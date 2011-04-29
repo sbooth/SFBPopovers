@@ -63,7 +63,7 @@
 															   defer:YES];
 
 	if((self = [super initWithWindow:[window autorelease]])) {
-		_viewController = [_viewController retain];
+		_viewController = [viewController retain];
 		[[self popoverWindow] setContentView:[viewController view]];
 		_animates = YES;
 
