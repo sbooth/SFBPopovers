@@ -1,0 +1,8 @@
+/*
+ *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  All Rights Reserved.
+ */
+
+#ifdef __OBJC__
+	#import <Cocoa/Cocoa.h>
+#endif
