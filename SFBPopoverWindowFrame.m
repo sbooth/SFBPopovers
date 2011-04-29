@@ -155,16 +155,20 @@
 
 - (NSPoint) arrowheadPosition
 {
+	return [self arrowheadPositionForRect:[self bounds]];
+}
+
+- (NSPoint) arrowheadPositionForRect:(NSRect)rect;
+{
 	NSPoint arrowheadPosition = NSZeroPoint;
 
-	NSRect bounds = [self bounds];
-	CGFloat minX = NSMinX(bounds);
-	CGFloat midX = NSMidX(bounds);
-	CGFloat maxX = NSMaxX(bounds);
+	CGFloat minX = NSMinX(rect);
+	CGFloat midX = NSMidX(rect);
+	CGFloat maxX = NSMaxX(rect);
 
-	CGFloat minY = NSMinY(bounds);
-	CGFloat midY = NSMidY(bounds);
-	CGFloat maxY = NSMaxY(bounds);
+	CGFloat minY = NSMinY(rect);
+	CGFloat midY = NSMidY(rect);
+	CGFloat maxY = NSMaxY(rect);
 
 	CGFloat arrowDistance = (_arrowHeight / 2) + (2 * _borderWidth);
 	if(_drawRoundCornerBesideArrow)
@@ -245,6 +249,7 @@
 - (NSBezierPath *) popoverFramePathForContentRect:(NSRect)contentRect
 {
 	contentRect = NSInsetRect(contentRect, -_viewMargin, -_viewMargin);
+	contentRect = NSInsetRect(contentRect, -_borderWidth / 2, -_borderWidth / 2);
 
 	CGFloat minX = NSMinX(contentRect);
 	CGFloat midX = NSMidX(contentRect);

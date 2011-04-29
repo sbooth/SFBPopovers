@@ -33,7 +33,6 @@
 
 @interface SFBPopoverWindow (Private)
 - (SFBPopoverWindowFrame *) popoverWindowFrame;
-- (void) updateGeometryWithContentRect:(NSRect)contentRect display:(BOOL)display;
 @end
 
 @implementation SFBPopoverWindow
@@ -42,13 +41,12 @@
 {
 #pragma unused(windowStyle)
 	if((self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:bufferingType defer:deferCreation])) {
-		[super setBackgroundColor:[NSColor clearColor]];
+		[self setBackgroundColor:[NSColor clearColor]];
 		[self setMovableByWindowBackground:NO];
 		[self setExcludedFromWindowsMenu:YES];
 		[self setAlphaValue:1];
 		[self setOpaque:NO];
 		[self setHasShadow:YES];
-		[self useOptimizedDrawing:YES];
 	}
 
 	return self;
@@ -110,7 +108,7 @@
 	_popoverContentView = [view retain];
 	NSRect viewFrame = [self contentRectForFrameRect:windowFrame];
 	[_popoverContentView setFrame:viewFrame];
-	[_popoverContentView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
+	[_popoverContentView setAutoresizingMask:NSViewNotSizable];
 
 	[popoverWindowFrame addSubview:_popoverContentView];
 }
@@ -130,9 +128,70 @@
 
 - (void) setPopoverPosition:(SFBPopoverPosition)popoverPosition
 {
-	NSRect contentRect = [self contentRectForFrameRect:[self frame]];
+	if(popoverPosition == [self popoverPosition])
+		return;
+
+	NSRect frameRect = [self frame];
+	NSPoint oldOrigin = frameRect.origin;
+	NSPoint oldArrow = [[self popoverWindowFrame] arrowheadPosition];
+
+	NSRect boundsRect = frameRect;
+	boundsRect.origin = NSZeroPoint;
+	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
+	
+	switch([[self popoverWindowFrame] popoverPosition]) {
+		case SFBPopoverPositionLeft:
+		case SFBPopoverPositionLeftTop:
+		case SFBPopoverPositionLeftBottom:
+		case SFBPopoverPositionRight:
+		case SFBPopoverPositionRightTop:
+		case SFBPopoverPositionRightBottom:
+			frameRect.size.width -= [[self popoverWindowFrame] arrowHeight];
+			break;
+
+		case SFBPopoverPositionTop:
+		case SFBPopoverPositionTopLeft:
+		case SFBPopoverPositionTopRight:
+		case SFBPopoverPositionBottom:
+		case SFBPopoverPositionBottomLeft:
+		case SFBPopoverPositionBottomRight:
+			frameRect.size.height -= [[self popoverWindowFrame] arrowHeight];
+			break;
+	}
+
 	[[self popoverWindowFrame] setPopoverPosition:popoverPosition];
-	[self updateGeometryWithContentRect:contentRect display:YES];
+
+	switch([[self popoverWindowFrame] popoverPosition]) {
+		case SFBPopoverPositionLeft:
+		case SFBPopoverPositionLeftTop:
+		case SFBPopoverPositionLeftBottom:
+		case SFBPopoverPositionRight:
+		case SFBPopoverPositionRightTop:
+		case SFBPopoverPositionRightBottom:
+			frameRect.size.width += [[self popoverWindowFrame] arrowHeight];
+			break;
+
+		case SFBPopoverPositionTop:
+		case SFBPopoverPositionTopLeft:
+		case SFBPopoverPositionTopRight:
+		case SFBPopoverPositionBottom:
+		case SFBPopoverPositionBottomLeft:
+		case SFBPopoverPositionBottomRight:
+			frameRect.size.height += [[self popoverWindowFrame] arrowHeight];
+			break;
+	}
+
+	boundsRect = frameRect;
+	boundsRect.origin = NSZeroPoint;
+	NSPoint newArrow = [[self popoverWindowFrame] arrowheadPositionForRect:boundsRect];
+
+	contentRect = [self contentRectForFrameRect:boundsRect];
+	[_popoverContentView setFrame:contentRect];
+
+	// Adjust the frame so the attachment point won't change
+	frameRect.origin = NSMakePoint(oldOrigin.x + (oldArrow.x - newArrow.x), oldOrigin.y + (oldArrow.y - newArrow.y));
+	[[self popoverWindowFrame] setNeedsDisplay:YES];
+	[self setFrame:frameRect display:YES];
 }
 
 - (NSColor *) borderColor
@@ -153,9 +212,47 @@
 
 - (void) setBorderWidth:(CGFloat)borderWidth
 {
-	NSRect contentRect = [self contentRectForFrameRect:[self frame]];
+	CGFloat delta = borderWidth - [[self popoverWindowFrame] borderWidth];
+	if(0 == delta)
+		return;
+
+	NSRect frameRect = [self frame];
+	frameRect = NSInsetRect([self frame], -delta, -delta);
+
+	switch([[self popoverWindowFrame] popoverPosition]) {
+		case SFBPopoverPositionLeft:
+		case SFBPopoverPositionLeftTop:
+		case SFBPopoverPositionLeftBottom:
+			frameRect = NSOffsetRect(frameRect, -delta, 0);
+			break;
+
+		case SFBPopoverPositionRight:
+		case SFBPopoverPositionRightTop:
+		case SFBPopoverPositionRightBottom:
+			frameRect = NSOffsetRect(frameRect, delta, 0);
+			break;
+
+		case SFBPopoverPositionTop:
+		case SFBPopoverPositionTopLeft:
+		case SFBPopoverPositionTopRight:
+			frameRect = NSOffsetRect(frameRect, 0, delta);
+			break;
+
+		case SFBPopoverPositionBottom:
+		case SFBPopoverPositionBottomLeft:
+		case SFBPopoverPositionBottomRight:
+			frameRect = NSOffsetRect(frameRect, 0, -delta);
+			break;
+	}
+	
 	[[self popoverWindowFrame] setBorderWidth:borderWidth];
-	[self updateGeometryWithContentRect:contentRect display:YES];
+
+	NSRect boundsRect = frameRect;
+	boundsRect.origin = NSZeroPoint;
+	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
+
+	[_popoverContentView setFrame:contentRect];
+	[self setFrame:frameRect display:YES];
 }
 
 - (CGFloat) cornerRadius
@@ -165,9 +262,8 @@
 
 - (void) setCornerRadius:(CGFloat)cornerRadius
 {
-	NSRect contentRect = [self contentRectForFrameRect:[self frame]];
 	[[self popoverWindowFrame] setCornerRadius:cornerRadius];
-	[self updateGeometryWithContentRect:contentRect display:YES];
+	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
 - (BOOL) drawsArrow
@@ -199,9 +295,48 @@
 
 - (void) setArrowHeight:(CGFloat)arrowHeight
 {
-	NSRect contentRect = [self contentRectForFrameRect:[self frame]];
+	CGFloat delta = arrowHeight - [[self popoverWindowFrame] arrowHeight];
+	if(0 == delta)
+		return;
+
+	NSRect frameRect = [self frame];
+	NSRect boundsRect = frameRect;
+	boundsRect.origin = NSZeroPoint;
+	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
+
+	switch([[self popoverWindowFrame] popoverPosition]) {
+		case SFBPopoverPositionLeft:
+		case SFBPopoverPositionLeftTop:
+		case SFBPopoverPositionLeftBottom:
+			frameRect.origin.x -= delta;
+			frameRect.size.width += delta;
+			break;
+
+		case SFBPopoverPositionRight:
+		case SFBPopoverPositionRightTop:
+		case SFBPopoverPositionRightBottom:
+			frameRect.size.width += delta;
+			contentRect.origin.x += delta;
+			break;
+
+		case SFBPopoverPositionTop:
+		case SFBPopoverPositionTopLeft:
+		case SFBPopoverPositionTopRight:
+			frameRect.size.height += delta;
+			contentRect.origin.y += delta;
+			break;
+
+		case SFBPopoverPositionBottom:
+		case SFBPopoverPositionBottomLeft:
+		case SFBPopoverPositionBottomRight:
+			frameRect.origin.y -= delta;
+			frameRect.size.height += delta;
+			break;
+	}
+
 	[[self popoverWindowFrame] setArrowHeight:arrowHeight];
-	[self updateGeometryWithContentRect:contentRect display:YES];
+	[_popoverContentView setFrame:contentRect];
+	[self setFrame:frameRect display:YES];
 }
 
 - (BOOL) drawRoundCornerBesideArrow
@@ -222,9 +357,46 @@
 
 - (void) setViewMargin:(CGFloat)viewMargin
 {
-	NSRect contentRect = [self contentRectForFrameRect:[self frame]];
+	CGFloat delta = viewMargin - [[self popoverWindowFrame] viewMargin];
+	if(0 == delta)
+		return;
+
+	NSRect frameRect = NSInsetRect([self frame], -delta, -delta);
+
+	switch([[self popoverWindowFrame] popoverPosition]) {
+		case SFBPopoverPositionLeft:
+		case SFBPopoverPositionLeftTop:
+		case SFBPopoverPositionLeftBottom:
+			frameRect = NSOffsetRect(frameRect, -delta, 0);
+			break;
+
+		case SFBPopoverPositionRight:
+		case SFBPopoverPositionRightTop:
+		case SFBPopoverPositionRightBottom:
+			frameRect = NSOffsetRect(frameRect, delta, 0);
+			break;
+
+		case SFBPopoverPositionTop:
+		case SFBPopoverPositionTopLeft:
+		case SFBPopoverPositionTopRight:
+			frameRect = NSOffsetRect(frameRect, 0, delta);
+			break;
+
+		case SFBPopoverPositionBottom:
+		case SFBPopoverPositionBottomLeft:
+		case SFBPopoverPositionBottomRight:
+			frameRect = NSOffsetRect(frameRect, 0, -delta);
+			break;
+	}
+
 	[[self popoverWindowFrame] setViewMargin:viewMargin];
-	[self updateGeometryWithContentRect:contentRect display:YES];
+
+	NSRect boundsRect = frameRect;
+	boundsRect.origin = NSZeroPoint;
+	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
+	
+	[_popoverContentView setFrame:contentRect];
+	[self setFrame:frameRect display:YES];
 }
 
 - (NSColor *) popoverBackgroundColor
@@ -245,18 +417,6 @@
 - (SFBPopoverWindowFrame *) popoverWindowFrame
 {
 	return (SFBPopoverWindowFrame *)[super contentView];
-}
-
-- (void) updateGeometryWithContentRect:(NSRect)contentRect display:(BOOL)display
-{
-	// Update the frames for both the window and content views
-	NSRect windowFrame = [self frameRectForContentRect:contentRect];
-	windowFrame.origin = NSZeroPoint;
-	[self setFrame:windowFrame display:NO];
-
-	contentRect = [self contentRectForFrameRect:windowFrame];
-	[_popoverContentView setFrame:contentRect];
-	[[self popoverWindowFrame] setNeedsDisplay:display];
 }
 
 @end

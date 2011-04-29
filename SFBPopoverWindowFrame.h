@@ -75,4 +75,5 @@
 - (NSRect) contentRectForFrameRect:(NSRect)windowFrame;
 
 - (NSPoint) arrowheadPosition;
+- (NSPoint) arrowheadPositionForRect:(NSRect)rect;
 @end
