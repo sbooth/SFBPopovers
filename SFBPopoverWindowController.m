@@ -40,6 +40,8 @@
 @implementation SFBPopoverWindowController
 
 @synthesize animates = _animates;
+@synthesize closesWhenPopoverResignsKey = _closesWhenPopoverResignsKey;
+@synthesize closesWhenApplicationBecomesInactive = _closesWhenApplicationBecomesInactive;
 
 - (id) initWithView:(NSView *)view
 {
@@ -63,12 +65,13 @@
 	if((self = [super initWithWindow:[window autorelease]])) {
 		_viewController = [_viewController retain];
 		[[self popoverWindow] setContentView:[viewController view]];
-//		_animates = YES;
+		_animates = YES;
 
 		CAAnimation *animation = [CABasicAnimation animation];
 		[animation setDelegate:self];
 		[[self window] setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:window];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
 	}
 
@@ -248,6 +251,11 @@
 	return (SFBPopoverWindow *)[self window];
 }
 
+- (NSViewController *) viewController
+{
+	return [[_viewController retain] autorelease];
+}
+
 @end
 
 @implementation SFBPopoverWindowController (NSAnimationDelegateMethods)
@@ -269,9 +277,6 @@
 @end
 
 @implementation SFBPopoverWindowController (NSWindowDelegateMethods)
-
-//- (void) windowWillClose:(NSNotification *)notification
-//{}
 
 - (void) windowDidResignKey:(NSNotification *)notification
 {

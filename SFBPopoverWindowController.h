@@ -41,12 +41,13 @@
 	BOOL _closesWhenPopoverResignsKey;
 	BOOL _closesWhenApplicationBecomesInactive;
 	BOOL _animates;
-	BOOL _anchors;
 }
 
 // ========================================
 // Properties
 @property (assign) BOOL animates;
+@property (assign) BOOL closesWhenPopoverResignsKey;
+@property (assign) BOOL closesWhenApplicationBecomesInactive;
 
 // ========================================
 // Creation
@@ -67,7 +68,8 @@
 - (IBAction) closePopover:(id)sender;
 
 // ========================================
-// The popover window
+//
 - (SFBPopoverWindow *) popoverWindow;
+- (NSViewController *) viewController;
 
 @end
