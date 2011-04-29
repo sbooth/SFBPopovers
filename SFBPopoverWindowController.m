@@ -64,7 +64,9 @@
 
 	if((self = [super initWithWindow:[window autorelease]])) {
 		_viewController = [viewController retain];
+		[self setNextResponder:_viewController];
 		[[self popoverWindow] setContentView:[viewController view]];
+
 		_animates = YES;
 
 		CAAnimation *animation = [CABasicAnimation animation];
