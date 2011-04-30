@@ -84,7 +84,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		32A1037D1368F216009FA237 /* SFBPopovers */ = {
+		32A1037D1368F216009FA237 /* Example */ = {
 			isa = PBXGroup;
 			children = (
 				32A104191368F4D2009FA237 /* ExampleAppDelegate.h */,
@@ -93,7 +93,7 @@
 				32A103861368F23D009FA237 /* Example-Info.plist */,
 				32A1039C1368F2A2009FA237 /* main.m */,
 			);
-			name = SFBPopovers;
+			name = Example;
 			sourceTree = "<group>";
 		};
 		32A11013136A61B7009FA237 /* Configs */ = {
@@ -110,7 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				32CE12CD1367854000CE7985 /* SFBPopovers */,
-				32A1037D1368F216009FA237 /* SFBPopovers */,
+				32A1037D1368F216009FA237 /* Example */,
 				32A11013136A61B7009FA237 /* Configs */,
 				32CE12C61367854000CE7985 /* Frameworks */,
 				32CE12C51367854000CE7985 /* Products */,
@@ -328,7 +328,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "Example/Example-Info.plist";
+				INFOPLIST_FILE = "Example-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
