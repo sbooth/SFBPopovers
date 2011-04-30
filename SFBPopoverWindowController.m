@@ -47,8 +47,19 @@
 // If window isn't an instance of SFBPopoverWindow, all bets are off
 - (id) initWithWindow:(NSWindow *)window
 {
-	if((self = [super initWithWindow:window]))
+	if((self = [super initWithWindow:window])) {
 		_animates = YES;
+
+		// If the window is loaded at this point -windowDidLoad will never be called, so perform the appropriate setup
+		if([self isWindowLoaded]) {
+			CAAnimation *animation = [CABasicAnimation animation];
+			[animation setDelegate:self];
+			[[self window] setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
+
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:[self window]];
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
+		}
+	}
 
 	return self;
 }
@@ -60,10 +71,9 @@
 	[super dealloc];
 }
 
+// This will only be called if the window was loaded from a nib file
 - (void) windowDidLoad
 {
-	[super windowDidLoad];
-
 	CAAnimation *animation = [CABasicAnimation animation];
 	[animation setDelegate:self];
 	[[self window] setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
