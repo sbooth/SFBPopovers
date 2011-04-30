@@ -37,7 +37,6 @@
 @interface SFBPopoverWindowController : NSWindowController
 {
 @private
-	NSViewController *_viewController;
 	BOOL _closesWhenPopoverResignsKey;
 	BOOL _closesWhenApplicationBecomesInactive;
 	BOOL _animates;
@@ -48,11 +47,6 @@
 @property (assign) BOOL animates;
 @property (assign) BOOL closesWhenPopoverResignsKey;
 @property (assign) BOOL closesWhenApplicationBecomesInactive;
-
-// ========================================
-// Creation
-- (id) initWithView:(NSView *)view;
-- (id) initWithViewController:(NSViewController *)viewController;
 
 // ========================================
 //
@@ -70,6 +64,5 @@
 // ========================================
 //
 - (SFBPopoverWindow *) popoverWindow;
-- (NSViewController *) viewController;
 
 @end

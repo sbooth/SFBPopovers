@@ -43,44 +43,12 @@
 @synthesize closesWhenPopoverResignsKey = _closesWhenPopoverResignsKey;
 @synthesize closesWhenApplicationBecomesInactive = _closesWhenApplicationBecomesInactive;
 
-- (id) initWithView:(NSView *)view
+// The designated initializer for NSWindowController
+// If window isn't an instance of SFBPopoverWindow, all bets are off
+- (id) initWithWindow:(NSWindow *)window
 {
-	NSParameterAssert(nil != view);
-
-	NSViewController *viewController = [[NSViewController alloc] initWithNibName:nil bundle:nil];
-	[viewController setView:view];
-
-	return [self initWithViewController:[viewController autorelease]];
-}
-
-- (id) initWithViewController:(NSViewController *)viewController
-{
-	NSParameterAssert(nil != viewController);
-
-	NSWindow *window = [[SFBPopoverWindow alloc] initWithContentRect:NSZeroRect
-														   styleMask:NSBorderlessWindowMask 
-															 backing:NSBackingStoreBuffered 
-															   defer:YES];
-
-	if((self = [super initWithWindow:[window autorelease]])) {
-		_viewController = [viewController retain];
-
-		// Insert the view controller into the responder chain
-		NSResponder *nextResponder = [self nextResponder];
-		[self setNextResponder:_viewController];
-		[_viewController setNextResponder:nextResponder];
-
-		[[self popoverWindow] setContentView:[viewController view]];
-
+	if((self = [super initWithWindow:window]))
 		_animates = YES;
-
-		CAAnimation *animation = [CABasicAnimation animation];
-		[animation setDelegate:self];
-		[[self window] setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
-
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:window];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
-	}
 
 	return self;
 }
@@ -89,14 +57,19 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
-	[_viewController release], _viewController = nil;
-
 	[super dealloc];
 }
 
 - (void) windowDidLoad
 {
 	[super windowDidLoad];
+
+	CAAnimation *animation = [CABasicAnimation animation];
+	[animation setDelegate:self];
+	[[self window] setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:[self window]];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
 }
 
 - (SFBPopoverPosition) bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point
@@ -249,18 +222,13 @@
 		[[self window] orderOut:sender];
 		NSWindow *parentWindow = [[self window] parentWindow];
 		[parentWindow removeChildWindow:[self window]];
-		[parentWindow makeKeyAndOrderFront:nil];
+		[parentWindow makeKeyAndOrderFront:sender];
 	}
 }
 
 - (SFBPopoverWindow *) popoverWindow
 {
 	return (SFBPopoverWindow *)[self window];
-}
-
-- (NSViewController *) viewController
-{
-	return [[_viewController retain] autorelease];
 }
 
 @end
