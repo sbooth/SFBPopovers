@@ -138,7 +138,8 @@
 	NSRect boundsRect = frameRect;
 	boundsRect.origin = NSZeroPoint;
 	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
-	
+
+	CGFloat offset = [[self popoverWindowFrame] arrowHeight] + [[self popoverWindowFrame] distance];
 	switch([[self popoverWindowFrame] popoverPosition]) {
 		case SFBPopoverPositionLeft:
 		case SFBPopoverPositionLeftTop:
@@ -146,7 +147,7 @@
 		case SFBPopoverPositionRight:
 		case SFBPopoverPositionRightTop:
 		case SFBPopoverPositionRightBottom:
-			frameRect.size.width -= [[self popoverWindowFrame] arrowHeight];
+			frameRect.size.width -= offset;
 			break;
 
 		case SFBPopoverPositionTop:
@@ -155,7 +156,7 @@
 		case SFBPopoverPositionBottom:
 		case SFBPopoverPositionBottomLeft:
 		case SFBPopoverPositionBottomRight:
-			frameRect.size.height -= [[self popoverWindowFrame] arrowHeight];
+			frameRect.size.height -= offset;
 			break;
 	}
 
@@ -168,7 +169,7 @@
 		case SFBPopoverPositionRight:
 		case SFBPopoverPositionRightTop:
 		case SFBPopoverPositionRightBottom:
-			frameRect.size.width += [[self popoverWindowFrame] arrowHeight];
+			frameRect.size.width += offset;
 			break;
 
 		case SFBPopoverPositionTop:
@@ -177,7 +178,7 @@
 		case SFBPopoverPositionBottom:
 		case SFBPopoverPositionBottomLeft:
 		case SFBPopoverPositionBottomRight:
-			frameRect.size.height += [[self popoverWindowFrame] arrowHeight];
+			frameRect.size.height += offset;
 			break;
 	}
 
