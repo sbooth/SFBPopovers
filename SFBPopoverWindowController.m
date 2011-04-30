@@ -64,7 +64,12 @@
 
 	if((self = [super initWithWindow:[window autorelease]])) {
 		_viewController = [viewController retain];
+
+		// Insert the view controller into the responder chain
+		NSResponder *nextResponder = [self nextResponder];
 		[self setNextResponder:_viewController];
+		[_viewController setNextResponder:nextResponder];
+
 		[[self popoverWindow] setContentView:[viewController view]];
 
 		_animates = YES;
