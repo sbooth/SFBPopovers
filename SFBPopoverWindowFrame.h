@@ -39,6 +39,8 @@
 @private
 	SFBPopoverPosition _popoverPosition;
 
+	CGFloat _distance;
+
 	NSColor *_borderColor;
 	CGFloat _borderWidth;
 	CGFloat _cornerRadius;
@@ -56,6 +58,8 @@
 // Properties
 // Changing these will NOT mark the view as dirty, to allow for efficient multiple property changes
 @property (assign) SFBPopoverPosition popoverPosition;
+
+@property (assign) CGFloat distance;
 
 @property (copy) NSColor * borderColor;
 @property (assign) CGFloat borderWidth;

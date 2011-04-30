@@ -63,6 +63,9 @@ typedef enum SFBPopoverPosition SFBPopoverPosition;
 - (SFBPopoverPosition) popoverPosition;
 - (void) setPopoverPosition:(SFBPopoverPosition)popoverPosition;
 
+- (CGFloat) distance;
+- (void) setDistance:(CGFloat)distance;
+
 - (NSColor *) borderColor;
 - (void) setBorderColor:(NSColor *)borderColor;
 - (CGFloat) borderWidth;

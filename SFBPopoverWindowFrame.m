@@ -40,6 +40,8 @@
 
 @synthesize popoverPosition = _popoverPosition;
 
+@synthesize distance = _distance;
+
 @synthesize borderColor = _borderColor;
 @synthesize borderWidth = _borderWidth;
 @synthesize cornerRadius = _cornerRadius;
@@ -57,6 +59,8 @@
 	if((self = [super initWithFrame:frame])) {
 		// Set the default appearance
 		_popoverPosition = SFBPopoverPositionBottom;
+
+		_distance = 0;
 
 		_borderColor = [[NSColor whiteColor] copy];
 		_borderWidth = 2;
@@ -86,32 +90,32 @@
 {
 	NSRect frameRect = NSInsetRect(contentRect, -_viewMargin, -_viewMargin);
 
+	CGFloat offset = _arrowHeight + _distance;
 	switch(_popoverPosition) {
 		case SFBPopoverPositionLeft:
 		case SFBPopoverPositionLeftTop:
 		case SFBPopoverPositionLeftBottom:
-			frameRect.size.width += _arrowHeight;
-			frameRect.origin.x += _arrowHeight;
+			frameRect.size.width += offset;
 			break;
 
 		case SFBPopoverPositionRight:
 		case SFBPopoverPositionRightTop:
 		case SFBPopoverPositionRightBottom:
-			frameRect.size.width += _arrowHeight;
-			frameRect.origin.x -= _arrowHeight;
+			frameRect.size.width += offset;
+			frameRect.origin.x -= offset;
 			break;
 			
 		case SFBPopoverPositionTop:
 		case SFBPopoverPositionTopLeft:
 		case SFBPopoverPositionTopRight:
-			frameRect.size.height += _arrowHeight;
-			frameRect.origin.y += _arrowHeight;
+			frameRect.size.height += offset;
+			frameRect.origin.y += offset;
 			break;
 
 		case SFBPopoverPositionBottom:
 		case SFBPopoverPositionBottomLeft:
 		case SFBPopoverPositionBottomRight:
-			frameRect.size.height += _arrowHeight;
+			frameRect.size.height += offset;
 			break;
 	}
 
@@ -121,32 +125,33 @@
 - (NSRect) contentRectForFrameRect:(NSRect)windowFrame
 {
 	NSRect contentRect = NSInsetRect(windowFrame, _borderWidth, _borderWidth);
-	
+
+	CGFloat offset = _arrowHeight + _distance;
 	switch(_popoverPosition) {
 		case SFBPopoverPositionLeft:
 		case SFBPopoverPositionLeftTop:
 		case SFBPopoverPositionLeftBottom:
-			contentRect.size.width -= _arrowHeight;
+			contentRect.size.width -= offset;
 			break;
 
 		case SFBPopoverPositionRight:
 		case SFBPopoverPositionRightTop:
 		case SFBPopoverPositionRightBottom:
-			contentRect.size.width -= _arrowHeight;
-			contentRect.origin.x += _arrowHeight;
+			contentRect.size.width -= offset;
+			contentRect.origin.x += offset;
 			break;
 			
 		case SFBPopoverPositionTop:
 		case SFBPopoverPositionTopLeft:
 		case SFBPopoverPositionTopRight:
-			contentRect.size.height -= _arrowHeight;
-			contentRect.origin.y += _arrowHeight;
+			contentRect.size.height -= offset;
+			contentRect.origin.y += offset;
 			break;
 
 		case SFBPopoverPositionBottom:
 		case SFBPopoverPositionBottomLeft:
 		case SFBPopoverPositionBottomRight:
-			contentRect.size.height -= _arrowHeight;
+			contentRect.size.height -= offset;
 			break;
 	}
 	

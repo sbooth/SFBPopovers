@@ -194,6 +194,57 @@
 	[self setFrame:frameRect display:YES];
 }
 
+- (CGFloat) distance
+{
+	return [[self popoverWindowFrame] distance];
+}
+
+- (void) setDistance:(CGFloat)distance
+{
+	CGFloat delta = distance - [[self popoverWindowFrame] distance];
+	if(0 == delta)
+		return;
+
+	NSRect frameRect = [self frame];
+	NSRect boundsRect = frameRect;
+	boundsRect.origin = NSZeroPoint;
+	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
+
+	switch([[self popoverWindowFrame] popoverPosition]) {
+		case SFBPopoverPositionLeft:
+		case SFBPopoverPositionLeftTop:
+		case SFBPopoverPositionLeftBottom:
+			frameRect.origin.x -= delta;
+			frameRect.size.width += delta;
+			break;
+
+		case SFBPopoverPositionRight:
+		case SFBPopoverPositionRightTop:
+		case SFBPopoverPositionRightBottom:
+			frameRect.size.width += delta;
+			contentRect.origin.x += delta;
+			break;
+
+		case SFBPopoverPositionTop:
+		case SFBPopoverPositionTopLeft:
+		case SFBPopoverPositionTopRight:
+			frameRect.size.height += delta;
+			contentRect.origin.y += delta;
+			break;
+
+		case SFBPopoverPositionBottom:
+		case SFBPopoverPositionBottomLeft:
+		case SFBPopoverPositionBottomRight:
+			frameRect.origin.y -= delta;
+			frameRect.size.height += delta;
+			break;
+	}
+
+	[[self popoverWindowFrame] setDistance:distance];
+	[_popoverContentView setFrame:contentRect];
+	[self setFrame:frameRect display:YES];
+}
+
 - (NSColor *) borderColor
 {
 	return [[self popoverWindowFrame] borderColor];
