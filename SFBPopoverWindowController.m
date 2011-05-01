@@ -229,10 +229,9 @@
 	if(_animates)
 		[[[self window] animator] setAlphaValue:0];
 	else {
-		[[self window] orderOut:sender];
 		NSWindow *parentWindow = [[self window] parentWindow];
 		[parentWindow removeChildWindow:[self window]];
-		[parentWindow makeKeyAndOrderFront:sender];
+		[[self window] orderOut:sender];
 	}
 }
 
@@ -250,12 +249,10 @@
 #pragma unused(animation)
 	// Detect the end of fade out and close the window
 	if(flag && 0 == [[self window] alphaValue]) {
-		[[self window] orderOut:nil];
-		[[self window] setAlphaValue:1];
-
 		NSWindow *parentWindow = [[self window] parentWindow];
 		[parentWindow removeChildWindow:[self window]];
-		[parentWindow makeKeyAndOrderFront:nil];
+		[[self window] orderOut:nil];
+		[[self window] setAlphaValue:1];
 	}
 }
 
