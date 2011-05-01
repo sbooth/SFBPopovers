@@ -186,13 +186,33 @@
 	boundsRect.origin = NSZeroPoint;
 	NSPoint newArrow = [[self popoverWindowFrame] arrowheadPositionForRect:boundsRect];
 
+	// This orderOut: then orderFront: trickery seems to be required to prevent visual artifacts when the new window position
+	// overlaps the old one.  No matter what I tried (flusing, erasing, disabling screen updates) I could not get the display
+	// to work properly if the window was onscreen
+	BOOL isVisible = [self isVisible];
+	BOOL isKey = [self isKeyWindow];
+	if(isVisible) {
+		NSDisableScreenUpdates();
+		[self orderOut:self];
+	}
+
 	contentRect = [self contentRectForFrameRect:boundsRect];
 	[_popoverContentView setFrame:contentRect];
 
 	// Adjust the frame so the attachment point won't change
 	frameRect.origin = NSMakePoint(oldOrigin.x + (oldArrow.x - newArrow.x), oldOrigin.y + (oldArrow.y - newArrow.y));
+
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 	[self setFrame:frameRect display:YES];
+
+	if(isVisible) {
+		if(isKey)
+			[self makeKeyAndOrderFront:self];
+		else
+			[self orderFront:self];
+
+		NSEnableScreenUpdates();
+	}
 }
 
 - (CGFloat) distance
