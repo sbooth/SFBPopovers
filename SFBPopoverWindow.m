@@ -135,10 +135,6 @@
 	NSPoint oldOrigin = frameRect.origin;
 	NSPoint oldAttachmentPoint = [[self popoverWindowFrame] attachmentPoint];
 
-	NSRect boundsRect = frameRect;
-	boundsRect.origin = NSZeroPoint;
-	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
-
 	CGFloat offset = [[self popoverWindowFrame] arrowHeight] + [[self popoverWindowFrame] distance];
 	switch([[self popoverWindowFrame] popoverPosition]) {
 		case SFBPopoverPositionLeft:
@@ -182,7 +178,7 @@
 			break;
 	}
 
-	boundsRect = frameRect;
+	NSRect boundsRect = frameRect;
 	boundsRect.origin = NSZeroPoint;
 	NSPoint newAttachmentPoint = [[self popoverWindowFrame] attachmentPointForRect:boundsRect];
 
@@ -196,7 +192,7 @@
 		[self orderOut:self];
 	}
 
-	contentRect = [self contentRectForFrameRect:boundsRect];
+	NSRect contentRect = [self contentRectForFrameRect:boundsRect];
 	[_popoverContentView setFrame:contentRect];
 
 	// Adjust the frame so the attachment point won't change
@@ -288,8 +284,7 @@
 	if(0 == delta)
 		return;
 
-	NSRect frameRect = [self frame];
-	frameRect = NSInsetRect([self frame], -delta, -delta);
+	NSRect frameRect = NSInsetRect([self frame], -delta, -delta);
 
 	switch([[self popoverWindowFrame] popoverPosition]) {
 		case SFBPopoverPositionLeft:
