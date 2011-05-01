@@ -197,11 +197,11 @@
 	if(chooseBestLocation)
 		[[self popoverWindow] setPopoverPosition:[self bestPositionInWindow:window atPoint:point]];
 
-	NSPoint arrowheadPoint = [[[self popoverWindow] popoverWindowFrame] arrowheadPosition];
+	NSPoint attachmentPoint = [[[self popoverWindow] popoverWindowFrame] attachmentPoint];
 	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
 
-	pointOnScreen.x -= arrowheadPoint.x;
-	pointOnScreen.y -= arrowheadPoint.y;
+	pointOnScreen.x -= attachmentPoint.x;
+	pointOnScreen.y -= attachmentPoint.y;
 
 	[[self window] setFrameOrigin:pointOnScreen];
 

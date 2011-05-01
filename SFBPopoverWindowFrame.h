@@ -78,6 +78,6 @@
 - (NSRect) frameRectForContentRect:(NSRect)contentRect;
 - (NSRect) contentRectForFrameRect:(NSRect)windowFrame;
 
-- (NSPoint) arrowheadPosition;
-- (NSPoint) arrowheadPositionForRect:(NSRect)rect;
+- (NSPoint) attachmentPoint;
+- (NSPoint) attachmentPointForRect:(NSRect)rect;
 @end

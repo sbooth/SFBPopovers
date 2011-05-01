@@ -133,7 +133,7 @@
 
 	NSRect frameRect = [self frame];
 	NSPoint oldOrigin = frameRect.origin;
-	NSPoint oldArrow = [[self popoverWindowFrame] arrowheadPosition];
+	NSPoint oldAttachmentPoint = [[self popoverWindowFrame] attachmentPoint];
 
 	NSRect boundsRect = frameRect;
 	boundsRect.origin = NSZeroPoint;
@@ -184,7 +184,7 @@
 
 	boundsRect = frameRect;
 	boundsRect.origin = NSZeroPoint;
-	NSPoint newArrow = [[self popoverWindowFrame] arrowheadPositionForRect:boundsRect];
+	NSPoint newAttachmentPoint = [[self popoverWindowFrame] attachmentPointForRect:boundsRect];
 
 	// This orderOut: then orderFront: trickery seems to be required to prevent visual artifacts when the new window position
 	// overlaps the old one.  No matter what I tried (flusing, erasing, disabling screen updates) I could not get the display
@@ -200,7 +200,7 @@
 	[_popoverContentView setFrame:contentRect];
 
 	// Adjust the frame so the attachment point won't change
-	frameRect.origin = NSMakePoint(oldOrigin.x + (oldArrow.x - newArrow.x), oldOrigin.y + (oldArrow.y - newArrow.y));
+	frameRect.origin = NSMakePoint(oldOrigin.x + (oldAttachmentPoint.x - newAttachmentPoint.x), oldOrigin.y + (oldAttachmentPoint.y - newAttachmentPoint.y));
 
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 	[self setFrame:frameRect display:YES];

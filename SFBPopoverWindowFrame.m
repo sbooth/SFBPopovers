@@ -158,12 +158,12 @@
 	return NSInsetRect(contentRect, _viewMargin, _viewMargin);
 }
 
-- (NSPoint) arrowheadPosition
+- (NSPoint) attachmentPoint
 {
-	return [self arrowheadPositionForRect:[self bounds]];
+	return [self attachmentPointForRect:[self bounds]];
 }
 
-- (NSPoint) arrowheadPositionForRect:(NSRect)rect;
+- (NSPoint) attachmentPointForRect:(NSRect)rect;
 {
 	NSPoint arrowheadPosition = NSZeroPoint;
 
