@@ -58,6 +58,10 @@
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation;
 
 // ========================================
+- (void) movePopover:(NSWindow *)window toPoint:(NSPoint)point;
+
+
+// ========================================
 // Close the popover
 - (IBAction) closePopover:(id)sender;
 
