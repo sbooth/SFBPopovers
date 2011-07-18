@@ -216,6 +216,18 @@
 		[[[self window] animator] setAlphaValue:1];
 }
 
+- (void) movePopoverToPoint:(NSPoint)point 
+{
+	NSPoint attachmentPoint = [[[self popoverWindow] popoverWindowFrame] attachmentPoint];
+	NSWindow *window = [[self window] parentWindow];
+	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
+
+	pointOnScreen.x -= attachmentPoint.x;
+	pointOnScreen.y -= attachmentPoint.y;
+
+	[[self window] setFrameOrigin:pointOnScreen];
+}
+
 - (IBAction) closePopover:(id)sender
 {
 	if(![[self window] isVisible])
@@ -270,17 +282,6 @@
 {
 	if(_closesWhenApplicationBecomesInactive)
 		[self closePopover:notification];
-}
-
-- (void) movePopover:(NSWindow *)window toPoint:(NSPoint)point 
-{
-	NSPoint attachmentPoint = [[[self popoverWindow] popoverWindowFrame] attachmentPoint];
-	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
-
-	pointOnScreen.x -= attachmentPoint.x;
-	pointOnScreen.y -= attachmentPoint.y;
-
-	[[self window] setFrameOrigin:pointOnScreen];
 }
 
 @end

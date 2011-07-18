@@ -139,7 +139,7 @@
 		where.x += [toggleButton frame].size.width / 2;
 		where.y += [toggleButton frame].size.height / 2;
 
-		[_popoverController movePopover:[toggleButton window] toPoint:where];
+		[_popoverController movePopoverToPoint:where];
     }
 }
 

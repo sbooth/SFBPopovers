@@ -58,8 +58,8 @@
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation;
 
 // ========================================
-// Move the popover to a new attachment point
-- (void) movePopover:(NSWindow *)window toPoint:(NSPoint)point;
+// Move the popover to a new attachment point (should be currently displayed)
+- (void) movePopoverToPoint:(NSPoint)point;
 
 // ========================================
 // Close the popover
