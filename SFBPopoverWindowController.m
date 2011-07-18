@@ -274,16 +274,13 @@
 
 - (void) movePopover:(NSWindow *)window toPoint:(NSPoint)point 
 {
-    NSPoint attachmentPoint = [[[self popoverWindow] popoverWindowFrame] attachmentPoint];
+	NSPoint attachmentPoint = [[[self popoverWindow] popoverWindowFrame] attachmentPoint];
 	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
-    
+
 	pointOnScreen.x -= attachmentPoint.x;
 	pointOnScreen.y -= attachmentPoint.y;
-    
+
 	[[self window] setFrameOrigin:pointOnScreen];
 }
 
-
-
 @end
-

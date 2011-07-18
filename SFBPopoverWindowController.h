@@ -32,7 +32,7 @@
 #import "SFBPopoverWindow.h"
 
 // ========================================
-//
+// A simple NSWindowController subclass with additions for controlling a popover window
 // ========================================
 @interface SFBPopoverWindowController : NSWindowController
 {
@@ -49,7 +49,7 @@
 @property (assign) BOOL closesWhenApplicationBecomesInactive;
 
 // ========================================
-//
+// Calculate the best position to use in the given window
 - (SFBPopoverPosition) bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point;
 
 // ========================================
@@ -58,15 +58,15 @@
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation;
 
 // ========================================
+// Move the popover to a new attachment point
 - (void) movePopover:(NSWindow *)window toPoint:(NSPoint)point;
-
 
 // ========================================
 // Close the popover
 - (IBAction) closePopover:(id)sender;
 
 // ========================================
-//
+// Get the popover window this object manages
 - (SFBPopoverWindow *) popoverWindow;
 
 @end
