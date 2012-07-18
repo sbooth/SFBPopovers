@@ -33,6 +33,7 @@
 
 @interface SFBPopoverWindow (Private)
 - (SFBPopoverWindowFrame *) popoverWindowFrame;
+- (id)windowFrameInstance;
 @end
 
 @implementation SFBPopoverWindow
@@ -91,7 +92,7 @@
 
 	SFBPopoverWindowFrame *popoverWindowFrame = [self popoverWindowFrame];
 	if(nil == popoverWindowFrame) {
-		popoverWindowFrame = [[SFBPopoverWindowFrame alloc] initWithFrame:NSZeroRect];
+        popoverWindowFrame = [[self windowFrameInstance] initWithFrame:NSZeroRect];
 		[super setContentView:[popoverWindowFrame autorelease]];
 	}
 
@@ -485,5 +486,11 @@
 {
 	return (SFBPopoverWindowFrame *)[super contentView];
 }
+
+- (id)windowFrameInstance
+{
+    return [SFBPopoverWindowFrame alloc];
+}
+
 
 @end
