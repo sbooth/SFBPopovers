@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		32A1032E136844AC009FA237 /* SFBPopoverWindowFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 32A1032C136844AC009FA237 /* SFBPopoverWindowFrame.h */; };
 		32A1032F136844AC009FA237 /* SFBPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A1032D136844AC009FA237 /* SFBPopoverWindowFrame.m */; };
 		32A103D51368F37B009FA237 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A103D31368F37B009FA237 /* MainMenu.xib */; };
 		32A103D61368F383009FA237 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32CE12CA1367854000CE7985 /* AppKit.framework */; };
@@ -18,9 +17,8 @@
 		32A10EBD136A5855009FA237 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32A10EBC136A5855009FA237 /* QuartzCore.framework */; };
 		32CE12C81367854000CE7985 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32CE12C71367854000CE7985 /* Cocoa.framework */; };
 		32CE12D21367854000CE7985 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32CE12D01367854000CE7985 /* InfoPlist.strings */; };
-		32CE12DE1367857A00CE7985 /* SFBPopoverWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 32CE12DC1367857A00CE7985 /* SFBPopoverWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		32CE12DF1367857A00CE7985 /* SFBPopoverWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE12DD1367857A00CE7985 /* SFBPopoverWindowController.m */; };
-		32CE12E31367859400CE7985 /* SFBPopoverWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 32CE12E11367859400CE7985 /* SFBPopoverWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32CE12DE1367857A00CE7985 /* SFBPopover.h in Headers */ = {isa = PBXBuildFile; fileRef = 32CE12DC1367857A00CE7985 /* SFBPopover.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32CE12DF1367857A00CE7985 /* SFBPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE12DD1367857A00CE7985 /* SFBPopover.m */; };
 		32CE12E41367859400CE7985 /* SFBPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CE12E21367859400CE7985 /* SFBPopoverWindow.m */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +50,8 @@
 		32CE12CF1367854000CE7985 /* SFBPopovers-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SFBPopovers-Info.plist"; sourceTree = "<group>"; };
 		32CE12D11367854000CE7985 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		32CE12D31367854000CE7985 /* SFBPopovers-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFBPopovers-Prefix.pch"; sourceTree = "<group>"; };
-		32CE12DC1367857A00CE7985 /* SFBPopoverWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopoverWindowController.h; sourceTree = "<group>"; };
-		32CE12DD1367857A00CE7985 /* SFBPopoverWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBPopoverWindowController.m; sourceTree = "<group>"; };
+		32CE12DC1367857A00CE7985 /* SFBPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopover.h; sourceTree = "<group>"; };
+		32CE12DD1367857A00CE7985 /* SFBPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBPopover.m; sourceTree = "<group>"; };
 		32CE12E11367859400CE7985 /* SFBPopoverWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopoverWindow.h; sourceTree = "<group>"; };
 		32CE12E21367859400CE7985 /* SFBPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBPopoverWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,8 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				32CE12CE1367854000CE7985 /* Supporting Files */,
-				32CE12DC1367857A00CE7985 /* SFBPopoverWindowController.h */,
-				32CE12DD1367857A00CE7985 /* SFBPopoverWindowController.m */,
+				32CE12DC1367857A00CE7985 /* SFBPopover.h */,
+				32CE12DD1367857A00CE7985 /* SFBPopover.m */,
 				32CE12E11367859400CE7985 /* SFBPopoverWindow.h */,
 				32CE12E21367859400CE7985 /* SFBPopoverWindow.m */,
 				32A1032C136844AC009FA237 /* SFBPopoverWindowFrame.h */,
@@ -163,9 +161,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32CE12DE1367857A00CE7985 /* SFBPopoverWindowController.h in Headers */,
-				32CE12E31367859400CE7985 /* SFBPopoverWindow.h in Headers */,
-				32A1032E136844AC009FA237 /* SFBPopoverWindowFrame.h in Headers */,
+				32CE12DE1367857A00CE7985 /* SFBPopover.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32CE12DF1367857A00CE7985 /* SFBPopoverWindowController.m in Sources */,
+				32CE12DF1367857A00CE7985 /* SFBPopover.m in Sources */,
 				32CE12E41367859400CE7985 /* SFBPopoverWindow.m in Sources */,
 				32A1032F136844AC009FA237 /* SFBPopoverWindowFrame.m in Sources */,
 			);

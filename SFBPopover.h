@@ -83,6 +83,10 @@ typedef enum SFBPopoverPosition SFBPopoverPosition;
 - (IBAction) closePopover:(id)sender;
 
 // ========================================
+// Returns the popover window
+- (NSWindow *) popoverWindow;
+
+// ========================================
 // Returns YES if the popover is visible
 - (BOOL) isVisible;
 

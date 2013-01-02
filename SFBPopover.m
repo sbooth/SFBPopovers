@@ -28,7 +28,7 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SFBPopoverWindowController.h"
+#import "SFBPopover.h"
 #import "SFBPopoverWindow.h"
 #import "SFBPopoverWindowFrame.h"
 
@@ -252,6 +252,11 @@
 		[parentWindow removeChildWindow:_popoverWindow];
 		[_popoverWindow orderOut:sender];
 	}
+}
+
+- (NSWindow *) popoverWindow
+{
+	return _popoverWindow;
 }
 
 - (BOOL) isVisible

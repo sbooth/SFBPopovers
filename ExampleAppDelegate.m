@@ -29,7 +29,7 @@
  */
 
 #import "ExampleAppDelegate.h"
-#import <SFBPopovers/SFBPopoverWindowController.h>
+#import <SFBPopovers/SFBPopover.h>
 
 @interface ExampleAppDelegate ()
 {

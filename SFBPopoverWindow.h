@@ -30,7 +30,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFBPopoverWindowController.h"
+#import "SFBPopover.h"
 
 // ========================================
 // NSWindow subclass implementing a popover window
