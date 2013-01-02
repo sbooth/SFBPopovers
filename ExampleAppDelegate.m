@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,117 +29,134 @@
  */
 
 #import "ExampleAppDelegate.h"
-#import <SFBPopovers/SFBPopoverWindow.h>
+#import <SFBPopovers/SFBPopoverWindowController.h>
+
+@interface ExampleAppDelegate ()
+{
+@private
+	SFBPopover * _popover;
+}
+@end
 
 @implementation ExampleAppDelegate
-
-@synthesize positionPopup, borderColorWell, backgroundColorWell, viewMarginSlider, borderWidthSlider, cornerRadiusSlider, hasArrowCheckbox, drawRoundCornerBesideArrowCheckbox, arrowWidthSlider, arrowHeightSlider, distanceSlider, toggleButton, popoverWindow, parametersWindow;
 
 - (void) awakeFromNib
 {
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
-	[parametersWindow center];
+	[self.parametersWindow center];
 
-	_popoverController = [[SFBPopoverWindowController alloc] initWithWindow:popoverWindow];
+	_popover = [[SFBPopover alloc] initWithContentView:self.popoverView];
 
 	// Set up the popover window the match the UI
-	[self changePosition:positionPopup];
-	[self changeBorderColor:borderColorWell];
-	[self changeBackgroundColor:backgroundColorWell];
-	[self changeViewMargin:viewMarginSlider];
-	[self changeBorderWidth:borderWidthSlider];
-	[self changeCornerRadius:cornerRadiusSlider];
-	[self changeHasArrow:hasArrowCheckbox];
-	[self changeDrawRoundCornerBesideArrow:drawRoundCornerBesideArrowCheckbox];
-	[self changeArrowWidth:arrowWidthSlider];
-	[self changeArrowHeight:arrowHeightSlider];
-	[self changeDistance:distanceSlider];
+	[self changePosition:self.positionPopup];
+	[self changeBorderColor:self.borderColorWell];
+	[self changeBackgroundColor:self.backgroundColorWell];
+	[self changeViewMargin:self.viewMarginSlider];
+	[self changeBorderWidth:self.borderWidthSlider];
+	[self changeCornerRadius:self.cornerRadiusSlider];
+	[self changeHasArrow:self.hasArrowCheckbox];
+	[self changeDrawRoundCornerBesideArrow:self.drawRoundCornerBesideArrowCheckbox];
+	[self changeMovable:self.movableCheckbox];
+//	[self changeResizable:self.resizableCheckbox];
+	[self changeArrowWidth:self.arrowWidthSlider];
+	[self changeArrowHeight:self.arrowHeightSlider];
+	[self changeDistance:self.distanceSlider];
 }
 
 - (IBAction) changePosition:(id)sender
 {
 	NSInteger position = [sender indexOfSelectedItem];
 	if(12 == position) {
-		NSPoint where = [toggleButton frame].origin;
-		where.x += [toggleButton frame].size.width / 2;
-		where.y += [toggleButton frame].size.height / 2;
-		position = [_popoverController bestPositionInWindow:[toggleButton window] atPoint:where];
+		NSPoint where = [self.toggleButton frame].origin;
+		where.x += [self.toggleButton frame].size.width / 2;
+		where.y += [self.toggleButton frame].size.height / 2;
+		position = [_popover bestPositionInWindow:[self.toggleButton window] atPoint:where];
 	}
 
-	[[_popoverController popoverWindow] setPopoverPosition:(SFBPopoverPosition)position];
+	[_popover setPosition:(SFBPopoverPosition)position];
 }
 
 - (IBAction) changeBorderColor:(id)sender
 {
-	[[_popoverController popoverWindow] setBorderColor:[sender color]];
+	[_popover setBorderColor:[sender color]];
 }
 
 - (IBAction) changeBackgroundColor:(id)sender
 {
-	[[_popoverController popoverWindow] setPopoverBackgroundColor:[sender color]];
+	[_popover setBackgroundColor:[sender color]];
 }
 
 - (IBAction) changeViewMargin:(id)sender
 {
-	[[_popoverController popoverWindow] setViewMargin:floorf([sender floatValue])];
+	[_popover setViewMargin:floorf([sender floatValue])];
 }
 
 - (IBAction) changeBorderWidth:(id)sender
 {
-	[[_popoverController popoverWindow] setBorderWidth:floorf([sender floatValue])];
+	[_popover setBorderWidth:floorf([sender floatValue])];
 }
 
 - (IBAction) changeCornerRadius:(id)sender
 {
-	[[_popoverController popoverWindow] setCornerRadius:floorf([sender floatValue])];
+	[_popover setCornerRadius:floorf([sender floatValue])];
 }
 
 - (IBAction) changeHasArrow:(id)sender
 {
-	[[_popoverController popoverWindow] setDrawsArrow:(NSOnState == [sender state])];
+	[_popover setDrawsArrow:(NSOnState == [sender state])];
 }
 
 - (IBAction) changeDrawRoundCornerBesideArrow:(id)sender
 {
-	[[_popoverController popoverWindow] setDrawRoundCornerBesideArrow:(NSOnState == [sender state])];
+	[_popover setDrawRoundCornerBesideArrow:(NSOnState == [sender state])];
 }
+
+- (IBAction) changeMovable:(id)sender
+{
+	[_popover setMovable:(NSOnState == [sender state])];
+}
+
+//- (IBAction) changeResizable:(id)sender
+//{
+//	[_popover setResizable:(NSOnState == [sender state])];
+//}
 
 - (IBAction) changeArrowWidth:(id)sender
 {
-	[[_popoverController popoverWindow] setArrowWidth:floorf([sender floatValue])];
+	[_popover setArrowWidth:floorf([sender floatValue])];
 }
 
 - (IBAction) changeArrowHeight:(id)sender
 {
-	[[_popoverController popoverWindow] setArrowHeight:floorf([sender floatValue])];
+	[_popover setArrowHeight:floorf([sender floatValue])];
 }
 
 - (IBAction) changeDistance:(id)sender
 {
-	[[_popoverController popoverWindow] setDistance:floorf([sender floatValue])];
+	[_popover setDistance:floorf([sender floatValue])];
 }
 
 - (IBAction) togglePopover:(id)sender
 {
-	if([[_popoverController window] isVisible])
-		[_popoverController closePopover:sender];
+	if([_popover isVisible])
+		[_popover closePopover:sender];
 	else {
-		NSPoint where = [toggleButton frame].origin;
-		where.x += [toggleButton frame].size.width / 2;
-		where.y += [toggleButton frame].size.height / 2;
+		NSPoint where = [self.toggleButton frame].origin;
+		where.x += [self.toggleButton frame].size.width / 2;
+		where.y += [self.toggleButton frame].size.height / 2;
 
-		[_popoverController displayPopoverInWindow:[toggleButton window] atPoint:where];
+		[_popover displayPopoverInWindow:[self.toggleButton window] atPoint:where];
 	}
 }
 
-- (void)windowDidResize:(NSNotification *)notification
+- (void) windowDidResize:(NSNotification *)notification
 {
-	if([[_popoverController window] isVisible]) {
-		NSPoint where = [toggleButton frame].origin;
-		where.x += [toggleButton frame].size.width / 2;
-		where.y += [toggleButton frame].size.height / 2;
+	if([_popover isVisible]) {
+		NSPoint where = [self.toggleButton frame].origin;
+		where.x += [self.toggleButton frame].size.width / 2;
+		where.y += [self.toggleButton frame].size.height / 2;
 
-		[_popoverController movePopoverToPoint:where];
+		[_popover movePopoverToPoint:where];
     }
 }
 

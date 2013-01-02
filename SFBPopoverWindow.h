@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -30,33 +30,12 @@
 
 #import <Foundation/Foundation.h>
 
-// ========================================
-// Positioning constants
-// ========================================
-enum SFBPopoverPosition {
-	SFBPopoverPositionLeft          = NSMinXEdge,
-	SFBPopoverPositionRight         = NSMaxXEdge,
-	SFBPopoverPositionTop           = NSMaxYEdge,
-	SFBPopoverPositionBottom        = NSMinYEdge,
-	SFBPopoverPositionLeftTop       = 4,
-	SFBPopoverPositionLeftBottom    = 5,
-	SFBPopoverPositionRightTop      = 6,
-	SFBPopoverPositionRightBottom   = 7,
-	SFBPopoverPositionTopLeft       = 8,
-	SFBPopoverPositionTopRight      = 9,
-	SFBPopoverPositionBottomLeft    = 10,
-	SFBPopoverPositionBottomRight   = 11
-};
-typedef enum SFBPopoverPosition SFBPopoverPosition;
+#import "SFBPopoverWindowController.h"
 
 // ========================================
 // NSWindow subclass implementing a popover window
 // ========================================
 @interface SFBPopoverWindow : NSWindow
-{
-@private
-	NSView *_popoverContentView;
-}
 
 // ========================================
 // Popover window properties
@@ -80,11 +59,17 @@ typedef enum SFBPopoverPosition SFBPopoverPosition;
 - (CGFloat) arrowHeight;
 - (void) setArrowHeight:(CGFloat)arrowHeight;
 - (BOOL) drawRoundCornerBesideArrow;
-- (void)setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow;
+- (void) setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow;
 
 - (CGFloat) viewMargin;
 - (void) setViewMargin:(CGFloat)viewMargin;
 - (NSColor *) popoverBackgroundColor;
 - (void) setPopoverBackgroundColor:(NSColor *)backgroundColor;
+
+- (BOOL) isMovable;
+- (void) setMovable:(BOOL)movable;
+
+- (BOOL) isResizable;
+- (void) setResizable:(BOOL)resizable;
 
 @end

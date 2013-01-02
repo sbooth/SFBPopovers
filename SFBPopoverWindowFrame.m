@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -38,60 +38,39 @@
 
 @implementation SFBPopoverWindowFrame
 
-@synthesize popoverPosition = _popoverPosition;
-
-@synthesize distance = _distance;
-
-@synthesize borderColor = _borderColor;
-@synthesize borderWidth = _borderWidth;
-@synthesize cornerRadius = _cornerRadius;
-
-@synthesize drawsArrow = _drawsArrow;
-@synthesize arrowWidth = _arrowWidth;
-@synthesize arrowHeight = _arrowHeight;
-@synthesize drawRoundCornerBesideArrow = _drawRoundCornerBesideArrow;
-
-@synthesize viewMargin = _viewMargin;
-@synthesize backgroundColor = _backgroundColor;
-
 - (id) initWithFrame:(NSRect)frame
 {
 	if((self = [super initWithFrame:frame])) {
 		// Set the default appearance
-		_popoverPosition = SFBPopoverPositionBottom;
+		self.popoverPosition = SFBPopoverPositionBottom;
 
-		_distance = 0;
+		self.distance = 0;
 
-		_borderColor = [[NSColor whiteColor] copy];
-		_borderWidth = 2;
-		_cornerRadius = 8;
+		self.borderColor = [NSColor whiteColor];
+		self.borderWidth = 2;
+		self.cornerRadius = 8;
 
-		_drawsArrow = YES;
-		_arrowWidth = 20;
-		_arrowHeight = 16;
-		_drawRoundCornerBesideArrow = YES;
+		self.drawsArrow = YES;
+		self.arrowWidth = 20;
+		self.arrowHeight = 16;
+		self.drawRoundCornerBesideArrow = YES;
 
-		_viewMargin = 2;
-		_backgroundColor = [[NSColor colorWithCalibratedWhite:(CGFloat)0.1 alpha:(CGFloat)0.75] copy];
+		self.viewMargin = 2;
+		self.backgroundColor = [NSColor colorWithCalibratedWhite:(CGFloat)0.1 alpha:(CGFloat)0.75];
+
+		self.movable = NO;
+		self.resizable = NO;
 	}
 
 	return self;
 }
 
-- (void) dealloc
-{
-	[_borderColor release], _borderColor = nil;
-	[_backgroundColor release], _backgroundColor = nil;
-
-	[super dealloc];
-}
-
 - (NSRect) frameRectForContentRect:(NSRect)contentRect
 {
-	NSRect frameRect = NSInsetRect(contentRect, -_viewMargin, -_viewMargin);
+	NSRect frameRect = NSInsetRect(contentRect, -self.viewMargin, -self.viewMargin);
 
-	CGFloat offset = _arrowHeight + _distance;
-	switch(_popoverPosition) {
+	CGFloat offset = self.arrowHeight + self.distance;
+	switch(self.popoverPosition) {
 		case SFBPopoverPositionLeft:
 		case SFBPopoverPositionLeftTop:
 		case SFBPopoverPositionLeftBottom:
@@ -119,15 +98,15 @@
 			break;
 	}
 
-	return NSInsetRect(frameRect, -_borderWidth, -_borderWidth);
+	return NSInsetRect(frameRect, -self.borderWidth, -self.borderWidth);
 }
 
 - (NSRect) contentRectForFrameRect:(NSRect)windowFrame
 {
-	NSRect contentRect = NSInsetRect(windowFrame, _borderWidth, _borderWidth);
+	NSRect contentRect = NSInsetRect(windowFrame, self.borderWidth, self.borderWidth);
 
-	CGFloat offset = _arrowHeight + _distance;
-	switch(_popoverPosition) {
+	CGFloat offset = self.arrowHeight + self.distance;
+	switch(self.popoverPosition) {
 		case SFBPopoverPositionLeft:
 		case SFBPopoverPositionLeftTop:
 		case SFBPopoverPositionLeftBottom:
@@ -155,7 +134,7 @@
 			break;
 	}
 	
-	return NSInsetRect(contentRect, _viewMargin, _viewMargin);
+	return NSInsetRect(contentRect, self.viewMargin, self.viewMargin);
 }
 
 - (NSPoint) attachmentPoint
@@ -175,11 +154,11 @@
 	CGFloat midY = NSMidY(rect);
 	CGFloat maxY = NSMaxY(rect);
 
-	CGFloat arrowDistance = (_arrowHeight / 2) + (2 * _borderWidth);
-	if(_drawRoundCornerBesideArrow)
-		arrowDistance += _cornerRadius;
+	CGFloat arrowDistance = (self.arrowHeight / 2) + (2 * self.borderWidth);
+	if(self.drawRoundCornerBesideArrow)
+		arrowDistance += self.cornerRadius;
 
-	switch(_popoverPosition) {
+	switch(self.popoverPosition) {
 		case SFBPopoverPositionLeft:
 			arrowheadPosition = NSMakePoint(maxX, midY);
 			break;
@@ -239,12 +218,69 @@
 	NSRect contentRect = [self contentRectForFrameRect:[self bounds]];
     NSBezierPath *path = [self popoverFramePathForContentRect:contentRect];
 
-    [_backgroundColor set];
+    [self.backgroundColor set];
     [path fill];
     
-	[path setLineWidth:_borderWidth];
-    [_borderColor set];
+	[path setLineWidth:self.borderWidth];
+    [self.borderColor set];
     [path stroke];
+}
+
+- (void) mouseDown:(NSEvent *)event
+{
+	NSPoint pointInView = [self convertPoint:[event locationInWindow] fromView:nil];
+	NSRect contentRect = [self contentRectForFrameRect:[self bounds]];
+    NSBezierPath *path = [self popoverFramePathForContentRect:contentRect];
+
+	BOOL resize = [path containsPoint:pointInView] && !NSPointInRect(pointInView, contentRect);
+	if((resize && !self.resizable) || (!resize && !self.movable))
+		return;
+
+	NSWindow *window = [self window];
+	NSPoint originalMouseLocation = [window convertBaseToScreen:[event locationInWindow]];
+	NSRect originalFrame = [window frame];
+	
+    for(;;) {
+        NSEvent *newEvent = [window nextEventMatchingMask:(NSLeftMouseDraggedMask | NSLeftMouseUpMask)];
+		
+        if(NSLeftMouseUp == [newEvent type])
+			break;
+		
+		NSPoint newMouseLocation = [window convertBaseToScreen:[newEvent locationInWindow]];
+		NSPoint delta = NSMakePoint(newMouseLocation.x - originalMouseLocation.x, newMouseLocation.y - originalMouseLocation.y);
+		
+		NSRect newFrame = originalFrame;		
+		if(!resize) {
+			newFrame.origin.x += delta.x;
+			newFrame.origin.y += delta.y;
+		}
+		else {
+			newFrame.size.width += delta.x;
+			newFrame.size.height -= delta.y;
+			newFrame.origin.y += delta.y;
+			
+			NSRect newContentRect = [window contentRectForFrameRect:newFrame];
+
+			NSSize maxSize = [window maxSize];
+			NSSize minSize = [window minSize];
+
+			if(newContentRect.size.width > maxSize.width)
+				newFrame.size.width -= newContentRect.size.width - maxSize.width;
+			else if(newContentRect.size.width < minSize.width)
+				newFrame.size.width += minSize.width - newContentRect.size.width;
+
+			if(newContentRect.size.height > maxSize.height) {
+				newFrame.size.height -= newContentRect.size.height - maxSize.height;
+				newFrame.origin.y += newContentRect.size.height - maxSize.height;
+			}
+			else if(newContentRect.size.height < minSize.height) {
+				newFrame.size.height += minSize.height - newContentRect.size.height;
+				newFrame.origin.y -= minSize.height - newContentRect.size.height;
+			}
+		}
+		
+		[window setFrame:newFrame display:YES animate:NO];
+	}
 }
 
 @end
@@ -253,8 +289,8 @@
 
 - (NSBezierPath *) popoverFramePathForContentRect:(NSRect)contentRect
 {
-	contentRect = NSInsetRect(contentRect, -_viewMargin, -_viewMargin);
-	contentRect = NSInsetRect(contentRect, -_borderWidth / 2, -_borderWidth / 2);
+	contentRect = NSInsetRect(contentRect, -self.viewMargin, -self.viewMargin);
+	contentRect = NSInsetRect(contentRect, -self.borderWidth / 2, -self.borderWidth / 2);
 
 	CGFloat minX = NSMinX(contentRect);
 	CGFloat midX = NSMidX(contentRect);
@@ -268,27 +304,27 @@
 	[path setLineJoinStyle:NSRoundLineJoinStyle];
 
 	NSPoint currentPoint = NSMakePoint(minX, maxY);
-	if(0 < _cornerRadius && (_drawRoundCornerBesideArrow || (SFBPopoverPositionBottomRight != _popoverPosition && SFBPopoverPositionRightBottom != _popoverPosition)))
-		currentPoint.x += _cornerRadius;
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionBottomRight != self.popoverPosition && SFBPopoverPositionRightBottom != self.popoverPosition)))
+		currentPoint.x += self.cornerRadius;
 
 	NSPoint endOfLine = NSMakePoint(maxX, maxY);
 	BOOL shouldDrawNextCorner = NO;
-	if(0 < _cornerRadius && (_drawRoundCornerBesideArrow || (SFBPopoverPositionBottomLeft != _popoverPosition && SFBPopoverPositionLeftBottom != _popoverPosition))) {
-		endOfLine.x -= _cornerRadius;
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionBottomLeft != self.popoverPosition && SFBPopoverPositionLeftBottom != self.popoverPosition))) {
+		endOfLine.x -= self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
 
 	[path moveToPoint:currentPoint];
 
 	// If arrow should be drawn at top-left point, draw it.
-	if(SFBPopoverPositionBottomRight == _popoverPosition)
+	if(SFBPopoverPositionBottomRight == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionBottom == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(midX - (_arrowWidth / 2), maxY)];
+	else if(SFBPopoverPositionBottom == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(midX - (self.arrowWidth / 2), maxY)];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionBottomLeft == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(endOfLine.x - _arrowWidth, maxY)];
+	else if(SFBPopoverPositionBottomLeft == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(endOfLine.x - self.arrowWidth, maxY)];
 		[self appendArrowToPath:path];
 	}
 
@@ -298,26 +334,26 @@
 	// Rounded corner on top-right.
 	if(shouldDrawNextCorner)
 		[path appendBezierPathWithArcFromPoint:NSMakePoint(maxX, maxY) 
-									   toPoint:NSMakePoint(maxX, maxY - _cornerRadius) 
-										radius:_cornerRadius];
+									   toPoint:NSMakePoint(maxX, maxY - self.cornerRadius)
+										radius:self.cornerRadius];
 
 	// Draw the right side, beginning at the top-right.
 	endOfLine = NSMakePoint(maxX, minY);
 	shouldDrawNextCorner = NO;
-	if(0 < _cornerRadius && (_drawRoundCornerBesideArrow || (SFBPopoverPositionTopLeft != _popoverPosition && SFBPopoverPositionLeftTop != _popoverPosition))) {
-		endOfLine.y += _cornerRadius;
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionTopLeft != self.popoverPosition && SFBPopoverPositionLeftTop != self.popoverPosition))) {
+		endOfLine.y += self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
 
 	// If arrow should be drawn at right-top point, draw it.
-	if(SFBPopoverPositionLeftBottom == _popoverPosition)
+	if(SFBPopoverPositionLeftBottom == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionLeft == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(maxX, midY + (_arrowWidth / 2))];
+	else if(SFBPopoverPositionLeft == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(maxX, midY + (self.arrowWidth / 2))];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionLeftTop == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(maxX, endOfLine.y + _arrowWidth)];
+	else if(SFBPopoverPositionLeftTop == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(maxX, endOfLine.y + self.arrowWidth)];
 		[self appendArrowToPath:path];
 	}
 
@@ -327,26 +363,26 @@
 	// Rounded corner on bottom-right.
 	if(shouldDrawNextCorner)
 		[path appendBezierPathWithArcFromPoint:NSMakePoint(maxX, minY) 
-									   toPoint:NSMakePoint(maxX - _cornerRadius, minY) 
-										radius:_cornerRadius];
+									   toPoint:NSMakePoint(maxX - self.cornerRadius, minY)
+										radius:self.cornerRadius];
 
 	// Draw the bottom side, beginning at the bottom-right.
 	endOfLine = NSMakePoint(minX, minY);
 	shouldDrawNextCorner = NO;
-	if(0 < _cornerRadius && (_drawRoundCornerBesideArrow || (SFBPopoverPositionTopRight != _popoverPosition && SFBPopoverPositionRightTop != _popoverPosition))) {
-		endOfLine.x += _cornerRadius;
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionTopRight != self.popoverPosition && SFBPopoverPositionRightTop != self.popoverPosition))) {
+		endOfLine.x += self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
 
 	// If arrow should be drawn at bottom-right point, draw it.
-	if(SFBPopoverPositionTopLeft == _popoverPosition)
+	if(SFBPopoverPositionTopLeft == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionTop == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(midX + (_arrowWidth / 2), minY)];
+	else if(SFBPopoverPositionTop == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(midX + (self.arrowWidth / 2), minY)];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionTopRight == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(endOfLine.x + _arrowWidth, minY)];
+	else if(SFBPopoverPositionTopRight == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(endOfLine.x + self.arrowWidth, minY)];
 		[self appendArrowToPath:path];
 	}
 
@@ -356,26 +392,26 @@
 	// Rounded corner on bottom-left.
 	if(shouldDrawNextCorner)
 		[path appendBezierPathWithArcFromPoint:NSMakePoint(minX, minY) 
-									   toPoint:NSMakePoint(minX, minY + _cornerRadius) 
-										radius:_cornerRadius];
+									   toPoint:NSMakePoint(minX, minY + self.cornerRadius)
+										radius:self.cornerRadius];
 
 	// Draw the left side, beginning at the bottom-left.
 	endOfLine = NSMakePoint(minX, maxY);
 	shouldDrawNextCorner = NO;
-	if(0 < _cornerRadius && (_drawRoundCornerBesideArrow || (SFBPopoverPositionRightBottom != _popoverPosition && SFBPopoverPositionBottomRight != _popoverPosition))) {
-		endOfLine.y -= _cornerRadius;
+	if(0 < self.cornerRadius && (self.drawRoundCornerBesideArrow || (SFBPopoverPositionRightBottom != self.popoverPosition && SFBPopoverPositionBottomRight != self.popoverPosition))) {
+		endOfLine.y -= self.cornerRadius;
 		shouldDrawNextCorner = YES;
 	}
 
 	// If arrow should be drawn at left-bottom point, draw it.
-	if(SFBPopoverPositionRightTop == _popoverPosition)
+	if(SFBPopoverPositionRightTop == self.popoverPosition)
 		[self appendArrowToPath:path];
-	else if(SFBPopoverPositionRight == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(minX, midY - (_arrowWidth / 2))];
+	else if(SFBPopoverPositionRight == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(minX, midY - (self.arrowWidth / 2))];
 		[self appendArrowToPath:path];
 	}
-	else if(SFBPopoverPositionRightBottom == _popoverPosition) {
-		[path lineToPoint:NSMakePoint(minX, endOfLine.y - _arrowWidth)];
+	else if(SFBPopoverPositionRightBottom == self.popoverPosition) {
+		[path lineToPoint:NSMakePoint(minX, endOfLine.y - self.arrowWidth)];
 		[self appendArrowToPath:path];
 	}
 
@@ -385,8 +421,8 @@
 	// Rounded corner on top-left.
 	if(shouldDrawNextCorner)
 		[path appendBezierPathWithArcFromPoint:NSMakePoint(minX, maxY) 
-									   toPoint:NSMakePoint(minX + _cornerRadius, maxY) 
-										radius:_cornerRadius];
+									   toPoint:NSMakePoint(minX + self.cornerRadius, maxY)
+										radius:self.cornerRadius];
 
 	[path closePath];
 	return path;
@@ -395,48 +431,48 @@
 
 - (void) appendArrowToPath:(NSBezierPath *)path
 {
-	if(!_drawsArrow)
+	if(!self.drawsArrow)
 		return;
 
 	NSPoint currentPoint = [path currentPoint];
 	NSPoint tipPoint = currentPoint;
 	NSPoint endPoint = currentPoint;
 
-	switch(_popoverPosition) {
+	switch(self.popoverPosition) {
 		case SFBPopoverPositionLeft:
 		case SFBPopoverPositionLeftTop:
 		case SFBPopoverPositionLeftBottom:
 			// Arrow points towards right. We're starting from the top.
-			tipPoint.x += _arrowHeight;
-			tipPoint.y -= _arrowWidth / 2;
-			endPoint.y -= _arrowWidth;
+			tipPoint.x += self.arrowHeight;
+			tipPoint.y -= self.arrowWidth / 2;
+			endPoint.y -= self.arrowWidth;
 			break;
 
 		case SFBPopoverPositionRight:
 		case SFBPopoverPositionRightTop:
 		case SFBPopoverPositionRightBottom:
 			// Arrow points towards left. We're starting from the bottom.
-			tipPoint.x -= _arrowHeight;
-			tipPoint.y += _arrowWidth / 2;
-			endPoint.y += _arrowWidth;
+			tipPoint.x -= self.arrowHeight;
+			tipPoint.y += self.arrowWidth / 2;
+			endPoint.y += self.arrowWidth;
 			break;
 
 		case SFBPopoverPositionTop:
 		case SFBPopoverPositionTopLeft:
 		case SFBPopoverPositionTopRight:
 			// Arrow points towards bottom. We're starting from the right.
-			tipPoint.y -= _arrowHeight;
-			tipPoint.x -= _arrowWidth / 2;
-			endPoint.x -= _arrowWidth;
+			tipPoint.y -= self.arrowHeight;
+			tipPoint.x -= self.arrowWidth / 2;
+			endPoint.x -= self.arrowWidth;
 			break;
 
 		case SFBPopoverPositionBottom:
 		case SFBPopoverPositionBottomLeft:
 		case SFBPopoverPositionBottomRight:
 			// Arrow points towards top. We're starting from the left.
-			tipPoint.y += _arrowHeight;
-			tipPoint.x += _arrowWidth / 2;
-			endPoint.x += _arrowWidth;
+			tipPoint.y += self.arrowHeight;
+			tipPoint.x += self.arrowWidth / 2;
+			endPoint.x += self.arrowWidth;
 			break;
 	}
 

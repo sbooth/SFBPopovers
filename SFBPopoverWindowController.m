@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,57 +29,61 @@
  */
 
 #import "SFBPopoverWindowController.h"
+#import "SFBPopoverWindow.h"
 #import "SFBPopoverWindowFrame.h"
 
 #include <QuartzCore/QuartzCore.h>
+
+@interface SFBPopover ()
+{
+@private
+	NSViewController * _contentViewController;
+	SFBPopoverWindow * _popoverWindow;
+}
+@end
 
 @interface SFBPopoverWindow (Private)
 - (SFBPopoverWindowFrame *) popoverWindowFrame;
 @end
 
-@implementation SFBPopoverWindowController
+@implementation SFBPopover
 
-@synthesize animates = _animates;
-@synthesize closesWhenPopoverResignsKey = _closesWhenPopoverResignsKey;
-@synthesize closesWhenApplicationBecomesInactive = _closesWhenApplicationBecomesInactive;
-
-// The designated initializer for NSWindowController
-// If window isn't an instance of SFBPopoverWindow, all bets are off
-- (id) initWithWindow:(NSWindow *)window
+- (id) init
 {
-	if((self = [super initWithWindow:window])) {
-		_animates = YES;
+	return [self initWithContentViewController:nil];
+}
 
-		// If the window is loaded at this point -windowDidLoad will never be called, so perform the appropriate setup
-		if([self isWindowLoaded]) {
-			CAAnimation *animation = [CABasicAnimation animation];
-			[animation setDelegate:self];
-			[[self window] setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
+- (id) initWithContentView:(NSView *)contentView
+{
+	NSViewController *contentViewController = [[NSViewController alloc] init];
+	[contentViewController setView:contentView];
+	return [self initWithContentViewController:contentViewController];
+}
 
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:[self window]];
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
-		}
+- (id) initWithContentViewController:(NSViewController *)contentViewController
+{
+	if((self = [super init])) {
+		_contentViewController = contentViewController;
+		self.animates = YES;
+
+		NSView *contentView = [_contentViewController view];
+		_popoverWindow = [[SFBPopoverWindow alloc] initWithContentRect:[contentView frame] styleMask:0 backing:NSBackingStoreBuffered defer:YES];
+		[_popoverWindow setContentView:contentView];
+		[_popoverWindow setMinSize:[contentView frame].size];
+
+		CAAnimation *animation = [CABasicAnimation animation];
+		[animation setDelegate:self];
+		[_popoverWindow setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
+
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:_popoverWindow];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
 	}
-
 	return self;
 }
 
 - (void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
-	[super dealloc];
-}
-
-// This will only be called if the window was loaded from a nib file
-- (void) windowDidLoad
-{
-	CAAnimation *animation = [CABasicAnimation animation];
-	[animation setDelegate:self];
-	[[self window] setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:[self window]];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
 }
 
 - (SFBPopoverPosition) bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point
@@ -91,23 +95,26 @@
 	else
 		screenFrame = [[NSScreen mainScreen] visibleFrame];
 
-	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
+	NSPoint pointOnScreen = window ? [window convertBaseToScreen:point] : point;
 
-	SFBPopoverWindow *popoverWindow = [self popoverWindow];
+	SFBPopoverWindow *popoverWindow = _popoverWindow;
 	NSSize popoverSize = [popoverWindow frame].size;
+	popoverSize.width += 2 * [popoverWindow viewMargin];
+	popoverSize.height += 2 * [popoverWindow viewMargin];
 
 	// By default, position us centered below.
 	SFBPopoverPosition side = SFBPopoverPositionBottom;
+	CGFloat distance = [popoverWindow arrowHeight] + [popoverWindow distance];
 
 	// We'd like to display directly below the specified point, since this gives a 
 	// sense of a relationship between the point and this window. Check there's room.
-	if(pointOnScreen.y - popoverSize.height - [popoverWindow arrowHeight] < NSMinY(screenFrame)) {
+	if(pointOnScreen.y - popoverSize.height - distance < NSMinY(screenFrame)) {
 		// We'd go off the bottom of the screen. Try the right.
-		if(pointOnScreen.x + popoverSize.width + [popoverWindow arrowHeight] >= NSMaxX(screenFrame)) {
+		if(pointOnScreen.x + popoverSize.width + distance >= NSMaxX(screenFrame)) {
 			// We'd go off the right of the screen. Try the left.
-			if(pointOnScreen.x - popoverSize.width - [popoverWindow arrowHeight] < NSMinX(screenFrame)) {
+			if(pointOnScreen.x - popoverSize.width - distance < NSMinX(screenFrame)) {
 				// We'd go off the left of the screen. Try the top.
-				if (pointOnScreen.y + popoverSize.height + [popoverWindow arrowHeight] < NSMaxY(screenFrame))
+				if (pointOnScreen.y + popoverSize.height + distance < NSMaxY(screenFrame))
 					side = SFBPopoverPositionTop;
 			}
 			else
@@ -120,7 +127,7 @@
 	CGFloat halfWidth = popoverSize.width / 2;
 	CGFloat halfHeight = popoverSize.height / 2;
 
-	NSRect parentFrame = (window) ? [window frame] : screenFrame;
+	NSRect parentFrame = window ? NSIntersectionRect([window frame], screenFrame) : screenFrame;
 	CGFloat arrowInset = ([popoverWindow arrowWidth] / 2) + ([popoverWindow drawRoundCornerBesideArrow] ? [popoverWindow cornerRadius] : 0);
 
 	// We're currently at a primary side.
@@ -191,96 +198,226 @@
 
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation
 {
-	if([[self window] isVisible])
+	if([_popoverWindow isVisible])
 		return;
 
 	if(chooseBestLocation)
-		[[self popoverWindow] setPopoverPosition:[self bestPositionInWindow:window atPoint:point]];
+		[_popoverWindow setPopoverPosition:[self bestPositionInWindow:window atPoint:point]];
 
-	NSPoint attachmentPoint = [[[self popoverWindow] popoverWindowFrame] attachmentPoint];
+	NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
 	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
 
 	pointOnScreen.x -= attachmentPoint.x;
 	pointOnScreen.y -= attachmentPoint.y;
 
-	[[self window] setFrameOrigin:pointOnScreen];
+	[_popoverWindow setFrameOrigin:pointOnScreen];
 
-	if(_animates)
-		[[self window] setAlphaValue:0];
+	if(self.animates)
+		[_popoverWindow setAlphaValue:0];
 
-	[window addChildWindow:[self window] ordered:NSWindowAbove];
+	[window addChildWindow:_popoverWindow ordered:NSWindowAbove];
 
-	[[self window] makeKeyAndOrderFront:nil];
+	[_popoverWindow makeKeyAndOrderFront:nil];
 
-	if(_animates)
-		[[[self window] animator] setAlphaValue:1];
+	if(self.animates)
+		[[_popoverWindow animator] setAlphaValue:1];
 }
 
-- (void) movePopoverToPoint:(NSPoint)point 
+- (void) movePopoverToPoint:(NSPoint)point
 {
-	NSPoint attachmentPoint = [[[self popoverWindow] popoverWindowFrame] attachmentPoint];
-	NSWindow *window = [[self window] parentWindow];
+	NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
+	NSWindow *window = [_popoverWindow parentWindow];
 	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
 
 	pointOnScreen.x -= attachmentPoint.x;
 	pointOnScreen.y -= attachmentPoint.y;
 
-	[[self window] setFrameOrigin:pointOnScreen];
+	[_popoverWindow setFrameOrigin:pointOnScreen];
 }
 
 - (IBAction) closePopover:(id)sender
 {
-	if(![[self window] isVisible])
+	if(![_popoverWindow isVisible])
 		return;
 
 //	[NSAnimationContext beginGrouping];
 //	[[NSAnimationContext currentContext] setDuration:0];
-//	[[[self window] animator] setAlphaValue:0];
+//	[[_popoverWindow animator] setAlphaValue:0];
 //	[NSAnimationContext endGrouping];
 
-	if(_animates)
-		[[[self window] animator] setAlphaValue:0];
+	if(self.animates)
+		[[_popoverWindow animator] setAlphaValue:0];
 	else {
-		NSWindow *parentWindow = [[self window] parentWindow];
-		[parentWindow removeChildWindow:[self window]];
-		[[self window] orderOut:sender];
+		NSWindow *parentWindow = [_popoverWindow parentWindow];
+		[parentWindow removeChildWindow:_popoverWindow];
+		[_popoverWindow orderOut:sender];
 	}
 }
 
-- (SFBPopoverWindow *) popoverWindow
+- (BOOL) isVisible
 {
-	return (SFBPopoverWindow *)[self window];
+	return [_popoverWindow isVisible];
+}
+
+- (SFBPopoverPosition) position
+{
+	return [_popoverWindow popoverPosition];
+}
+
+- (void) setPosition:(SFBPopoverPosition)position
+{
+	[_popoverWindow setPopoverPosition:position];
+}
+
+- (CGFloat) distance
+{
+	return [_popoverWindow distance];
+}
+
+- (void) setDistance:(CGFloat)distance
+{
+	[_popoverWindow setDistance:distance];
+}
+
+- (NSColor *) borderColor
+{
+	return [_popoverWindow borderColor];
+}
+
+- (void) setBorderColor:(NSColor *)borderColor
+{
+	[_popoverWindow setBorderColor:borderColor];
+}
+
+- (CGFloat) borderWidth
+{
+	return [_popoverWindow borderWidth];
+}
+
+- (void) setBorderWidth:(CGFloat)borderWidth
+{
+	[_popoverWindow setBorderWidth:borderWidth];
+}
+
+- (CGFloat) cornerRadius
+{
+	return [_popoverWindow cornerRadius];
+}
+
+- (void) setCornerRadius:(CGFloat)cornerRadius
+{
+	[_popoverWindow setCornerRadius:cornerRadius];
+}
+
+- (BOOL) drawsArrow
+{
+	return [_popoverWindow drawsArrow];
+}
+
+- (void) setDrawsArrow:(BOOL)drawsArrow
+{
+	[_popoverWindow setDrawsArrow:drawsArrow];
+}
+
+- (CGFloat) arrowWidth
+{
+	return [_popoverWindow arrowWidth];
+}
+
+- (void) setArrowWidth:(CGFloat)arrowWidth
+{
+	[_popoverWindow setArrowWidth:arrowWidth];
+}
+
+- (CGFloat) arrowHeight
+{
+	return [_popoverWindow arrowHeight];
+}
+
+- (void) setArrowHeight:(CGFloat)arrowHeight
+{
+	[_popoverWindow setArrowHeight:arrowHeight];
+}
+
+- (BOOL) drawRoundCornerBesideArrow
+{
+	return [_popoverWindow drawRoundCornerBesideArrow];
+}
+
+- (void) setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow
+{
+	[_popoverWindow setDrawRoundCornerBesideArrow:drawRoundCornerBesideArrow];
+}
+
+- (CGFloat) viewMargin
+{
+	return [_popoverWindow viewMargin];
+}
+
+- (void) setViewMargin:(CGFloat)viewMargin
+{
+	[_popoverWindow setViewMargin:viewMargin];
+}
+
+- (NSColor *) backgroundColor
+{
+	return [_popoverWindow popoverBackgroundColor];
+}
+
+- (void) setBackgroundColor:(NSColor *)backgroundColor
+{
+	[_popoverWindow setPopoverBackgroundColor:backgroundColor];
+}
+
+- (BOOL) isMovable
+{
+	return [_popoverWindow isMovable];
+}
+
+- (void) setMovable:(BOOL)movable
+{
+	[_popoverWindow setMovable:movable];
+}
+
+- (BOOL) isResizable
+{
+	return [_popoverWindow isResizable];
+}
+
+- (void) setResizable:(BOOL)resizable
+{
+	[_popoverWindow setResizable:resizable];
 }
 
 @end
 
-@implementation SFBPopoverWindowController (NSAnimationDelegateMethods)
+@implementation SFBPopover (NSAnimationDelegateMethods)
 
 - (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
 {
 #pragma unused(animation)
 	// Detect the end of fade out and close the window
-	if(flag && 0 == [[self window] alphaValue]) {
-		NSWindow *parentWindow = [[self window] parentWindow];
-		[parentWindow removeChildWindow:[self window]];
-		[[self window] orderOut:nil];
-		[[self window] setAlphaValue:1];
+	if(flag && 0 == [_popoverWindow alphaValue]) {
+		NSWindow *parentWindow = [_popoverWindow parentWindow];
+		[parentWindow removeChildWindow:_popoverWindow];
+		[_popoverWindow orderOut:nil];
+		[_popoverWindow setAlphaValue:1];
 	}
 }
 
 @end
 
-@implementation SFBPopoverWindowController (NSWindowDelegateMethods)
+@implementation SFBPopover (NSWindowDelegateMethods)
 
 - (void) windowDidResignKey:(NSNotification *)notification
 {
-	if(_closesWhenPopoverResignsKey)
+	if(self.closesWhenPopoverResignsKey)
 		[self closePopover:notification];
 }
 
 - (void) applicationDidResignActive:(NSNotification *)notification
 {
-	if(_closesWhenApplicationBecomesInactive)
+	if(self.closesWhenApplicationBecomesInactive)
 		[self closePopover:notification];
 }
 

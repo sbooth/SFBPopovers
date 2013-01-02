@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -31,6 +31,13 @@
 #import "SFBPopoverWindow.h"
 #import "SFBPopoverWindowFrame.h"
 
+@interface SFBPopoverWindow ()
+{
+@private
+	NSView * _popoverContentView;
+}
+@end
+
 @interface SFBPopoverWindow (Private)
 - (SFBPopoverWindowFrame *) popoverWindowFrame;
 @end
@@ -50,13 +57,6 @@
 	}
 
 	return self;
-}
-
-- (void) dealloc
-{
-	[_popoverContentView release], _popoverContentView = nil;
-
-	[super dealloc];
 }
 
 - (NSRect) contentRectForFrameRect:(NSRect)windowFrame
@@ -81,7 +81,7 @@
 
 - (NSView *) contentView
 {
-	return [[_popoverContentView retain] autorelease];
+	return _popoverContentView;
 }
 
 - (void) setContentView:(NSView *)view
@@ -92,7 +92,7 @@
 	SFBPopoverWindowFrame *popoverWindowFrame = [self popoverWindowFrame];
 	if(nil == popoverWindowFrame) {
 		popoverWindowFrame = [[SFBPopoverWindowFrame alloc] initWithFrame:NSZeroRect];
-		[super setContentView:[popoverWindowFrame autorelease]];
+		[super setContentView:popoverWindowFrame];
 	}
 
 	// Automatically resize the window to match the size of the new content
@@ -102,10 +102,10 @@
 
 	if(_popoverContentView) {
 		[_popoverContentView removeFromSuperview];
-		[_popoverContentView release], _popoverContentView = nil;
+		_popoverContentView = nil;
 	}
 
-	_popoverContentView = [view retain];
+	_popoverContentView = view;
 	NSRect viewFrame = [self contentRectForFrameRect:windowFrame];
 	[_popoverContentView setFrame:viewFrame];
 	[_popoverContentView setAutoresizingMask:NSViewNotSizable];
@@ -183,7 +183,7 @@
 	NSPoint newAttachmentPoint = [[self popoverWindowFrame] attachmentPointForRect:boundsRect];
 
 	// This orderOut: then orderFront: trickery seems to be required to prevent visual artifacts when the new window position
-	// overlaps the old one.  No matter what I tried (flusing, erasing, disabling screen updates) I could not get the display
+	// overlaps the old one.  No matter what I tried (flushing, erasing, disabling screen updates) I could not get the display
 	// to work properly if the window was onscreen
 	BOOL isVisible = [self isVisible];
 	BOOL isKey = [self isKeyWindow];
@@ -477,12 +477,37 @@
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
+- (BOOL) isMovable
+{
+	return [[self popoverWindowFrame] isMovable];
+}
+
+- (void) setMovable:(BOOL)movable
+{
+	[[self popoverWindowFrame] setMovable:movable];
+}
+
+- (BOOL) isResizable
+{
+	return [[self popoverWindowFrame] isResizable];
+}
+
+- (void) setResizable:(BOOL)resizable
+{
+	[[self popoverWindowFrame] setResizable:resizable];
+//	if(resizable)
+//		[self setStyleMask:NSBorderlessWindowMask | NSResizableWindowMask];
+//	else
+//		[self setStyleMask:NSBorderlessWindowMask];
+}
+
 @end
 
 @implementation SFBPopoverWindow (Private)
 
 - (SFBPopoverWindowFrame *) popoverWindowFrame
 {
+	// The window's content view is the popover frame
 	return (SFBPopoverWindowFrame *)[super contentView];
 }
 

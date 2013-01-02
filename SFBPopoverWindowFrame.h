@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,49 +29,35 @@
  */
 
 #import <Cocoa/Cocoa.h>
+
 #import "SFBPopoverWindow.h"
 
 // ========================================
 // The class that actually does the work of drawing the popover window
 // ========================================
 @interface SFBPopoverWindowFrame : NSView
-{
-@private
-	SFBPopoverPosition _popoverPosition;
-
-	CGFloat _distance;
-
-	NSColor *_borderColor;
-	CGFloat _borderWidth;
-	CGFloat _cornerRadius;
-
-	BOOL _drawsArrow;
-	CGFloat _arrowWidth;
-	CGFloat _arrowHeight;
-	BOOL _drawRoundCornerBesideArrow;
-
-	CGFloat _viewMargin;
-	NSColor *_backgroundColor;
-}
 
 // ========================================
 // Properties
 // Changing these will NOT mark the view as dirty, to allow for efficient multiple property changes
-@property (assign) SFBPopoverPosition popoverPosition;
+@property (nonatomic, assign) SFBPopoverPosition popoverPosition;
 
-@property (assign) CGFloat distance;
+@property (nonatomic, assign) CGFloat distance;
 
-@property (copy) NSColor * borderColor;
-@property (assign) CGFloat borderWidth;
-@property (assign) CGFloat cornerRadius;
+@property (nonatomic, copy) NSColor * borderColor;
+@property (nonatomic, assign) CGFloat borderWidth;
+@property (nonatomic, assign) CGFloat cornerRadius;
 
-@property (assign) BOOL drawsArrow;
-@property (assign) CGFloat arrowWidth;
-@property (assign) CGFloat arrowHeight;
-@property (assign) BOOL drawRoundCornerBesideArrow;
+@property (nonatomic, assign) BOOL drawsArrow;
+@property (nonatomic, assign) CGFloat arrowWidth;
+@property (nonatomic, assign) CGFloat arrowHeight;
+@property (nonatomic, assign) BOOL drawRoundCornerBesideArrow;
 
-@property (assign) CGFloat viewMargin;
-@property (copy) NSColor * backgroundColor;
+@property (nonatomic, assign) CGFloat viewMargin;
+@property (nonatomic, copy) NSColor * backgroundColor;
+
+@property (nonatomic, assign, getter=isMovable) BOOL movable;
+@property (nonatomic, assign, getter=isResizable) BOOL resizable;
 
 // ========================================
 // Geometry calculations
@@ -80,4 +66,5 @@
 
 - (NSPoint) attachmentPoint;
 - (NSPoint) attachmentPointForRect:(NSRect)rect;
+
 @end

@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,44 +29,26 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <SFBPopovers/SFBPopoverWindowController.h>
 
 @interface ExampleAppDelegate : NSObject <NSApplicationDelegate>
-{
-@private
-	NSPopUpButton *positionPopup;
-	NSColorWell *borderColorWell;
-	NSColorWell *backgroundColorWell;
-	NSSlider *viewMarginSlider;
-	NSSlider *borderWidthSlider;
-	NSSlider *cornerRadiusSlider;
-	NSButton *hasArrowCheckbox;
-	NSButton *drawRoundCornerBesideArrowCheckbox;
-	NSSlider *arrowWidthSlider;
-	NSSlider *arrowHeightSlider;
-	NSSlider *distanceSlider;
-	NSButton *toggleButton;
 
-	NSWindow *popoverWindow;
-	NSWindow *parametersWindow;
+@property (nonatomic, weak) IBOutlet NSPopUpButton *positionPopup;
+@property (nonatomic, weak) IBOutlet NSColorWell *borderColorWell;
+@property (nonatomic, weak) IBOutlet NSColorWell *backgroundColorWell;
+@property (nonatomic, weak) IBOutlet NSSlider *viewMarginSlider;
+@property (nonatomic, weak) IBOutlet NSSlider *borderWidthSlider;
+@property (nonatomic, weak) IBOutlet NSSlider *cornerRadiusSlider;
+@property (nonatomic, weak) IBOutlet NSButton *hasArrowCheckbox;
+@property (nonatomic, weak) IBOutlet NSButton *drawRoundCornerBesideArrowCheckbox;
+@property (nonatomic, weak) IBOutlet NSButton *movableCheckbox;
+//@property (nonatomic, weak) IBOutlet NSButton *resizableCheckbox;
+@property (nonatomic, weak) IBOutlet NSSlider *arrowWidthSlider;
+@property (nonatomic, weak) IBOutlet NSSlider *arrowHeightSlider;
+@property (nonatomic, weak) IBOutlet NSSlider *distanceSlider;
+@property (nonatomic, weak) IBOutlet NSButton *toggleButton;
 
-	SFBPopoverWindowController *_popoverController;
-}
-@property (assign) IBOutlet NSPopUpButton *positionPopup;
-@property (assign) IBOutlet NSColorWell *borderColorWell;
-@property (assign) IBOutlet NSColorWell *backgroundColorWell;
-@property (assign) IBOutlet NSSlider *viewMarginSlider;
-@property (assign) IBOutlet NSSlider *borderWidthSlider;
-@property (assign) IBOutlet NSSlider *cornerRadiusSlider;
-@property (assign) IBOutlet NSButton *hasArrowCheckbox;
-@property (assign) IBOutlet NSButton *drawRoundCornerBesideArrowCheckbox;
-@property (assign) IBOutlet NSSlider *arrowWidthSlider;
-@property (assign) IBOutlet NSSlider *arrowHeightSlider;
-@property (assign) IBOutlet NSSlider *distanceSlider;
-@property (assign) IBOutlet NSButton *toggleButton;
-
-@property (assign) IBOutlet NSWindow *popoverWindow;
-@property (assign) IBOutlet NSWindow *parametersWindow;
+@property (nonatomic, weak) IBOutlet NSView *popoverView;
+@property (nonatomic, weak) IBOutlet NSWindow *parametersWindow;
 
 - (IBAction) changePosition:(id)sender;
 - (IBAction) changeBorderColor:(id)sender;
@@ -76,6 +58,8 @@
 - (IBAction) changeCornerRadius:(id)sender;
 - (IBAction) changeHasArrow:(id)sender;
 - (IBAction) changeDrawRoundCornerBesideArrow:(id)sender;
+- (IBAction) changeMovable:(id)sender;
+//- (IBAction) changeResizable:(id)sender;
 - (IBAction) changeArrowWidth:(id)sender;
 - (IBAction) changeArrowHeight:(id)sender;
 - (IBAction) changeDistance:(id)sender;

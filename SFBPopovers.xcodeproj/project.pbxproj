@@ -44,9 +44,6 @@
 		32A104191368F4D2009FA237 /* ExampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleAppDelegate.h; sourceTree = "<group>"; };
 		32A1041A1368F4D2009FA237 /* ExampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleAppDelegate.m; sourceTree = "<group>"; };
 		32A10EBC136A5855009FA237 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		32A11014136A61C8009FA237 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
-		32A11015136A61C8009FA237 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		32A11016136A61C8009FA237 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		32CE12C41367854000CE7985 /* SFBPopovers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SFBPopovers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32CE12C71367854000CE7985 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		32CE12CA1367854000CE7985 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -96,22 +93,11 @@
 			name = Example;
 			sourceTree = "<group>";
 		};
-		32A11013136A61B7009FA237 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				32A11014136A61C8009FA237 /* Base.xcconfig */,
-				32A11015136A61C8009FA237 /* Debug.xcconfig */,
-				32A11016136A61C8009FA237 /* Release.xcconfig */,
-			);
-			path = Configs;
-			sourceTree = "<group>";
-		};
 		32CE12B81367854000CE7985 = {
 			isa = PBXGroup;
 			children = (
 				32CE12CD1367854000CE7985 /* SFBPopovers */,
 				32A1037D1368F216009FA237 /* Example */,
-				32A11013136A61B7009FA237 /* Configs */,
 				32CE12C61367854000CE7985 /* Frameworks */,
 				32CE12C51367854000CE7985 /* Products */,
 			);
@@ -324,7 +310,6 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -336,7 +321,6 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = Example;
 			};
 			name = Debug;
@@ -348,7 +332,6 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "Example-Info.plist";
@@ -359,23 +342,25 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = Example;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
 		32CE12D41367854000CE7985 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32A11015136A61C8009FA237 /* Debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 			};
 			name = Debug;
 		};
 		32CE12D51367854000CE7985 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32A11016136A61C8009FA237 /* Release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 			};
 			name = Release;
 		};
@@ -387,7 +372,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SFBPopovers-Prefix.pch";
 				INFOPLIST_FILE = "SFBPopovers-Info.plist";
@@ -405,7 +389,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SFBPopovers-Prefix.pch";
 				INFOPLIST_FILE = "SFBPopovers-Info.plist";
