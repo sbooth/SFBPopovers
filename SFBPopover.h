@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013, 2014 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@
 // ========================================
 // Positioning constants
 // ========================================
-enum SFBPopoverPosition {
+typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 	SFBPopoverPositionLeft          = NSMinXEdge,
 	SFBPopoverPositionRight         = NSMaxXEdge,
 	SFBPopoverPositionTop           = NSMaxYEdge,
@@ -47,7 +47,6 @@ enum SFBPopoverPosition {
 	SFBPopoverPositionBottomLeft    = 10,
 	SFBPopoverPositionBottomRight   = 11
 };
-typedef enum SFBPopoverPosition SFBPopoverPosition;
 
 // ========================================
 // A class that controls display of a popover
