@@ -1,19 +1,17 @@
 /*
- *  Copyright (C) 2011, 2012, 2013 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011, 2012, 2013, 2014, 2015 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions are
  *  met:
  *
- *    - Redistributions of source code must retain the above copyright
+ *   1. Redistributions of source code must retain the above copyright
  *      notice, this list of conditions and the following disclaimer.
- *    - Redistributions in binary form must reproduce the above copyright
+ *
+ *   2. Redistributions in binary form must reproduce the above copyright
  *      notice, this list of conditions and the following disclaimer in the
  *      documentation and/or other materials provided with the distribution.
- *    - Neither the name of Stephen F. Booth nor the names of its 
- *      contributors may be used to endorse or promote products derived
- *      from this software without specific prior written permission.
  *
  *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -95,7 +93,12 @@
 	else
 		screenFrame = [[NSScreen mainScreen] visibleFrame];
 
-	NSPoint pointOnScreen = window ? [window convertBaseToScreen:point] : point;
+	NSPoint pointOnScreen = point;
+	if(window) {
+		NSRect rect = { .origin = point, .size = NSZeroSize };
+		NSRect rectOnScreen = [window convertRectToScreen:rect];
+		pointOnScreen = rectOnScreen.origin;
+	}
 
 	SFBPopoverWindow *popoverWindow = _popoverWindow;
 	NSSize popoverSize = [popoverWindow frame].size;
@@ -205,7 +208,12 @@
 		[_popoverWindow setPopoverPosition:[self bestPositionInWindow:window atPoint:point]];
 
 	NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
-	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
+	NSPoint pointOnScreen = point;
+	if(window) {
+		NSRect rect = { .origin = point, .size = NSZeroSize };
+		NSRect rectOnScreen = [window convertRectToScreen:rect];
+		pointOnScreen = rectOnScreen.origin;
+	}
 
 	pointOnScreen.x -= attachmentPoint.x;
 	pointOnScreen.y -= attachmentPoint.y;
@@ -227,7 +235,13 @@
 {
 	NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
 	NSWindow *window = [_popoverWindow parentWindow];
-	NSPoint pointOnScreen = (nil != window) ? [window convertBaseToScreen:point] : point;
+
+	NSPoint pointOnScreen = point;
+	if(window) {
+		NSRect rect = { .origin = point, .size = NSZeroSize };
+		NSRect rectOnScreen = [window convertRectToScreen:rect];
+		pointOnScreen = rectOnScreen.origin;
+	}
 
 	pointOnScreen.x -= attachmentPoint.x;
 	pointOnScreen.y -= attachmentPoint.y;
