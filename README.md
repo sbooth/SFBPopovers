@@ -1,8 +1,7 @@
 SFBPopovers
 ===========
 
-This framework implements popover windows- windows that, to the user, logically belong to another window are visually
-attached to the parent window.
+This framework implements popover windows- windows that, to the user, logically belong to another window and are visually attached to the parent window.
 
 Although the majority of the code was written by me, the inspiration came from two similar products:
 
