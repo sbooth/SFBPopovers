@@ -16,4 +16,5 @@ An `SFBPopover` has a customizable appearance including border thickness, color,
 	s.source_files  		= "SFBPopover.{h,m}", "SFBPopoverWindow.{h,m}", "SFBPopoverWindowFrame.{h,m}"
 	s.public_header_files 	= "SFBPopover.h"
 	s.requires_arc 			= true
+	s.frameworks			= "Cocoa", "QuartzCore"
 end
