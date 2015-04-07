@@ -8,7 +8,7 @@ This framework implements popover windows- windows that, to the user, logically 
 An `SFBPopover` has a customizable appearance including border thickness, color, and radius, attachment point, and arrow appearance.
 							DESC
 	s.homepage				= "https://github.com/sbooth/SFBPopovers"
-	s.license				= { :type => "MIT", :file => "COPYING" }
+	s.license				= { :type => "BSD", :file => "COPYING" }
 	s.author				= { "Stephen F. Booth" => "me@sbooth.org" }
 	s.social_media_url		= "http://twitter.com/sbooth"
 	s.platform				= :osx, "10.7"
