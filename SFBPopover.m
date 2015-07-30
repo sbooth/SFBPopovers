@@ -29,6 +29,7 @@
 #import "SFBPopover.h"
 #import "SFBPopoverWindow.h"
 #import "SFBPopoverWindowFrame.h"
+#import "SFBPopoverAnimationDelegate.h"
 
 #include <QuartzCore/QuartzCore.h>
 
@@ -37,6 +38,7 @@
 @private
 	NSViewController * _contentViewController;
 	SFBPopoverWindow * _popoverWindow;
+    SFBPopoverAnimationDelegate* _popoverAnimationDelegate;
 }
 @end
 
@@ -69,8 +71,9 @@
 		[_popoverWindow setContentView:contentView];
 		[_popoverWindow setMinSize:[contentView frame].size];
 
+        _popoverAnimationDelegate = [[SFBPopoverAnimationDelegate alloc] initWithPopoverWindow:_popoverWindow];
 		CAAnimation *animation = [CABasicAnimation animation];
-		[animation setDelegate:self];
+		[animation setDelegate:_popoverAnimationDelegate];
 		[_popoverWindow setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:_popoverWindow];
@@ -406,22 +409,6 @@
 - (void) setResizable:(BOOL)resizable
 {
 	[_popoverWindow setResizable:resizable];
-}
-
-@end
-
-@implementation SFBPopover (NSAnimationDelegateMethods)
-
-- (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
-{
-#pragma unused(animation)
-	// Detect the end of fade out and close the window
-	if(flag && 0 == [_popoverWindow alphaValue]) {
-		NSWindow *parentWindow = [_popoverWindow parentWindow];
-		[parentWindow removeChildWindow:_popoverWindow];
-		[_popoverWindow orderOut:nil];
-		[_popoverWindow setAlphaValue:1];
-	}
 }
 
 @end
