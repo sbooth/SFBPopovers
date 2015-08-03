@@ -32,6 +32,41 @@
 
 #include <QuartzCore/QuartzCore.h>
 
+// A custom delegate class is used since CAAnimation retains its delegate
+@interface SFBPopoverAnimationDelegate : NSObject
+{
+@private
+	__weak SFBPopoverWindow *_popoverWindow;
+}
+
+- (instancetype) initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow;
+
+@end
+
+@implementation SFBPopoverAnimationDelegate
+
+- (instancetype) initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow
+{
+	if((self = [super init])) {
+		_popoverWindow = popoverWindow;
+	}
+	return self;
+}
+
+- (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
+{
+#pragma unused(animation)
+	// Detect the end of fade out and close the window
+	if(flag && 0 == [_popoverWindow alphaValue]) {
+		NSWindow *parentWindow = [_popoverWindow parentWindow];
+		[parentWindow removeChildWindow:_popoverWindow];
+		[_popoverWindow orderOut:nil];
+		[_popoverWindow setAlphaValue:1];
+	}
+}
+
+@end
+
 @interface SFBPopover ()
 {
 @private
@@ -70,7 +105,7 @@
 		[_popoverWindow setMinSize:[contentView frame].size];
 
 		CAAnimation *animation = [CABasicAnimation animation];
-		[animation setDelegate:self];
+		[animation setDelegate:[[SFBPopoverAnimationDelegate alloc] initWithPopoverWindow:_popoverWindow]];
 		[_popoverWindow setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResignKey:) name:NSWindowDidResignKeyNotification object:_popoverWindow];
@@ -406,22 +441,6 @@
 - (void) setResizable:(BOOL)resizable
 {
 	[_popoverWindow setResizable:resizable];
-}
-
-@end
-
-@implementation SFBPopover (NSAnimationDelegateMethods)
-
-- (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
-{
-#pragma unused(animation)
-	// Detect the end of fade out and close the window
-	if(flag && 0 == [_popoverWindow alphaValue]) {
-		NSWindow *parentWindow = [_popoverWindow parentWindow];
-		[parentWindow removeChildWindow:_popoverWindow];
-		[_popoverWindow orderOut:nil];
-		[_popoverWindow setAlphaValue:1];
-	}
 }
 
 @end
