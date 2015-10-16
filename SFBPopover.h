@@ -59,17 +59,17 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 
 // ========================================
 // Creation
-- (id) initWithContentView:(NSView *)contentView;
-- (id) initWithContentViewController:(NSViewController *)contentViewController;
+- (nullable id) initWithContentView:(nonnull NSView *)contentView;
+- (nullable id) initWithContentViewController:(nonnull NSViewController *)contentViewController;
 
 // ========================================
 // Geometry determination
-- (SFBPopoverPosition) bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point;
+- (SFBPopoverPosition) bestPositionInWindow:(nonnull NSWindow *)window atPoint:(NSPoint)point;
 
 // ========================================
 // Show the popover- prefer these to showWindow:
-- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point;
-- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation;
+- (void) displayPopoverInWindow:(nonnull NSWindow *)window atPoint:(NSPoint)point;
+- (void) displayPopoverInWindow:(nonnull NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation;
 
 // ========================================
 // Move the popover to a new attachment point (should be currently displayed)
@@ -77,11 +77,11 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 
 // ========================================
 // Close the popover
-- (IBAction) closePopover:(id)sender;
+- (IBAction) closePopover:(nullable id)sender;
 
 // ========================================
 // Returns the popover window
-- (NSWindow *) popoverWindow;
+- (nonnull NSWindow *) popoverWindow;
 
 // ========================================
 // Returns YES if the popover is visible
@@ -99,8 +99,8 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 - (void) setDistance:(CGFloat)distance;
 
 // The popover's border color
-- (NSColor *) borderColor;
-- (void) setBorderColor:(NSColor *)borderColor;
+- (nonnull NSColor *) borderColor;
+- (void) setBorderColor:(nonnull NSColor *)borderColor;
 
 // The width of the popover window's border
 - (CGFloat) borderWidth;
@@ -131,8 +131,8 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 - (void) setViewMargin:(CGFloat)viewMargin;
 
 // The popover's background color
-- (NSColor *) backgroundColor;
-- (void) setBackgroundColor:(NSColor *)backgroundColor;
+- (nonnull NSColor *) backgroundColor;
+- (void) setBackgroundColor:(nonnull NSColor *)backgroundColor;
 
 // Specifies whether the popover may be moved by dragging
 - (BOOL) isMovable;

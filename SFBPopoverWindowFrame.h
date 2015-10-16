@@ -42,7 +42,7 @@
 
 @property (nonatomic, assign) CGFloat distance;
 
-@property (nonatomic, copy) NSColor * borderColor;
+@property (nonatomic, copy, nonnull) NSColor * borderColor;
 @property (nonatomic, assign) CGFloat borderWidth;
 @property (nonatomic, assign) CGFloat cornerRadius;
 
@@ -52,7 +52,7 @@
 @property (nonatomic, assign) BOOL drawRoundCornerBesideArrow;
 
 @property (nonatomic, assign) CGFloat viewMargin;
-@property (nonatomic, copy) NSColor * backgroundColor;
+@property (nonatomic, copy, nonnull) NSColor * backgroundColor;
 
 @property (nonatomic, assign, getter=isMovable) BOOL movable;
 @property (nonatomic, assign, getter=isResizable) BOOL resizable;

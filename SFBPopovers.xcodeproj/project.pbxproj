@@ -213,7 +213,7 @@
 		32CE12BA1367854000CE7985 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = sbooth.org;
 			};
 			buildConfigurationList = 32CE12BD1367854000CE7985 /* Build configuration list for PBXProject "SFBPopovers" */;
@@ -323,6 +323,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.sbooth.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Example;
 			};
 			name = Debug;
@@ -345,6 +346,7 @@
 					"-framework",
 					AppKit,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.sbooth.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Example;
 			};
 			name = Release;
@@ -353,6 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -381,6 +384,7 @@
 				GCC_PREFIX_HEADER = "SFBPopovers-Prefix.pch";
 				INFOPLIST_FILE = "SFBPopovers-Info.plist";
 				INSTALL_PATH = "@rpath";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.sbooth.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -399,6 +403,7 @@
 				GCC_PREFIX_HEADER = "SFBPopovers-Prefix.pch";
 				INFOPLIST_FILE = "SFBPopovers-Info.plist";
 				INSTALL_PATH = "@rpath";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.sbooth.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};

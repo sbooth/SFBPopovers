@@ -81,11 +81,6 @@
 
 @implementation SFBPopover
 
-- (id) init
-{
-	return [self initWithContentViewController:nil];
-}
-
 - (id) initWithContentView:(NSView *)contentView
 {
 	NSViewController *contentViewController = [[NSViewController alloc] init];

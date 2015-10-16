@@ -43,8 +43,8 @@
 - (CGFloat) distance;
 - (void) setDistance:(CGFloat)distance;
 
-- (NSColor *) borderColor;
-- (void) setBorderColor:(NSColor *)borderColor;
+- (nonnull NSColor *) borderColor;
+- (void) setBorderColor:(nonnull NSColor *)borderColor;
 - (CGFloat) borderWidth;
 - (void) setBorderWidth:(CGFloat)borderWidth;
 - (CGFloat) cornerRadius;
@@ -61,8 +61,8 @@
 
 - (CGFloat) viewMargin;
 - (void) setViewMargin:(CGFloat)viewMargin;
-- (NSColor *) popoverBackgroundColor;
-- (void) setPopoverBackgroundColor:(NSColor *)backgroundColor;
+- (nonnull NSColor *) popoverBackgroundColor;
+- (void) setPopoverBackgroundColor:(nonnull NSColor *)backgroundColor;
 
 - (BOOL) isMovable;
 - (void) setMovable:(BOOL)movable;
