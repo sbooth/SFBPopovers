@@ -36,6 +36,11 @@
 @interface SFBPopoverWindow : NSWindow
 
 // ========================================
+// Popover content view property
+- (NSView *_Nullable)popoverContentView;
+- (void)setPopoverContentView:(NSView *_Nullable)view;
+
+// ========================================
 // Popover window properties
 - (SFBPopoverPosition) popoverPosition;
 - (void) setPopoverPosition:(SFBPopoverPosition)popoverPosition;
