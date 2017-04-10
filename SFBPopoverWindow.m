@@ -77,12 +77,12 @@
 	return NO;
 }
 
-- (NSView *) contentView
+- (void) setContentView:(NSView *)view
 {
-	return _popoverContentView;
+    [self setPopoverContentView:view];
 }
 
-- (void) setContentView:(NSView *)view
+- (void) setPopoverContentView:(NSView *)view
 {
 	if([_popoverContentView isEqualTo:view])
 		return;

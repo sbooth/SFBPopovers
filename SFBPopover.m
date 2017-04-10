@@ -96,7 +96,7 @@
 
 		NSView *contentView = [_contentViewController view];
 		_popoverWindow = [[SFBPopoverWindow alloc] initWithContentRect:[contentView frame] styleMask:0 backing:NSBackingStoreBuffered defer:YES];
-		[_popoverWindow setContentView:contentView];
+		[_popoverWindow setPopoverContentView:contentView];
 		[_popoverWindow setMinSize:[contentView frame].size];
 
 		CAAnimation *animation = [CABasicAnimation animation];
