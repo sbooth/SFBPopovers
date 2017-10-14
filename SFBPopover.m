@@ -226,39 +226,46 @@
 
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point
 {
-	[self displayPopoverInWindow:window atPoint:point chooseBestLocation:NO];
+	[self displayPopoverInWindow:window atPoint:point chooseBestLocation:NO giveFocus:YES];
 }
 
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation
 {
-	if([_popoverWindow isVisible])
-		return;
+    [self displayPopoverInWindow:window atPoint:point chooseBestLocation:chooseBestLocation giveFocus:YES];
+}
 
-	if(chooseBestLocation)
-		[_popoverWindow setPopoverPosition:[self bestPositionInWindow:window atPoint:point]];
-
-	NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
-	NSPoint pointOnScreen = point;
-	if(window) {
-		NSRect rect = { .origin = point, .size = NSZeroSize };
-		NSRect rectOnScreen = [window convertRectToScreen:rect];
-		pointOnScreen = rectOnScreen.origin;
-	}
-
-	pointOnScreen.x -= attachmentPoint.x;
-	pointOnScreen.y -= attachmentPoint.y;
-
-	[_popoverWindow setFrameOrigin:pointOnScreen];
-
-	if(self.animates)
-		[_popoverWindow setAlphaValue:0];
-
-	[window addChildWindow:_popoverWindow ordered:NSWindowAbove];
-
-	[_popoverWindow makeKeyAndOrderFront:nil];
-
-	if(self.animates)
-		[[_popoverWindow animator] setAlphaValue:1];
+- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation giveFocus:(BOOL)giveFocus
+{
+    if([_popoverWindow isVisible])
+        return;
+    
+    if(chooseBestLocation)
+        [_popoverWindow setPopoverPosition:[self bestPositionInWindow:window atPoint:point]];
+    
+    NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
+    NSPoint pointOnScreen = point;
+    if(window) {
+        NSRect rect = { .origin = point, .size = NSZeroSize };
+        NSRect rectOnScreen = [window convertRectToScreen:rect];
+        pointOnScreen = rectOnScreen.origin;
+    }
+    
+    pointOnScreen.x -= attachmentPoint.x;
+    pointOnScreen.y -= attachmentPoint.y;
+    
+    [_popoverWindow setFrameOrigin:pointOnScreen];
+    
+    if(self.animates)
+        [_popoverWindow setAlphaValue:0];
+    
+    [window addChildWindow:_popoverWindow ordered:NSWindowAbove];
+    
+    if (giveFocus) {
+        [_popoverWindow makeKeyAndOrderFront:nil];
+    }
+    
+    if(self.animates)
+        [[_popoverWindow animator] setAlphaValue:1];
 }
 
 - (void) movePopoverToPoint:(NSPoint)point
