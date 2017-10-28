@@ -70,7 +70,7 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 // Show the popover- prefer these to showWindow:
 - (void) displayPopoverInWindow:(nonnull NSWindow *)window atPoint:(NSPoint)point;
 - (void) displayPopoverInWindow:(nonnull NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation;
-- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation giveFocus:(BOOL)giveFocus;
+- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation makeKey:(BOOL)makeKey;
 
 // ========================================
 // Move the popover to a new attachment point (should be currently displayed)
