@@ -226,15 +226,15 @@
 
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point
 {
-	[self displayPopoverInWindow:window atPoint:point chooseBestLocation:NO giveFocus:YES];
+	[self displayPopoverInWindow:window atPoint:point chooseBestLocation:NO makeKey:YES];
 }
 
 - (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation
 {
-    [self displayPopoverInWindow:window atPoint:point chooseBestLocation:chooseBestLocation giveFocus:YES];
+    [self displayPopoverInWindow:window atPoint:point chooseBestLocation:chooseBestLocation makeKey:YES];
 }
 
-- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation giveFocus:(BOOL)giveFocus
+- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation makeKey:(BOOL)makeKey
 {
     if([_popoverWindow isVisible])
         return;
@@ -260,7 +260,7 @@
     
     [window addChildWindow:_popoverWindow ordered:NSWindowAbove];
     
-    if (giveFocus) {
+    if (makeKey) {
         [_popoverWindow makeKeyAndOrderFront:nil];
     }
     
