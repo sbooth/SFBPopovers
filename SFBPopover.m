@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011, 2012, 2013, 2014, 2015 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011 - 2018 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@
 #include <QuartzCore/QuartzCore.h>
 
 // A custom delegate class is used since CAAnimation retains its delegate
-@interface SFBPopoverAnimationDelegate : NSObject
+@interface SFBPopoverAnimationDelegate : NSObject <CAAnimationDelegate>
 {
 @private
 	__weak SFBPopoverWindow *_popoverWindow;
@@ -81,14 +81,14 @@
 
 @implementation SFBPopover
 
-- (id) initWithContentView:(NSView *)contentView
+- (instancetype) initWithContentView:(NSView *)contentView
 {
 	NSViewController *contentViewController = [[NSViewController alloc] init];
 	[contentViewController setView:contentView];
 	return [self initWithContentViewController:contentViewController];
 }
 
-- (id) initWithContentViewController:(NSViewController *)contentViewController
+- (instancetype) initWithContentViewController:(NSViewController *)contentViewController
 {
 	if((self = [super init])) {
 		_contentViewController = contentViewController;
@@ -96,7 +96,7 @@
 
 		NSView *contentView = [_contentViewController view];
 		_popoverWindow = [[SFBPopoverWindow alloc] initWithContentRect:[contentView frame] styleMask:0 backing:NSBackingStoreBuffered defer:YES];
-		[_popoverWindow setContentView:contentView];
+		[_popoverWindow setPopoverContentView:contentView];
 		[_popoverWindow setMinSize:[contentView frame].size];
 
 		CAAnimation *animation = [CABasicAnimation animation];

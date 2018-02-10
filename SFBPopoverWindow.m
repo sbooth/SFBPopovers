@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011, 2012, 2013, 2014, 2015 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011 - 2018 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,7 @@
 
 @implementation SFBPopoverWindow
 
-- (id) initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
+- (instancetype) initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
 {
 #pragma unused(windowStyle)
 	if((self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:bufferingType defer:deferCreation])) {
@@ -52,6 +52,7 @@
 		[self setAlphaValue:1];
 		[self setOpaque:NO];
 		[self setHasShadow:YES];
+		[self setLevel:NSFloatingWindowLevel];
 	}
 
 	return self;
@@ -77,12 +78,12 @@
 	return NO;
 }
 
-- (NSView *) contentView
+- (void) setContentView:(NSView *)view
 {
-	return _popoverContentView;
+	[self setPopoverContentView:view];
 }
 
-- (void) setContentView:(NSView *)view
+- (void) setPopoverContentView:(NSView *)view
 {
 	if([_popoverContentView isEqualTo:view])
 		return;

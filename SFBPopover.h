@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011, 2012, 2013, 2014, 2015 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011 - 2018 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -59,8 +59,8 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 
 // ========================================
 // Creation
-- (nullable id) initWithContentView:(nonnull NSView *)contentView;
-- (nullable id) initWithContentViewController:(nonnull NSViewController *)contentViewController;
+- (nullable instancetype) initWithContentView:(nonnull NSView *)contentView;
+- (nullable instancetype) initWithContentViewController:(nonnull NSViewController *)contentViewController;
 
 // ========================================
 // Geometry determination

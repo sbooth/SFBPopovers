@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011, 2012, 2013, 2014, 2015 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2011 - 2018 Stephen F. Booth <me@sbooth.org>
  *  All Rights Reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -34,6 +34,8 @@
 // NSWindow subclass implementing a popover window
 // ========================================
 @interface SFBPopoverWindow : NSWindow
+
+@property (nonatomic, strong) NSView * _Nullable popoverContentView;
 
 // ========================================
 // Popover window properties
