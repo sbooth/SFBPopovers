@@ -26,6 +26,18 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+@import Foundation;
+
+@import AppKit;
+
+//! Project version number for SFBPopover.
+FOUNDATION_EXPORT double SFBPopoverVersionNumber;
+
+//! Project version string for SFBPopover.
+FOUNDATION_EXPORT const unsigned char SFBPopoverVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <SFBPopover/PublicHeader.h>
+
 #import <Cocoa/Cocoa.h>
 
 // ========================================
