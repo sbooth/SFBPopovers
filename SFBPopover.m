@@ -296,6 +296,11 @@
 //	[[_popoverWindow animator] setAlphaValue:0];
 //	[NSAnimationContext endGrouping];
 
+    if(self.delegate && [self.delegate respondsToSelector: @selector(popoverWillClose:)])
+    {
+        [self.delegate popoverWillClose: self];
+    } // End of delegate handles popoverWillClose:
+
 	if(self.animates)
 		[[_popoverWindow animator] setAlphaValue:0];
 	else {

@@ -28,6 +28,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class SFBPopover;
+
+@protocol SFBPopoverDelegate <NSObject>
+
+- (void) popoverWillClose: (nonnull SFBPopover*) popover;
+
+@end
+
 // ========================================
 // Positioning constants
 // ========================================
@@ -56,6 +64,7 @@ typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
 @property (nonatomic, assign) BOOL animates;
 @property (nonatomic, assign) BOOL closesWhenPopoverResignsKey;
 @property (nonatomic, assign) BOOL closesWhenApplicationBecomesInactive;
+@property (nonatomic, weak, nullable)   id<SFBPopoverDelegate> delegate;
 
 // ========================================
 // Creation
