@@ -302,11 +302,27 @@
     } // End of delegate handles popoverWillClose:
 
 	if(self.animates)
-		[[_popoverWindow animator] setAlphaValue:0];
-	else {
+    {
+        [NSAnimationContext beginGrouping];
+        [[_popoverWindow animator] setAlphaValue:0];
+        [[NSAnimationContext currentContext] setCompletionHandler: ^{
+            if(self.delegate && [self.delegate respondsToSelector: @selector(popoverDidClose:)])
+            {
+                [self.delegate popoverDidClose: self];
+            } // End of delegate handles popoverWillClose:
+        }];
+        [NSAnimationContext endGrouping];
+    }
+	else
+    {
 		NSWindow *parentWindow = [_popoverWindow parentWindow];
 		[parentWindow removeChildWindow:_popoverWindow];
 		[_popoverWindow orderOut:sender];
+
+        if(self.delegate && [self.delegate respondsToSelector: @selector(popoverDidClose:)])
+        {
+            [self.delegate popoverDidClose: self];
+        } // End of delegate handles popoverWillClose:
 	}
 }
 

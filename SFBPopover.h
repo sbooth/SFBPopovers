@@ -33,6 +33,7 @@
 @protocol SFBPopoverDelegate <NSObject>
 
 - (void) popoverWillClose: (nonnull SFBPopover*) popover;
+- (void) popoverDidClose: (nonnull SFBPopover*) popover;
 
 @end
 
