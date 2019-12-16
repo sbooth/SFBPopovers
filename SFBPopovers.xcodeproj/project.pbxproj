@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		323492191A55BE8A00FEC47B /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 323492181A55BE8A00FEC47B /* COPYING */; };
+		323442D323A7D6810007E67B /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 323442D223A7D6810007E67B /* LICENSE.txt */; };
 		32A1032F136844AC009FA237 /* SFBPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A1032D136844AC009FA237 /* SFBPopoverWindowFrame.m */; };
 		32A103D51368F37B009FA237 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A103D31368F37B009FA237 /* MainMenu.xib */; };
 		32A103D61368F383009FA237 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32CE12CA1367854000CE7985 /* AppKit.framework */; };
@@ -34,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		323492181A55BE8A00FEC47B /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		323442D223A7D6810007E67B /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		32A1032C136844AC009FA237 /* SFBPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopoverWindowFrame.h; sourceTree = "<group>"; };
 		32A1032D136844AC009FA237 /* SFBPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBPopoverWindowFrame.m; sourceTree = "<group>"; };
 		32A103841368F23D009FA237 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +96,7 @@
 		32CE12B81367854000CE7985 = {
 			isa = PBXGroup;
 			children = (
-				323492181A55BE8A00FEC47B /* COPYING */,
+				323442D223A7D6810007E67B /* LICENSE.txt */,
 				32CE12CD1367854000CE7985 /* SFBPopovers */,
 				32A1037D1368F216009FA237 /* Example */,
 				32CE12C61367854000CE7985 /* Frameworks */,
@@ -247,7 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				323492191A55BE8A00FEC47B /* COPYING in Resources */,
+				323442D323A7D6810007E67B /* LICENSE.txt in Resources */,
 				32CE12D21367854000CE7985 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
