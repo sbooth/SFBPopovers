@@ -191,42 +191,42 @@
 	[NSBezierPath clipRect:dirtyRect];
 
 	NSRect contentRect = [self contentRectForFrameRect:[self bounds]];
-    NSBezierPath *path = [self popoverFramePathForContentRect:contentRect];
+	NSBezierPath *path = [self popoverFramePathForContentRect:contentRect];
 
-    [self.backgroundColor set];
-    [path fill];
-    
+	[self.backgroundColor set];
+	[path fill];
+
 	[path setLineWidth:self.borderWidth];
-    [self.borderColor set];
-    [path stroke];
+	[self.borderColor set];
+	[path stroke];
 }
 
 - (void) mouseDown:(NSEvent *)event
 {
 	NSPoint pointInView = [self convertPoint:[event locationInWindow] fromView:nil];
 	NSRect contentRect = [self contentRectForFrameRect:[self bounds]];
-    NSBezierPath *path = [self popoverFramePathForContentRect:contentRect];
+	NSBezierPath *path = [self popoverFramePathForContentRect:contentRect];
 
 	BOOL resize = [path containsPoint:pointInView] && !NSPointInRect(pointInView, contentRect);
 	if((resize && !self.resizable) || (!resize && !self.movable))
 		return;
 
 	NSWindow *window = [self window];
-    NSRect originalFrame = [window frame];
+	NSRect originalFrame = [window frame];
 
-    NSRect eventLocation = { .origin = [event locationInWindow], .size = NSZeroSize };
-    NSRect originalMouseLocation = [window convertRectFromScreen:eventLocation];
-	
-    for(;;) {
-        NSEvent *newEvent = [window nextEventMatchingMask:(NSLeftMouseDraggedMask | NSLeftMouseUpMask)];
-		
-        if(NSLeftMouseUp == [newEvent type])
+	NSRect eventLocation = { .origin = [event locationInWindow], .size = NSZeroSize };
+	NSRect originalMouseLocation = [window convertRectFromScreen:eventLocation];
+
+	for(;;) {
+		NSEvent *newEvent = [window nextEventMatchingMask:(NSLeftMouseDraggedMask | NSLeftMouseUpMask)];
+
+		if(NSLeftMouseUp == [newEvent type])
 			break;
-		
-        NSRect eventLocation = { .origin = [newEvent locationInWindow], .size = NSZeroSize };
-        NSRect newMouseLocation = [window convertRectFromScreen:eventLocation];
+
+		NSRect eventLocation = { .origin = [newEvent locationInWindow], .size = NSZeroSize };
+		NSRect newMouseLocation = [window convertRectFromScreen:eventLocation];
 		NSPoint delta = NSMakePoint(newMouseLocation.origin.x - originalMouseLocation.origin.x, newMouseLocation.origin.y - originalMouseLocation.origin.y);
-		
+
 		NSRect newFrame = originalFrame;		
 		if(!resize) {
 			newFrame.origin.x += delta.x;
@@ -236,7 +236,7 @@
 			newFrame.size.width += delta.x;
 			newFrame.size.height -= delta.y;
 			newFrame.origin.y += delta.y;
-			
+
 			NSRect newContentRect = [window contentRectForFrameRect:newFrame];
 
 			NSSize maxSize = [window maxSize];
@@ -256,7 +256,7 @@
 				newFrame.origin.y -= minSize.height - newContentRect.size.height;
 			}
 		}
-		
+
 		[window setFrame:newFrame display:YES animate:NO];
 	}
 }
