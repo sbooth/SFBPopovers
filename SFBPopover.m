@@ -215,10 +215,10 @@
 {
     if([_popoverWindow isVisible])
         return;
-    
+
     if(chooseBestLocation)
         [_popoverWindow setPopoverPosition:[self bestPositionInWindow:window atPoint:point]];
-    
+
     NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
     NSPoint pointOnScreen = point;
     if(window) {
@@ -226,21 +226,21 @@
         NSRect rectOnScreen = [window convertRectToScreen:rect];
         pointOnScreen = rectOnScreen.origin;
     }
-    
+
     pointOnScreen.x -= attachmentPoint.x;
     pointOnScreen.y -= attachmentPoint.y;
-    
+
     [_popoverWindow setFrameOrigin:pointOnScreen];
-    
+
     if(self.animates)
         [_popoverWindow setAlphaValue:0];
-    
+
     [window addChildWindow:_popoverWindow ordered:NSWindowAbove];
-    
+
     if (makeKey) {
         [_popoverWindow makeKeyAndOrderFront:nil];
     }
-    
+
     if(self.animates)
         [[_popoverWindow animator] setAlphaValue:1];
 }
