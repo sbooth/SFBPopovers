@@ -1,7 +1,8 @@
-/*
- * Copyright (C) 2011 - 2019 Stephen F. Booth <me@sbooth.org>
- * See https://github.com/sbooth/SFBPopovers/blob/master/LICENSE.txt for license information
- */
+//
+// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Part of https://github.com/sbooth/SFBPopovers
+// MIT license
+//
 
 #import "SFBPopoverWindow.h"
 #import "SFBPopoverWindowFrame.h"
@@ -14,12 +15,12 @@
 @end
 
 @interface SFBPopoverWindow (Private)
-- (SFBPopoverWindowFrame *) popoverWindowFrame;
+- (SFBPopoverWindowFrame *)popoverWindowFrame;
 @end
 
 @implementation SFBPopoverWindow
 
-- (instancetype) initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
+- (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation
 {
 #pragma unused(windowStyle)
 	if((self = [super initWithContentRect:contentRect styleMask:NSBorderlessWindowMask backing:bufferingType defer:deferCreation])) {
@@ -35,32 +36,32 @@
 	return self;
 }
 
-- (NSRect) contentRectForFrameRect:(NSRect)windowFrame
+- (NSRect)contentRectForFrameRect:(NSRect)windowFrame
 {
 	return [[self popoverWindowFrame] contentRectForFrameRect:windowFrame];
 }
 
-- (NSRect) frameRectForContentRect:(NSRect)contentRect
+- (NSRect)frameRectForContentRect:(NSRect)contentRect
 {
 	return [[self popoverWindowFrame] frameRectForContentRect:contentRect];
 }
 
-- (BOOL) canBecomeKeyWindow
+- (BOOL)canBecomeKeyWindow
 {
 	return YES;
 }
 
-- (BOOL) canBecomeMainWindow
+- (BOOL)canBecomeMainWindow
 {
 	return NO;
 }
 
-- (void) setContentView:(NSView *)view
+- (void)setContentView:(NSView *)view
 {
 	[self setPopoverContentView:view];
 }
 
-- (void) setPopoverContentView:(NSView *)view
+- (void)setPopoverContentView:(NSView *)view
 {
 	if([_popoverContentView isEqualTo:view])
 		return;
@@ -89,7 +90,7 @@
 	[popoverWindowFrame addSubview:_popoverContentView];
 }
 
-- (void) setContentSize:(NSSize)size
+- (void)setContentSize:(NSSize)size
 {
 	NSRect contentRect = NSMakeRect(0, 0, size.width, size.height);
 	NSRect frameRect = [self frameRectForContentRect:contentRect];
@@ -97,12 +98,12 @@
 	[self setFrame:frameRect display:NO];
 }
 
-- (SFBPopoverPosition) popoverPosition
+- (SFBPopoverPosition)popoverPosition
 {
 	return [[self popoverWindowFrame] popoverPosition];
 }
 
-- (void) setPopoverPosition:(SFBPopoverPosition)popoverPosition
+- (void)setPopoverPosition:(SFBPopoverPosition)popoverPosition
 {
 	if(popoverPosition == [self popoverPosition])
 		return;
@@ -187,12 +188,12 @@
 	}
 }
 
-- (CGFloat) distance
+- (CGFloat)distance
 {
 	return [[self popoverWindowFrame] distance];
 }
 
-- (void) setDistance:(CGFloat)distance
+- (void)setDistance:(CGFloat)distance
 {
 	CGFloat delta = distance - [[self popoverWindowFrame] distance];
 	if(0 == delta)
@@ -238,23 +239,23 @@
 	[self setFrame:frameRect display:YES];
 }
 
-- (NSColor *) borderColor
+- (NSColor *)borderColor
 {
 	return [[self popoverWindowFrame] borderColor];
 }
 
-- (void) setBorderColor:(NSColor *)borderColor
+- (void)setBorderColor:(NSColor *)borderColor
 {
 	[[self popoverWindowFrame] setBorderColor:borderColor];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
-- (CGFloat) borderWidth
+- (CGFloat)borderWidth
 {
 	return [[self popoverWindowFrame] borderWidth];
 }
 
-- (void) setBorderWidth:(CGFloat)borderWidth
+- (void)setBorderWidth:(CGFloat)borderWidth
 {
 	CGFloat delta = borderWidth - [[self popoverWindowFrame] borderWidth];
 	if(0 == delta)
@@ -298,45 +299,45 @@
 	[self setFrame:frameRect display:YES];
 }
 
-- (CGFloat) cornerRadius
+- (CGFloat)cornerRadius
 {
 	return [[self popoverWindowFrame] cornerRadius];
 }
 
-- (void) setCornerRadius:(CGFloat)cornerRadius
+- (void)setCornerRadius:(CGFloat)cornerRadius
 {
 	[[self popoverWindowFrame] setCornerRadius:cornerRadius];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
-- (BOOL) drawsArrow
+- (BOOL)drawsArrow
 {
 	return [[self popoverWindowFrame] drawsArrow];
 }
 
-- (void) setDrawsArrow:(BOOL)drawsArrow
+- (void)setDrawsArrow:(BOOL)drawsArrow
 {
 	[[self popoverWindowFrame] setDrawsArrow:drawsArrow];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
-- (CGFloat) arrowWidth
+- (CGFloat)arrowWidth
 {
 	return [[self popoverWindowFrame] arrowWidth];
 }
 
-- (void) setArrowWidth:(CGFloat)arrowWidth
+- (void)setArrowWidth:(CGFloat)arrowWidth
 {
 	[[self popoverWindowFrame] setArrowWidth:arrowWidth];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
-- (CGFloat) arrowHeight
+- (CGFloat)arrowHeight
 {
 	return [[self popoverWindowFrame] arrowHeight];
 }
 
-- (void) setArrowHeight:(CGFloat)arrowHeight
+- (void)setArrowHeight:(CGFloat)arrowHeight
 {
 	CGFloat delta = arrowHeight - [[self popoverWindowFrame] arrowHeight];
 	if(0 == delta)
@@ -382,7 +383,7 @@
 	[self setFrame:frameRect display:YES];
 }
 
-- (BOOL) drawRoundCornerBesideArrow
+- (BOOL)drawRoundCornerBesideArrow
 {
 	return [[self popoverWindowFrame] drawRoundCornerBesideArrow];
 }
@@ -393,12 +394,12 @@
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
-- (CGFloat) viewMargin
+- (CGFloat)viewMargin
 {
 	return [[self popoverWindowFrame] viewMargin];
 }
 
-- (void) setViewMargin:(CGFloat)viewMargin
+- (void)setViewMargin:(CGFloat)viewMargin
 {
 	CGFloat delta = viewMargin - [[self popoverWindowFrame] viewMargin];
 	if(0 == delta)
@@ -442,33 +443,33 @@
 	[self setFrame:frameRect display:YES];
 }
 
-- (NSColor *) popoverBackgroundColor
+- (NSColor *)popoverBackgroundColor
 {
 	return [[self popoverWindowFrame] backgroundColor];
 }
 
-- (void) setPopoverBackgroundColor:(NSColor *)backgroundColor
+- (void)setPopoverBackgroundColor:(NSColor *)backgroundColor
 {
 	[[self popoverWindowFrame] setBackgroundColor:backgroundColor];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
 }
 
-- (BOOL) isMovable
+- (BOOL)isPopoverMovable
 {
 	return [[self popoverWindowFrame] isMovable];
 }
 
-- (void) setMovable:(BOOL)movable
+- (void)setPopoverMovable:(BOOL)movable
 {
 	[[self popoverWindowFrame] setMovable:movable];
 }
 
-- (BOOL) isResizable
+- (BOOL)isPopoverResizable
 {
 	return [[self popoverWindowFrame] isResizable];
 }
 
-- (void) setResizable:(BOOL)resizable
+- (void)setPopoverResizable:(BOOL)resizable
 {
 	[[self popoverWindowFrame] setResizable:resizable];
 //	if(resizable)
@@ -481,7 +482,7 @@
 
 @implementation SFBPopoverWindow (Private)
 
-- (SFBPopoverWindowFrame *) popoverWindowFrame
+- (SFBPopoverWindowFrame *)popoverWindowFrame
 {
 	// The window's content view is the popover frame
 	return (SFBPopoverWindowFrame *)[super contentView];

@@ -1,52 +1,38 @@
-/*
- * Copyright (C) 2011 - 2019 Stephen F. Booth <me@sbooth.org>
- * See https://github.com/sbooth/SFBPopovers/blob/master/LICENSE.txt for license information
- */
+//
+// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Part of https://github.com/sbooth/SFBPopovers
+// MIT license
+//
 
 #import <Foundation/Foundation.h>
 
 #import "SFBPopover.h"
 
-// ========================================
-// NSWindow subclass implementing a popover window
-// ========================================
+/// @c NSWindow subclass implementing a popover window
 @interface SFBPopoverWindow : NSWindow
 
-@property (nonatomic, strong) NSView * _Nullable popoverContentView;
+@property (nonatomic, strong, nullable) NSView * popoverContentView;
 
-// ========================================
-// Popover window properties
-- (SFBPopoverPosition) popoverPosition;
-- (void) setPopoverPosition:(SFBPopoverPosition)popoverPosition;
+// MARK: Popover window properties
 
-- (CGFloat) distance;
-- (void) setDistance:(CGFloat)distance;
+@property (nonatomic, assign) SFBPopoverPosition popoverPosition;
 
-- (nonnull NSColor *) borderColor;
-- (void) setBorderColor:(nonnull NSColor *)borderColor;
-- (CGFloat) borderWidth;
-- (void) setBorderWidth:(CGFloat)borderWidth;
-- (CGFloat) cornerRadius;
-- (void) setCornerRadius:(CGFloat)cornerRadius;
+@property (nonatomic, assign) CGFloat distance;
 
-- (BOOL) drawsArrow;
-- (void) setDrawsArrow:(BOOL)drawsArrow;
-- (CGFloat) arrowWidth;
-- (void) setArrowWidth:(CGFloat)arrowWidth;
-- (CGFloat) arrowHeight;
-- (void) setArrowHeight:(CGFloat)arrowHeight;
-- (BOOL) drawRoundCornerBesideArrow;
-- (void) setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow;
+@property (nonatomic, copy, nonnull) NSColor * borderColor;
+@property (nonatomic, assign) CGFloat borderWidth;
+@property (nonatomic, assign) CGFloat cornerRadius;
 
-- (CGFloat) viewMargin;
-- (void) setViewMargin:(CGFloat)viewMargin;
-- (nonnull NSColor *) popoverBackgroundColor;
-- (void) setPopoverBackgroundColor:(nonnull NSColor *)backgroundColor;
+@property (nonatomic, assign) BOOL drawsArrow;
+@property (nonatomic, assign) CGFloat arrowWidth;
+@property (nonatomic, assign) CGFloat arrowHeight;
+@property (nonatomic, assign) BOOL drawRoundCornerBesideArrow;
 
-- (BOOL) isMovable;
-- (void) setMovable:(BOOL)movable;
+@property (nonatomic, assign) CGFloat viewMargin;
+@property (nonatomic, copy, nonnull) NSColor * popoverBackgroundColor;
 
-- (BOOL) isResizable;
-- (void) setResizable:(BOOL)resizable;
+@property (nonatomic, assign, getter=isPopoverMovable) BOOL popoverMovable;
+
+@property (nonatomic, assign, getter=isPopoverResizable) BOOL popoverResizable;
 
 @end
