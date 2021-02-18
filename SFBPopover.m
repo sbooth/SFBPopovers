@@ -403,22 +403,22 @@
 
 - (BOOL)isMovable
 {
-	return [_popoverWindow isMovable];
+	return [_popoverWindow isPopoverMovable];
 }
 
 - (void)setMovable:(BOOL)movable
 {
-	[_popoverWindow setMovable:movable];
+	[_popoverWindow setPopoverMovable:movable];
 }
 
 - (BOOL)isResizable
 {
-	return [_popoverWindow isResizable];
+	return [_popoverWindow isPopoverResizable];
 }
 
 - (void)setResizable:(BOOL)resizable
 {
-	[_popoverWindow setResizable:resizable];
+	[_popoverWindow setPopoverResizable:resizable];
 }
 
 @end
