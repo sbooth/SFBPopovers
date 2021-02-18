@@ -10,7 +10,7 @@
 @interface SFBPopoverWindow ()
 {
 @private
-	NSView * _popoverContentView;
+	NSView *_popoverContentView;
 }
 @end
 
@@ -67,7 +67,7 @@
 		return;
 
 	SFBPopoverWindowFrame *popoverWindowFrame = [self popoverWindowFrame];
-	if(nil == popoverWindowFrame) {
+	if(popoverWindowFrame == nil) {
 		popoverWindowFrame = [[SFBPopoverWindowFrame alloc] initWithFrame:NSZeroRect];
 		[super setContentView:popoverWindowFrame];
 	}
@@ -308,6 +308,7 @@
 {
 	[[self popoverWindowFrame] setCornerRadius:cornerRadius];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
+	[self invalidateShadow];
 }
 
 - (BOOL)drawsArrow
@@ -319,6 +320,7 @@
 {
 	[[self popoverWindowFrame] setDrawsArrow:drawsArrow];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
+	[self invalidateShadow];
 }
 
 - (CGFloat)arrowWidth
@@ -330,6 +332,7 @@
 {
 	[[self popoverWindowFrame] setArrowWidth:arrowWidth];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
+	[self invalidateShadow];
 }
 
 - (CGFloat)arrowHeight
@@ -381,6 +384,7 @@
 	[[self popoverWindowFrame] setArrowHeight:arrowHeight];
 	[_popoverContentView setFrame:contentRect];
 	[self setFrame:frameRect display:YES];
+	[self invalidateShadow];
 }
 
 - (BOOL)drawRoundCornerBesideArrow
@@ -392,6 +396,7 @@
 {
 	[[self popoverWindowFrame] setDrawRoundCornerBesideArrow:drawRoundCornerBesideArrow];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
+	[self invalidateShadow];
 }
 
 - (CGFloat)viewMargin
