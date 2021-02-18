@@ -307,6 +307,7 @@
 {
 	[[self popoverWindowFrame] setCornerRadius:cornerRadius];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
+	[self invalidateShadow];
 }
 
 - (BOOL) drawsArrow
@@ -318,6 +319,7 @@
 {
 	[[self popoverWindowFrame] setDrawsArrow:drawsArrow];
 	[[self popoverWindowFrame] setNeedsDisplay:YES];
+	[self invalidateShadow];
 }
 
 - (CGFloat) arrowWidth
