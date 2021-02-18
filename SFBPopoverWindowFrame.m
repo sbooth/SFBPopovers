@@ -1,19 +1,20 @@
-/*
- * Copyright (C) 2011 - 2019 Stephen F. Booth <me@sbooth.org>
- * See https://github.com/sbooth/SFBPopovers/blob/master/LICENSE.txt for license information
- */
+//
+// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Part of https://github.com/sbooth/SFBPopovers
+// MIT license
+//
 
 #import "SFBPopoverWindowFrame.h"
 #import "SFBPopoverWindow.h"
 
 @interface SFBPopoverWindowFrame (Private)
-- (NSBezierPath *) popoverFramePathForContentRect:(NSRect)rect;
-- (void) appendArrowToPath:(NSBezierPath *)path;
+- (NSBezierPath *)popoverFramePathForContentRect:(NSRect)rect;
+- (void)appendArrowToPath:(NSBezierPath *)path;
 @end
 
 @implementation SFBPopoverWindowFrame
 
-- (instancetype) initWithFrame:(NSRect)frame
+- (instancetype)initWithFrame:(NSRect)frame
 {
 	if((self = [super initWithFrame:frame])) {
 		// Set the default appearance
@@ -40,7 +41,7 @@
 	return self;
 }
 
-- (NSRect) frameRectForContentRect:(NSRect)contentRect
+- (NSRect)frameRectForContentRect:(NSRect)contentRect
 {
 	NSRect frameRect = NSInsetRect(contentRect, -self.viewMargin, -self.viewMargin);
 
@@ -76,7 +77,7 @@
 	return NSInsetRect(frameRect, -self.borderWidth, -self.borderWidth);
 }
 
-- (NSRect) contentRectForFrameRect:(NSRect)windowFrame
+- (NSRect)contentRectForFrameRect:(NSRect)windowFrame
 {
 	NSRect contentRect = NSInsetRect(windowFrame, self.borderWidth, self.borderWidth);
 
@@ -112,12 +113,12 @@
 	return NSInsetRect(contentRect, self.viewMargin, self.viewMargin);
 }
 
-- (NSPoint) attachmentPoint
+- (NSPoint)attachmentPoint
 {
 	return [self attachmentPointForRect:[self bounds]];
 }
 
-- (NSPoint) attachmentPointForRect:(NSRect)rect;
+- (NSPoint)attachmentPointForRect:(NSRect)rect;
 {
 	NSPoint arrowheadPosition = NSZeroPoint;
 
@@ -186,7 +187,7 @@
 	return arrowheadPosition;
 }
 
-- (void) drawRect:(NSRect)dirtyRect
+- (void)drawRect:(NSRect)dirtyRect
 {
 	[NSBezierPath clipRect:dirtyRect];
 
@@ -201,7 +202,7 @@
 	[path stroke];
 }
 
-- (void) mouseDown:(NSEvent *)event
+- (void)mouseDown:(NSEvent *)event
 {
 	NSPoint pointInView = [self convertPoint:[event locationInWindow] fromView:nil];
 	NSRect contentRect = [self contentRectForFrameRect:[self bounds]];
@@ -265,7 +266,7 @@
 
 @implementation SFBPopoverWindowFrame (Private)
 
-- (NSBezierPath *) popoverFramePathForContentRect:(NSRect)contentRect
+- (NSBezierPath *)popoverFramePathForContentRect:(NSRect)contentRect
 {
 	contentRect = NSInsetRect(contentRect, -self.viewMargin, -self.viewMargin);
 	contentRect = NSInsetRect(contentRect, -self.borderWidth / 2, -self.borderWidth / 2);
@@ -407,7 +408,7 @@
 }
 
 
-- (void) appendArrowToPath:(NSBezierPath *)path
+- (void)appendArrowToPath:(NSBezierPath *)path
 {
 	if(!self.drawsArrow)
 		return;

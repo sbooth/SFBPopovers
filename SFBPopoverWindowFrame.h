@@ -1,20 +1,20 @@
-/*
- * Copyright (C) 2011 - 2019 Stephen F. Booth <me@sbooth.org>
- * See https://github.com/sbooth/SFBPopovers/blob/master/LICENSE.txt for license information
- */
+//
+// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Part of https://github.com/sbooth/SFBPopovers
+// MIT license
+//
 
 #import <Cocoa/Cocoa.h>
 
 #import "SFBPopoverWindow.h"
 
-// ========================================
-// The class that actually does the work of drawing the popover window
-// ========================================
+/// A class that does the work of drawing the popover window
 @interface SFBPopoverWindowFrame : NSView
 
-// ========================================
-// Properties
+// MARK: Properties
+
 // Changing these will NOT mark the view as dirty, to allow for efficient multiple property changes
+
 @property (nonatomic, assign) SFBPopoverPosition popoverPosition;
 
 @property (nonatomic, assign) CGFloat distance;
@@ -34,12 +34,23 @@
 @property (nonatomic, assign, getter=isMovable) BOOL movable;
 @property (nonatomic, assign, getter=isResizable) BOOL resizable;
 
-// ========================================
-// Geometry calculations
-- (NSRect) frameRectForContentRect:(NSRect)contentRect;
-- (NSRect) contentRectForFrameRect:(NSRect)windowFrame;
 
-- (NSPoint) attachmentPoint;
-- (NSPoint) attachmentPointForRect:(NSRect)rect;
+// MARK: Geometry calculations
+
+/// Returns the popover's frame rectangle for @c contentRect
+/// @param contentRect The content rectangle
+/// @return The popover's frame rectangle
+- (NSRect)frameRectForContentRect:(NSRect)contentRect;
+/// Returns the popover's content rectangle for @c windowFrame
+/// @param windowFrame The popover's window frame rectangle
+/// @return The popover's content rectangle
+- (NSRect)contentRectForFrameRect:(NSRect)windowFrame;
+
+/// Returns the popover window's attachment point (arrowhead position) for @c self.bounds
+@property (nonatomic, readonly) NSPoint attachmentPoint;
+/// Returns the popover window's attachment point (arrowhead position) for @c rect
+/// @param rect The bounding rectangle expressed in the view's own coordinate system
+/// @return The popover's attachment point
+- (NSPoint)attachmentPointForRect:(NSRect)rect;
 
 @end
