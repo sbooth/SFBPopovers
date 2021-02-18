@@ -1,7 +1,8 @@
-/*
- * Copyright (C) 2011 - 2019 Stephen F. Booth <me@sbooth.org>
- * See https://github.com/sbooth/SFBPopovers/blob/master/LICENSE.txt for license information
- */
+//
+// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Part of https://github.com/sbooth/SFBPopovers
+// MIT license
+//
 
 #import <Cocoa/Cocoa.h>
 
