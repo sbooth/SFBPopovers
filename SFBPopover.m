@@ -1,7 +1,8 @@
-/*
- * Copyright (C) 2011 - 2019 Stephen F. Booth <me@sbooth.org>
- * See https://github.com/sbooth/SFBPopovers/blob/master/LICENSE.txt for license information
- */
+//
+// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Part of https://github.com/sbooth/SFBPopovers
+// MIT license
+//
 
 #import "SFBPopover.h"
 #import "SFBPopoverWindow.h"
@@ -16,25 +17,24 @@
 	__weak SFBPopoverWindow *_popoverWindow;
 }
 
-- (instancetype) initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow;
+- (instancetype)initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow;
 
 @end
 
 @implementation SFBPopoverAnimationDelegate
 
-- (instancetype) initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow
+- (instancetype)initWithPopoverWindow:(SFBPopoverWindow *)popoverWindow
 {
-	if((self = [super init])) {
+	if((self = [super init]))
 		_popoverWindow = popoverWindow;
-	}
 	return self;
 }
 
-- (void) animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag
 {
 #pragma unused(animation)
 	// Detect the end of fade out and close the window
-	if(flag && 0 == [_popoverWindow alphaValue]) {
+	if(flag && [_popoverWindow alphaValue] == 0) {
 		NSWindow *parentWindow = [_popoverWindow parentWindow];
 		[parentWindow removeChildWindow:_popoverWindow];
 		[_popoverWindow orderOut:nil];
@@ -47,25 +47,25 @@
 @interface SFBPopover ()
 {
 @private
-	NSViewController * _contentViewController;
-	SFBPopoverWindow * _popoverWindow;
+	NSViewController *_contentViewController;
+	SFBPopoverWindow *_popoverWindow;
 }
 @end
 
 @interface SFBPopoverWindow (Private)
-- (SFBPopoverWindowFrame *) popoverWindowFrame;
+- (SFBPopoverWindowFrame *)popoverWindowFrame;
 @end
 
 @implementation SFBPopover
 
-- (instancetype) initWithContentView:(NSView *)contentView
+- (instancetype)initWithContentView:(NSView *)contentView
 {
 	NSViewController *contentViewController = [[NSViewController alloc] init];
 	[contentViewController setView:contentView];
 	return [self initWithContentViewController:contentViewController];
 }
 
-- (instancetype) initWithContentViewController:(NSViewController *)contentViewController
+- (instancetype)initWithContentViewController:(NSViewController *)contentViewController
 {
 	if((self = [super init])) {
 		_contentViewController = contentViewController;
@@ -86,12 +86,12 @@
 	return self;
 }
 
-- (void) dealloc
+- (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (SFBPopoverPosition) bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point
+- (SFBPopoverPosition)bestPositionInWindow:(NSWindow *)window atPoint:(NSPoint)point
 {
 	// Get all relevant geometry in screen coordinates.
 	NSRect screenFrame = NSZeroRect;
@@ -201,17 +201,17 @@
 	return side;
 }
 
-- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point
+- (void)displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point
 {
 	[self displayPopoverInWindow:window atPoint:point chooseBestLocation:NO makeKey:YES];
 }
 
-- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation
+- (void)displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation
 {
 	[self displayPopoverInWindow:window atPoint:point chooseBestLocation:chooseBestLocation makeKey:YES];
 }
 
-- (void) displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation makeKey:(BOOL)makeKey
+- (void)displayPopoverInWindow:(NSWindow *)window atPoint:(NSPoint)point chooseBestLocation:(BOOL)chooseBestLocation makeKey:(BOOL)makeKey
 {
 	if([_popoverWindow isVisible])
 		return;
@@ -244,7 +244,7 @@
 		[[_popoverWindow animator] setAlphaValue:1];
 }
 
-- (void) movePopoverToPoint:(NSPoint)point
+- (void)movePopoverToPoint:(NSPoint)point
 {
 	NSPoint attachmentPoint = [[_popoverWindow popoverWindowFrame] attachmentPoint];
 	NSWindow *window = [_popoverWindow parentWindow];
@@ -262,7 +262,7 @@
 	[_popoverWindow setFrameOrigin:pointOnScreen];
 }
 
-- (IBAction) closePopover:(id)sender
+- (IBAction)closePopover:(id)sender
 {
 	if(![_popoverWindow isVisible])
 		return;
@@ -281,142 +281,142 @@
 	}
 }
 
-- (NSWindow *) popoverWindow
+- (NSWindow *)popoverWindow
 {
 	return _popoverWindow;
 }
 
-- (BOOL) isVisible
+- (BOOL)isVisible
 {
 	return [_popoverWindow isVisible];
 }
 
-- (SFBPopoverPosition) position
+- (SFBPopoverPosition)position
 {
 	return [_popoverWindow popoverPosition];
 }
 
-- (void) setPosition:(SFBPopoverPosition)position
+- (void)setPosition:(SFBPopoverPosition)position
 {
 	[_popoverWindow setPopoverPosition:position];
 }
 
-- (CGFloat) distance
+- (CGFloat)distance
 {
 	return [_popoverWindow distance];
 }
 
-- (void) setDistance:(CGFloat)distance
+- (void)setDistance:(CGFloat)distance
 {
 	[_popoverWindow setDistance:distance];
 }
 
-- (NSColor *) borderColor
+- (NSColor *)borderColor
 {
 	return [_popoverWindow borderColor];
 }
 
-- (void) setBorderColor:(NSColor *)borderColor
+- (void)setBorderColor:(NSColor *)borderColor
 {
 	[_popoverWindow setBorderColor:borderColor];
 }
 
-- (CGFloat) borderWidth
+- (CGFloat)borderWidth
 {
 	return [_popoverWindow borderWidth];
 }
 
-- (void) setBorderWidth:(CGFloat)borderWidth
+- (void)setBorderWidth:(CGFloat)borderWidth
 {
 	[_popoverWindow setBorderWidth:borderWidth];
 }
 
-- (CGFloat) cornerRadius
+- (CGFloat)cornerRadius
 {
 	return [_popoverWindow cornerRadius];
 }
 
-- (void) setCornerRadius:(CGFloat)cornerRadius
+- (void)setCornerRadius:(CGFloat)cornerRadius
 {
 	[_popoverWindow setCornerRadius:cornerRadius];
 }
 
-- (BOOL) drawsArrow
+- (BOOL)drawsArrow
 {
 	return [_popoverWindow drawsArrow];
 }
 
-- (void) setDrawsArrow:(BOOL)drawsArrow
+- (void)setDrawsArrow:(BOOL)drawsArrow
 {
 	[_popoverWindow setDrawsArrow:drawsArrow];
 }
 
-- (CGFloat) arrowWidth
+- (CGFloat)arrowWidth
 {
 	return [_popoverWindow arrowWidth];
 }
 
-- (void) setArrowWidth:(CGFloat)arrowWidth
+- (void)setArrowWidth:(CGFloat)arrowWidth
 {
 	[_popoverWindow setArrowWidth:arrowWidth];
 }
 
-- (CGFloat) arrowHeight
+- (CGFloat)arrowHeight
 {
 	return [_popoverWindow arrowHeight];
 }
 
-- (void) setArrowHeight:(CGFloat)arrowHeight
+- (void)setArrowHeight:(CGFloat)arrowHeight
 {
 	[_popoverWindow setArrowHeight:arrowHeight];
 }
 
-- (BOOL) drawRoundCornerBesideArrow
+- (BOOL)drawRoundCornerBesideArrow
 {
 	return [_popoverWindow drawRoundCornerBesideArrow];
 }
 
-- (void) setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow
+- (void)setDrawRoundCornerBesideArrow:(BOOL)drawRoundCornerBesideArrow
 {
 	[_popoverWindow setDrawRoundCornerBesideArrow:drawRoundCornerBesideArrow];
 }
 
-- (CGFloat) viewMargin
+- (CGFloat)viewMargin
 {
 	return [_popoverWindow viewMargin];
 }
 
-- (void) setViewMargin:(CGFloat)viewMargin
+- (void)setViewMargin:(CGFloat)viewMargin
 {
 	[_popoverWindow setViewMargin:viewMargin];
 }
 
-- (NSColor *) backgroundColor
+- (NSColor *)backgroundColor
 {
 	return [_popoverWindow popoverBackgroundColor];
 }
 
-- (void) setBackgroundColor:(NSColor *)backgroundColor
+- (void)setBackgroundColor:(NSColor *)backgroundColor
 {
 	[_popoverWindow setPopoverBackgroundColor:backgroundColor];
 }
 
-- (BOOL) isMovable
+- (BOOL)isMovable
 {
 	return [_popoverWindow isMovable];
 }
 
-- (void) setMovable:(BOOL)movable
+- (void)setMovable:(BOOL)movable
 {
 	[_popoverWindow setMovable:movable];
 }
 
-- (BOOL) isResizable
+- (BOOL)isResizable
 {
 	return [_popoverWindow isResizable];
 }
 
-- (void) setResizable:(BOOL)resizable
+- (void)setResizable:(BOOL)resizable
 {
 	[_popoverWindow setResizable:resizable];
 }
@@ -425,13 +425,13 @@
 
 @implementation SFBPopover (NSWindowDelegateMethods)
 
-- (void) windowDidResignKey:(NSNotification *)notification
+- (void)windowDidResignKey:(NSNotification *)notification
 {
 	if(self.closesWhenPopoverResignsKey)
 		[self closePopover:notification];
 }
 
-- (void) applicationDidResignActive:(NSNotification *)notification
+- (void)applicationDidResignActive:(NSNotification *)notification
 {
 	if(self.closesWhenApplicationBecomesInactive)
 		[self closePopover:notification];
