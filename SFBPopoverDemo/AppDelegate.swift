@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 		popover = SFBPopover(contentView: popoverContentView)
 
 		// Update the UI with the popover's state
-		changePosition(positionPopup)
+		positionPopup.selectItem(at: Int(popover.position.rawValue))
 		borderColorWell.color = popover.borderColor
 		backgroundColorWell.color = popover.backgroundColor
 		viewMarginSlider.floatValue = Float(popover.viewMargin)
