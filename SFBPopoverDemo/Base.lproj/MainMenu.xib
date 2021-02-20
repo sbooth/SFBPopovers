@@ -702,24 +702,14 @@
         <window title="SFBPopoverDemo" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="722" height="448"/>
+            <rect key="contentRect" x="335" y="390" width="766" height="387"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="766" height="448"/>
+                <rect key="frame" x="0.0" y="0.0" width="766" height="387"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Kp-aa-dl6">
-                        <rect key="frame" x="624" y="13" width="129" height="32"/>
-                        <buttonCell key="cell" type="push" title="Toggle Popover" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BAo-tC-67L">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="togglePopover:" target="Voe-Tx-rLC" id="V7F-Kp-Kxv"/>
-                        </connections>
-                    </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Q8w-tz-asE">
-                        <rect key="frame" x="18" y="348" width="730" height="80"/>
+                        <rect key="frame" x="18" y="287" width="730" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="wVd-5T-zQQ"/>
                         </constraints>
@@ -733,13 +723,13 @@ In this example, the popover will be attached to the center point of the Toggle 
                         </textFieldCell>
                     </textField>
                     <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="7QH-YT-J0c">
-                        <rect key="frame" x="17" y="56" width="732" height="286"/>
+                        <rect key="frame" x="17" y="56" width="732" height="225"/>
                         <view key="contentView" id="rCj-9G-FgA">
-                            <rect key="frame" x="3" y="3" width="726" height="280"/>
+                            <rect key="frame" x="3" y="3" width="726" height="219"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="10" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XXg-C8-6DA">
-                                    <rect key="frame" x="391" y="125" width="315" height="135"/>
+                                    <rect key="frame" x="391" y="64" width="315" height="135"/>
                                     <rows>
                                         <gridRow id="Nnz-OT-wSY"/>
                                         <gridRow id="bQW-JP-qUw"/>
@@ -910,7 +900,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                     </gridCells>
                                 </gridView>
                                 <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="10" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SjC-SL-xTh">
-                                    <rect key="frame" x="20" y="81" width="315" height="179"/>
+                                    <rect key="frame" x="20" y="20" width="315" height="179"/>
                                     <rows>
                                         <gridRow rowAlignment="firstBaseline" id="I8I-bG-hNg"/>
                                         <gridRow id="k7U-m2-twr"/>
@@ -1152,6 +1142,16 @@ In this example, the popover will be attached to the center point of the Toggle 
                             </constraints>
                         </view>
                     </box>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Kp-aa-dl6">
+                        <rect key="frame" x="624" y="13" width="129" height="32"/>
+                        <buttonCell key="cell" type="push" title="Toggle Popover" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BAo-tC-67L">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="togglePopover:" target="Voe-Tx-rLC" id="V7F-Kp-Kxv"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="7QH-YT-J0c" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="11X-dx-TR2"/>
@@ -1169,7 +1169,7 @@ In this example, the popover will be attached to the center point of the Toggle 
             <connections>
                 <outlet property="delegate" destination="Voe-Tx-rLC" id="934-4Z-vqw"/>
             </connections>
-            <point key="canvasLocation" x="129" y="479"/>
+            <point key="canvasLocation" x="129" y="448.5"/>
         </window>
         <customView id="CrL-wD-0DH">
             <rect key="frame" x="0.0" y="0.0" width="472" height="88"/>
