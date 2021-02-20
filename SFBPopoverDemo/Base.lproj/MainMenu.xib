@@ -705,11 +705,11 @@
             <rect key="contentRect" x="335" y="390" width="722" height="448"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="722" height="448"/>
+                <rect key="frame" x="0.0" y="0.0" width="766" height="448"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Kp-aa-dl6">
-                        <rect key="frame" x="580" y="13" width="129" height="32"/>
+                        <rect key="frame" x="624" y="13" width="129" height="32"/>
                         <buttonCell key="cell" type="push" title="Toggle Popover" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BAo-tC-67L">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -719,7 +719,7 @@
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Q8w-tz-asE">
-                        <rect key="frame" x="18" y="348" width="686" height="80"/>
+                        <rect key="frame" x="18" y="348" width="730" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="wVd-5T-zQQ"/>
                         </constraints>
@@ -733,13 +733,13 @@ In this example, the popover will be attached to the center point of the Toggle 
                         </textFieldCell>
                     </textField>
                     <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="7QH-YT-J0c">
-                        <rect key="frame" x="17" y="56" width="688" height="286"/>
+                        <rect key="frame" x="17" y="56" width="732" height="286"/>
                         <view key="contentView" id="rCj-9G-FgA">
-                            <rect key="frame" x="3" y="3" width="682" height="280"/>
+                            <rect key="frame" x="3" y="3" width="726" height="280"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="10" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XXg-C8-6DA">
-                                    <rect key="frame" x="397" y="125" width="265" height="135"/>
+                                    <rect key="frame" x="391" y="125" width="315" height="135"/>
                                     <rows>
                                         <gridRow id="Nnz-OT-wSY"/>
                                         <gridRow id="bQW-JP-qUw"/>
@@ -783,7 +783,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         <gridCell row="bQW-JP-qUw" column="cU0-fw-jbP" id="WdG-mK-UZE"/>
                                         <gridCell row="fTW-vt-lXL" column="Yab-yG-X1F" id="gcs-rO-XjV">
                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1hF-40-6dH">
-                                                <rect key="frame" x="0.0" y="65" width="113" height="16"/>
+                                                <rect key="frame" x="-2" y="65" width="113" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Arrow base width:" id="KZx-7W-rT7">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -793,7 +793,10 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="fTW-vt-lXL" column="0wq-yV-lJK" xPlacement="fill" id="mzX-LP-QLW">
                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Cf-Xx-Pfo">
-                                                <rect key="frame" x="117" y="56" width="104" height="28"/>
+                                                <rect key="frame" x="115" y="56" width="154" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="ljp-fm-eGT"/>
+                                                </constraints>
                                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="5" maxValue="50" doubleValue="20" tickMarkPosition="above" numberOfTickMarks="2" sliderType="linear" id="YNm-0Z-eov"/>
                                                 <connections>
                                                     <action selector="changeArrowWidth:" target="Voe-Tx-rLC" id="umD-BL-Zvu"/>
@@ -802,7 +805,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="fTW-vt-lXL" column="cU0-fw-jbP" id="gnw-jy-f9D">
                                             <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EtN-c1-iHv">
-                                                <rect key="frame" x="227" y="62" width="33" height="21"/>
+                                                <rect key="frame" x="275" y="62" width="33" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="33" id="LYz-2C-V7d"/>
                                                 </constraints>
@@ -822,7 +825,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="oBJ-QP-ztg" column="Yab-yG-X1F" id="9Wo-L6-Pzd">
                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CuG-Fn-lrt">
-                                                <rect key="frame" x="27" y="34" width="86" height="16"/>
+                                                <rect key="frame" x="25" y="34" width="86" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Arrow height:" id="DLk-F8-BeE">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -832,7 +835,10 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="oBJ-QP-ztg" column="0wq-yV-lJK" xPlacement="fill" id="DPd-N3-bNo">
                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FVP-9c-gR8">
-                                                <rect key="frame" x="117" y="25" width="104" height="28"/>
+                                                <rect key="frame" x="115" y="25" width="154" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="LvM-0Z-dfG"/>
+                                                </constraints>
                                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="5" maxValue="50" doubleValue="16" tickMarkPosition="above" numberOfTickMarks="2" sliderType="linear" id="pzY-bG-dK8"/>
                                                 <connections>
                                                     <action selector="changeArrowHeight:" target="Voe-Tx-rLC" id="mVU-vY-QiT"/>
@@ -841,7 +847,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="oBJ-QP-ztg" column="cU0-fw-jbP" id="D1B-QU-p7V">
                                             <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vP1-O1-60B">
-                                                <rect key="frame" x="227" y="31" width="33" height="21"/>
+                                                <rect key="frame" x="275" y="31" width="33" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="33" id="GGr-aB-gdg"/>
                                                 </constraints>
@@ -861,7 +867,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="2hd-5k-Qkc" column="Yab-yG-X1F" id="R8m-ng-hbj">
                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kls-7W-a6p">
-                                                <rect key="frame" x="52" y="3" width="61" height="16"/>
+                                                <rect key="frame" x="50" y="3" width="61" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Distance:" id="RPq-Zv-Iev">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -871,7 +877,10 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="2hd-5k-Qkc" column="0wq-yV-lJK" xPlacement="fill" id="yLP-Ti-emi">
                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kyH-T3-Xd9">
-                                                <rect key="frame" x="117" y="-6" width="104" height="28"/>
+                                                <rect key="frame" x="115" y="-6" width="154" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="k9Z-fF-Qbs"/>
+                                                </constraints>
                                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="200" doubleValue="10" tickMarkPosition="above" numberOfTickMarks="2" sliderType="linear" id="Jyr-mL-mX7"/>
                                                 <connections>
                                                     <action selector="changeDistance:" target="Voe-Tx-rLC" id="64z-gv-axu"/>
@@ -880,7 +889,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="2hd-5k-Qkc" column="cU0-fw-jbP" id="QH2-DA-fEf">
                                             <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jtc-jd-w17">
-                                                <rect key="frame" x="227" y="0.0" width="33" height="21"/>
+                                                <rect key="frame" x="275" y="0.0" width="33" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="33" id="i60-zM-ise"/>
                                                 </constraints>
@@ -901,7 +910,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                     </gridCells>
                                 </gridView>
                                 <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="10" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SjC-SL-xTh">
-                                    <rect key="frame" x="20" y="81" width="265" height="179"/>
+                                    <rect key="frame" x="20" y="81" width="315" height="179"/>
                                     <rows>
                                         <gridRow rowAlignment="firstBaseline" id="I8I-bG-hNg"/>
                                         <gridRow id="k7U-m2-twr"/>
@@ -928,7 +937,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="I8I-bG-hNg" column="kek-1U-o9G" headOfMergedCell="Ybh-Ai-J4b" xPlacement="fill" id="Ybh-Ai-J4b">
                                             <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N5B-dH-gr6">
-                                                <rect key="frame" x="121" y="155" width="148" height="25"/>
+                                                <rect key="frame" x="121" y="155" width="198" height="25"/>
                                                 <popUpButtonCell key="cell" type="push" title="Bottom" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="eTT-mo-fIX" id="A6B-iC-8P9">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
@@ -1016,7 +1025,10 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="DD6-cK-RRx" column="kek-1U-o9G" xPlacement="fill" id="XsR-28-J7n">
                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lWP-jm-WZo">
-                                                <rect key="frame" x="122" y="56" width="104" height="28"/>
+                                                <rect key="frame" x="122" y="56" width="154" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="vW2-LY-nq4"/>
+                                                </constraints>
                                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="20" doubleValue="2" tickMarkPosition="above" numberOfTickMarks="2" sliderType="linear" id="cI3-U5-rf2"/>
                                                 <connections>
                                                     <action selector="changeViewMargin:" target="Voe-Tx-rLC" id="o0T-hz-UmT"/>
@@ -1025,7 +1037,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="DD6-cK-RRx" column="KQU-kf-8eP" id="VAL-zI-7yf">
                                             <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3up-0O-1eS">
-                                                <rect key="frame" x="232" y="62" width="33" height="21"/>
+                                                <rect key="frame" x="282" y="62" width="33" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="33" id="JZO-i9-bkc"/>
                                                 </constraints>
@@ -1055,7 +1067,10 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="TV1-bK-0Gc" column="kek-1U-o9G" xPlacement="fill" id="Bvm-g9-Aij">
                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0U4-hB-zku">
-                                                <rect key="frame" x="122" y="25" width="104" height="28"/>
+                                                <rect key="frame" x="122" y="25" width="154" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="rsu-eT-QHp"/>
+                                                </constraints>
                                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="10" doubleValue="2" tickMarkPosition="above" numberOfTickMarks="2" sliderType="linear" id="t1v-Re-WAR"/>
                                                 <connections>
                                                     <action selector="changeBorderWidth:" target="Voe-Tx-rLC" id="PrS-x7-7Cl"/>
@@ -1064,7 +1079,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="TV1-bK-0Gc" column="KQU-kf-8eP" id="G0D-7N-z6h">
                                             <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p5t-Ny-Q4V">
-                                                <rect key="frame" x="232" y="31" width="33" height="21"/>
+                                                <rect key="frame" x="282" y="31" width="33" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="33" id="JHJ-SQ-hc0"/>
                                                 </constraints>
@@ -1094,7 +1109,10 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="lxR-Tj-Afv" column="kek-1U-o9G" xPlacement="fill" id="qjV-MN-JwD">
                                             <slider key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4cX-D6-K9h">
-                                                <rect key="frame" x="122" y="-6" width="104" height="28"/>
+                                                <rect key="frame" x="122" y="-6" width="154" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="hIN-Uf-Lnq"/>
+                                                </constraints>
                                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="20" doubleValue="8" tickMarkPosition="above" numberOfTickMarks="2" sliderType="linear" id="3pe-hs-8Q8"/>
                                                 <connections>
                                                     <action selector="changeCornerRadius:" target="Voe-Tx-rLC" id="2TF-vB-Uw9"/>
@@ -1103,7 +1121,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                         </gridCell>
                                         <gridCell row="lxR-Tj-Afv" column="KQU-kf-8eP" id="VYP-fL-zEd">
                                             <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t9q-0i-AWU">
-                                                <rect key="frame" x="232" y="0.0" width="33" height="21"/>
+                                                <rect key="frame" x="282" y="0.0" width="33" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="33" id="jEZ-pl-2FX"/>
                                                 </constraints>
