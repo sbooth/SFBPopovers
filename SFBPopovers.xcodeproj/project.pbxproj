@@ -18,6 +18,7 @@
 		325A5E3425E028D900A19006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 325A5E3325E028D900A19006 /* Assets.xcassets */; };
 		325A5E3725E028D900A19006 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325A5E3525E028D900A19006 /* MainMenu.xib */; };
 		325A5E4A25E0297400A19006 /* SFBPopovers.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 325A5DDD25E016CE00A19006 /* SFBPopovers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		32A6AC3F25E191A500B4D4A2 /* SFBPopovers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325A5DDD25E016CE00A19006 /* SFBPopovers.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32A6AC3F25E191A500B4D4A2 /* SFBPopovers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +91,7 @@
 				325A5DDF25E016CE00A19006 /* SFBPopovers */,
 				325A5E3025E028D900A19006 /* SFBPopoverDemo */,
 				325A5DDE25E016CE00A19006 /* Products */,
+				32A6AC3E25E191A500B4D4A2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +128,13 @@
 				325A5E3825E028D900A19006 /* Info.plist */,
 			);
 			path = SFBPopoverDemo;
+			sourceTree = "<group>";
+		};
+		32A6AC3E25E191A500B4D4A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
