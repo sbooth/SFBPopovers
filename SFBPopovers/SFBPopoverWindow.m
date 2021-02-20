@@ -111,6 +111,7 @@
 	NSRect frameRect = [self frame];
 	NSPoint oldOrigin = frameRect.origin;
 	NSPoint oldAttachmentPoint = [[self popoverWindowFrame] attachmentPoint];
+	NSWindow *parentWindow = [self parentWindow];
 
 	CGFloat offset = [[self popoverWindowFrame] arrowHeight] + [[self popoverWindowFrame] distance];
 	switch([[self popoverWindowFrame] popoverPosition]) {
@@ -166,6 +167,7 @@
 	BOOL isKey = [self isKeyWindow];
 	if(isVisible) {
 		NSDisableScreenUpdates();
+		[parentWindow removeChildWindow: self];
 		[self orderOut:self];
 	}
 
@@ -183,6 +185,8 @@
 			[self makeKeyAndOrderFront:self];
 		else
 			[self orderFront:self];
+
+		[parentWindow addChildWindow: self ordered:NSWindowAbove];
 
 		NSEnableScreenUpdates();
 	}
