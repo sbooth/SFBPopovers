@@ -167,7 +167,7 @@
 	BOOL isKey = [self isKeyWindow];
 	if(isVisible) {
 		NSDisableScreenUpdates();
-		[parentWindow removeChildWindow: self];
+		[parentWindow removeChildWindow:self];
 		[self orderOut:self];
 	}
 
@@ -186,7 +186,7 @@
 		else
 			[self orderFront:self];
 
-		[parentWindow addChildWindow: self ordered:NSWindowAbove];
+		[parentWindow addChildWindow:self ordered:NSWindowAbove];
 
 		NSEnableScreenUpdates();
 	}
