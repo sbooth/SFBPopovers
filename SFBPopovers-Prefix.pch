@@ -1,8 +1,0 @@
-/*
- * Copyright (C) 2011 - 2019 Stephen F. Booth <me@sbooth.org>
- * See https://github.com/sbooth/SFBPopovers/blob/master/LICENSE.txt for license information
- */
-
-#ifdef __OBJC__
-	#import <Cocoa/Cocoa.h>
-#endif

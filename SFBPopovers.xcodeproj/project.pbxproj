@@ -14,7 +14,35 @@
 		325A5DF425E0178300A19006 /* SFBPopoverWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 325A5DEE25E0178300A19006 /* SFBPopoverWindow.h */; };
 		325A5DF525E0178300A19006 /* SFBPopover.h in Headers */ = {isa = PBXBuildFile; fileRef = 325A5DEF25E0178300A19006 /* SFBPopover.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		325A5DF625E0178300A19006 /* SFBPopoverWindowFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 325A5DF025E0178300A19006 /* SFBPopoverWindowFrame.h */; };
+		325A5E3225E028D900A19006 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A5E3125E028D900A19006 /* AppDelegate.swift */; };
+		325A5E3425E028D900A19006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 325A5E3325E028D900A19006 /* Assets.xcassets */; };
+		325A5E3725E028D900A19006 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325A5E3525E028D900A19006 /* MainMenu.xib */; };
+		325A5E4A25E0297400A19006 /* SFBPopovers.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 325A5DDD25E016CE00A19006 /* SFBPopovers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		325A5E4725E0296600A19006 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 325A5DD425E016CE00A19006 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 325A5DDC25E016CE00A19006;
+			remoteInfo = SFBPopovers;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		325A5E4925E0296A00A19006 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				325A5E4A25E0297400A19006 /* SFBPopovers.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		325A5DDD25E016CE00A19006 /* SFBPopovers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SFBPopovers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,10 +56,22 @@
 		325A5DF025E0178300A19006 /* SFBPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopoverWindowFrame.h; sourceTree = "<group>"; };
 		325A5DFA25E0186D00A19006 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		325A5DFB25E0186D00A19006 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		325A5E2F25E028D800A19006 /* SFBPopoverDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFBPopoverDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		325A5E3125E028D900A19006 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		325A5E3325E028D900A19006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		325A5E3625E028D900A19006 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		325A5E3825E028D900A19006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		325A5DDA25E016CE00A19006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		325A5E2C25E028D800A19006 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +87,7 @@
 				325A5DFA25E0186D00A19006 /* README.md */,
 				325A5DFB25E0186D00A19006 /* LICENSE.txt */,
 				325A5DDF25E016CE00A19006 /* SFBPopovers */,
+				325A5E3025E028D900A19006 /* SFBPopoverDemo */,
 				325A5DDE25E016CE00A19006 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				325A5DDD25E016CE00A19006 /* SFBPopovers.framework */,
+				325A5E2F25E028D800A19006 /* SFBPopoverDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +114,17 @@
 				325A5DE125E016CE00A19006 /* Info.plist */,
 			);
 			path = SFBPopovers;
+			sourceTree = "<group>";
+		};
+		325A5E3025E028D900A19006 /* SFBPopoverDemo */ = {
+			isa = PBXGroup;
+			children = (
+				325A5E3125E028D900A19006 /* AppDelegate.swift */,
+				325A5E3325E028D900A19006 /* Assets.xcassets */,
+				325A5E3525E028D900A19006 /* MainMenu.xib */,
+				325A5E3825E028D900A19006 /* Info.plist */,
+			);
+			path = SFBPopoverDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,15 +162,38 @@
 			productReference = 325A5DDD25E016CE00A19006 /* SFBPopovers.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		325A5E2E25E028D800A19006 /* SFBPopoverDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 325A5E3A25E028D900A19006 /* Build configuration list for PBXNativeTarget "SFBPopoverDemo" */;
+			buildPhases = (
+				325A5E2B25E028D800A19006 /* Sources */,
+				325A5E2C25E028D800A19006 /* Frameworks */,
+				325A5E2D25E028D800A19006 /* Resources */,
+				325A5E4925E0296A00A19006 /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				325A5E4825E0296600A19006 /* PBXTargetDependency */,
+			);
+			name = SFBPopoverDemo;
+			productName = SFBPopoverDemo;
+			productReference = 325A5E2F25E028D800A19006 /* SFBPopoverDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		325A5DD425E016CE00A19006 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					325A5DDC25E016CE00A19006 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					325A5E2E25E028D800A19006 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -136,6 +212,7 @@
 			projectRoot = "";
 			targets = (
 				325A5DDC25E016CE00A19006 /* SFBPopovers */,
+				325A5E2E25E028D800A19006 /* SFBPopoverDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -145,6 +222,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		325A5E2D25E028D800A19006 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				325A5E3425E028D900A19006 /* Assets.xcassets in Resources */,
+				325A5E3725E028D900A19006 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +247,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		325A5E2B25E028D800A19006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				325A5E3225E028D900A19006 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		325A5E4825E0296600A19006 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 325A5DDC25E016CE00A19006 /* SFBPopovers */;
+			targetProxy = 325A5E4725E0296600A19006 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		325A5E3525E028D900A19006 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				325A5E3625E028D900A19006 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		325A5DE325E016CE00A19006 /* Debug */ = {
@@ -288,10 +401,9 @@
 		325A5DE625E016CE00A19006 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = TAHRGVZME4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -302,7 +414,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.SFBPopovers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.Popovers;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -312,10 +424,9 @@
 		325A5DE725E016CE00A19006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = TAHRGVZME4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -326,9 +437,53 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.SFBPopovers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.Popovers;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		325A5E3B25E028D900A19006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				INFOPLIST_FILE = SFBPopoverDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.PopoverDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		325A5E3C25E028D900A19006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				INFOPLIST_FILE = SFBPopoverDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.PopoverDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -350,6 +505,15 @@
 			buildConfigurations = (
 				325A5DE625E016CE00A19006 /* Debug */,
 				325A5DE725E016CE00A19006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		325A5E3A25E028D900A19006 /* Build configuration list for PBXNativeTarget "SFBPopoverDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				325A5E3B25E028D900A19006 /* Debug */,
+				325A5E3C25E028D900A19006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
