@@ -749,7 +749,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                     </rows>
                                     <columns>
                                         <gridColumn xPlacement="trailing" id="Yab-yG-X1F"/>
-                                        <gridColumn xPlacement="leading" id="0wq-yV-lJK"/>
+                                        <gridColumn id="0wq-yV-lJK"/>
                                         <gridColumn id="cU0-fw-jbP"/>
                                     </columns>
                                     <gridCells>
@@ -904,7 +904,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                     <rect key="frame" x="20" y="81" width="265" height="179"/>
                                     <rows>
                                         <gridRow rowAlignment="firstBaseline" id="I8I-bG-hNg"/>
-                                        <gridRow yPlacement="center" id="k7U-m2-twr"/>
+                                        <gridRow id="k7U-m2-twr"/>
                                         <gridRow id="yl4-9O-7E5"/>
                                         <gridRow rowAlignment="firstBaseline" id="DD6-cK-RRx"/>
                                         <gridRow rowAlignment="firstBaseline" id="TV1-bK-0Gc"/>
@@ -912,7 +912,7 @@ In this example, the popover will be attached to the center point of the Toggle 
                                     </rows>
                                     <columns>
                                         <gridColumn xPlacement="trailing" id="3b5-ah-FNb"/>
-                                        <gridColumn xPlacement="leading" id="kek-1U-o9G"/>
+                                        <gridColumn id="kek-1U-o9G"/>
                                         <gridColumn id="KQU-kf-8eP"/>
                                     </columns>
                                     <gridCells>
@@ -926,9 +926,9 @@ In this example, the popover will be attached to the center point of the Toggle 
                                                 </textFieldCell>
                                             </textField>
                                         </gridCell>
-                                        <gridCell row="I8I-bG-hNg" column="kek-1U-o9G" xPlacement="fill" id="Ybh-Ai-J4b">
+                                        <gridCell row="I8I-bG-hNg" column="kek-1U-o9G" headOfMergedCell="Ybh-Ai-J4b" xPlacement="fill" id="Ybh-Ai-J4b">
                                             <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N5B-dH-gr6">
-                                                <rect key="frame" x="121" y="155" width="107" height="25"/>
+                                                <rect key="frame" x="121" y="155" width="148" height="25"/>
                                                 <popUpButtonCell key="cell" type="push" title="Bottom" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="eTT-mo-fIX" id="A6B-iC-8P9">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
@@ -955,10 +955,10 @@ In this example, the popover will be attached to the center point of the Toggle 
                                                 </connections>
                                             </popUpButton>
                                         </gridCell>
-                                        <gridCell row="I8I-bG-hNg" column="KQU-kf-8eP" id="qVZ-4n-7nt"/>
+                                        <gridCell row="I8I-bG-hNg" column="KQU-kf-8eP" headOfMergedCell="Ybh-Ai-J4b" id="qVZ-4n-7nt"/>
                                         <gridCell row="k7U-m2-twr" column="3b5-ah-FNb" id="8JL-Ny-U6s">
                                             <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pjg-6r-wWL">
-                                                <rect key="frame" x="35" y="130" width="83" height="16"/>
+                                                <rect key="frame" x="35" y="126" width="83" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Border color:" id="3NP-mJ-BTE">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
