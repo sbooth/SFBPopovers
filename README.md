@@ -1,6 +1,6 @@
 [![Version](https://img.shields.io/cocoapods/v/SFBPopovers.svg)](http://cocoadocs.org/docsets/SFBPopovers)
 [![Platform](https://img.shields.io/cocoapods/p/SFBPopovers.svg)](https://github.com/sbooth/SFBPopovers)
-[![License](https://img.shields.io/cocoapods/l/SFBPopovers.svg)](COPYING)
+[![License](https://img.shields.io/cocoapods/l/SFBPopovers.svg)](LICENSE.txt)
 
 SFBPopovers
 ===========
