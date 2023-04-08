@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Copyright (c) 2011 - 2023 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/SFBPopovers
 // MIT license
 //
@@ -219,9 +219,9 @@
 	NSRect originalMouseLocation = [window convertRectFromScreen:eventLocation];
 
 	for(;;) {
-		NSEvent *newEvent = [window nextEventMatchingMask:(NSLeftMouseDraggedMask | NSLeftMouseUpMask)];
+		NSEvent *newEvent = [window nextEventMatchingMask:(NSEventMaskLeftMouseDragged | NSEventMaskLeftMouseUp)];
 
-		if(NSLeftMouseUp == [newEvent type])
+		if(NSEventTypeLeftMouseUp == [newEvent type])
 			break;
 
 		NSRect eventLocation = { .origin = [newEvent locationInWindow], .size = NSZeroSize };

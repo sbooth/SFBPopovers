@@ -4,7 +4,7 @@
 // MIT license
 //
 
-#import <Cocoa/Cocoa.h>
+#import <AppKit/AppKit.h>
 
 /// Popover positioning constants
 typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {
