@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Copyright (c) 2011 - 2023 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/SFBPopovers
 // MIT license
 //
 
-#import <Cocoa/Cocoa.h>
+@import AppKit;
 
 /// Popover positioning constants
 typedef NS_ENUM(NSUInteger, SFBPopoverPosition) {

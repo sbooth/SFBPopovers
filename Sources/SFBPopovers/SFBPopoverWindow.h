@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Copyright (c) 2011 - 2023 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/SFBPopovers
 // MIT license
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "SFBPopover.h"
 

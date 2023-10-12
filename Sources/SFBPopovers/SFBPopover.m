@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Copyright (c) 2011 - 2023 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/SFBPopovers
 // MIT license
 //
@@ -8,7 +8,7 @@
 #import "SFBPopoverWindow.h"
 #import "SFBPopoverWindowFrame.h"
 
-#include <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 // A custom delegate class is used since CAAnimation retains its delegate
 @interface SFBPopoverAnimationDelegate : NSObject <CAAnimationDelegate>

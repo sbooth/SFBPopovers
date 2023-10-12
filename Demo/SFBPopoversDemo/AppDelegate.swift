@@ -1,10 +1,10 @@
 //
-// Copyright (c) 2011 - 2021 Stephen F. Booth <me@sbooth.org>
+// Copyright (c) 2011 - 2023 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/SFBPopovers
 // MIT license
 //
 
-import Cocoa
+import AppKit
 import SFBPopovers
 
 @main
@@ -217,4 +217,3 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 	}
 
 }
-
