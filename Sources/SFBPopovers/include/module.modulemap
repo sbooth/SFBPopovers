@@ -1,0 +1,4 @@
+framework module SFBPopovers {
+	header "SFBPopover.h"
+	export *
+}
