@@ -2,7 +2,7 @@
 
 SFBPopovers is a framework implementing customizable popover windows.
 
-![Image of a popover](SFBPopoverDemo/screenshot.png)
+![Image of a popover](Demo/SFBPopoversDemo/screenshot.png)
 
 ## Inspiration
 

@@ -3,33 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		325A5DE225E016CE00A19006 /* SFBPopovers.h in Headers */ = {isa = PBXBuildFile; fileRef = 325A5DE025E016CE00A19006 /* SFBPopovers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		325A5DF125E0178300A19006 /* SFBPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 325A5DEB25E0178200A19006 /* SFBPopover.m */; };
-		325A5DF225E0178300A19006 /* SFBPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 325A5DEC25E0178200A19006 /* SFBPopoverWindow.m */; };
-		325A5DF325E0178300A19006 /* SFBPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 325A5DED25E0178300A19006 /* SFBPopoverWindowFrame.m */; };
-		325A5DF425E0178300A19006 /* SFBPopoverWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 325A5DEE25E0178300A19006 /* SFBPopoverWindow.h */; };
-		325A5DF525E0178300A19006 /* SFBPopover.h in Headers */ = {isa = PBXBuildFile; fileRef = 325A5DEF25E0178300A19006 /* SFBPopover.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		325A5DF625E0178300A19006 /* SFBPopoverWindowFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 325A5DF025E0178300A19006 /* SFBPopoverWindowFrame.h */; };
 		325A5E3225E028D900A19006 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A5E3125E028D900A19006 /* AppDelegate.swift */; };
 		325A5E3425E028D900A19006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 325A5E3325E028D900A19006 /* Assets.xcassets */; };
 		325A5E3725E028D900A19006 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325A5E3525E028D900A19006 /* MainMenu.xib */; };
-		325A5E4A25E0297400A19006 /* SFBPopovers.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 325A5DDD25E016CE00A19006 /* SFBPopovers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		32A6AC3F25E191A500B4D4A2 /* SFBPopovers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325A5DDD25E016CE00A19006 /* SFBPopovers.framework */; };
+		32E0F49B2AD7A4340032BD64 /* SFBPopovers in Frameworks */ = {isa = PBXBuildFile; productRef = 32E0F49A2AD7A4340032BD64 /* SFBPopovers */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		325A5E4725E0296600A19006 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 325A5DD425E016CE00A19006 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 325A5DDC25E016CE00A19006;
-			remoteInfo = SFBPopovers;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		325A5E4925E0296A00A19006 /* Copy Frameworks */ = {
@@ -38,7 +20,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				325A5E4A25E0297400A19006 /* SFBPopovers.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,18 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		325A5DDD25E016CE00A19006 /* SFBPopovers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SFBPopovers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		325A5DE025E016CE00A19006 /* SFBPopovers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFBPopovers.h; sourceTree = "<group>"; };
-		325A5DE125E016CE00A19006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		325A5DEB25E0178200A19006 /* SFBPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBPopover.m; sourceTree = "<group>"; };
-		325A5DEC25E0178200A19006 /* SFBPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBPopoverWindow.m; sourceTree = "<group>"; };
-		325A5DED25E0178300A19006 /* SFBPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBPopoverWindowFrame.m; sourceTree = "<group>"; };
-		325A5DEE25E0178300A19006 /* SFBPopoverWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopoverWindow.h; sourceTree = "<group>"; };
-		325A5DEF25E0178300A19006 /* SFBPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopover.h; sourceTree = "<group>"; };
-		325A5DF025E0178300A19006 /* SFBPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBPopoverWindowFrame.h; sourceTree = "<group>"; };
-		325A5DFA25E0186D00A19006 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		325A5DFB25E0186D00A19006 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		325A5E2F25E028D800A19006 /* SFBPopoverDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFBPopoverDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		325A5E2F25E028D800A19006 /* SFBPopoversDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFBPopoversDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		325A5E3125E028D900A19006 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		325A5E3325E028D900A19006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		325A5E3625E028D900A19006 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -65,18 +35,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		325A5DDA25E016CE00A19006 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		325A5E2C25E028D800A19006 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32A6AC3F25E191A500B4D4A2 /* SFBPopovers.framework in Frameworks */,
+				32E0F49B2AD7A4340032BD64 /* SFBPopovers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,10 +49,7 @@
 		325A5DD325E016CE00A19006 = {
 			isa = PBXGroup;
 			children = (
-				325A5DFA25E0186D00A19006 /* README.md */,
-				325A5DFB25E0186D00A19006 /* LICENSE.txt */,
-				325A5DDF25E016CE00A19006 /* SFBPopovers */,
-				325A5E3025E028D900A19006 /* SFBPopoverDemo */,
+				325A5E3025E028D900A19006 /* SFBPopoversDemo */,
 				325A5DDE25E016CE00A19006 /* Products */,
 				32A6AC3E25E191A500B4D4A2 /* Frameworks */,
 			);
@@ -98,28 +58,12 @@
 		325A5DDE25E016CE00A19006 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				325A5DDD25E016CE00A19006 /* SFBPopovers.framework */,
-				325A5E2F25E028D800A19006 /* SFBPopoverDemo.app */,
+				325A5E2F25E028D800A19006 /* SFBPopoversDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		325A5DDF25E016CE00A19006 /* SFBPopovers */ = {
-			isa = PBXGroup;
-			children = (
-				325A5DE025E016CE00A19006 /* SFBPopovers.h */,
-				325A5DEF25E0178300A19006 /* SFBPopover.h */,
-				325A5DEB25E0178200A19006 /* SFBPopover.m */,
-				325A5DEE25E0178300A19006 /* SFBPopoverWindow.h */,
-				325A5DEC25E0178200A19006 /* SFBPopoverWindow.m */,
-				325A5DF025E0178300A19006 /* SFBPopoverWindowFrame.h */,
-				325A5DED25E0178300A19006 /* SFBPopoverWindowFrame.m */,
-				325A5DE125E016CE00A19006 /* Info.plist */,
-			);
-			path = SFBPopovers;
-			sourceTree = "<group>";
-		};
-		325A5E3025E028D900A19006 /* SFBPopoverDemo */ = {
+		325A5E3025E028D900A19006 /* SFBPopoversDemo */ = {
 			isa = PBXGroup;
 			children = (
 				325A5E3125E028D900A19006 /* AppDelegate.swift */,
@@ -127,7 +71,7 @@
 				325A5E3525E028D900A19006 /* MainMenu.xib */,
 				325A5E3825E028D900A19006 /* Info.plist */,
 			);
-			path = SFBPopoverDemo;
+			path = SFBPopoversDemo;
 			sourceTree = "<group>";
 		};
 		32A6AC3E25E191A500B4D4A2 /* Frameworks */ = {
@@ -139,42 +83,10 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		325A5DD825E016CE00A19006 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				325A5DF425E0178300A19006 /* SFBPopoverWindow.h in Headers */,
-				325A5DE225E016CE00A19006 /* SFBPopovers.h in Headers */,
-				325A5DF625E0178300A19006 /* SFBPopoverWindowFrame.h in Headers */,
-				325A5DF525E0178300A19006 /* SFBPopover.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		325A5DDC25E016CE00A19006 /* SFBPopovers */ = {
+		325A5E2E25E028D800A19006 /* SFBPopoversDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 325A5DE525E016CE00A19006 /* Build configuration list for PBXNativeTarget "SFBPopovers" */;
-			buildPhases = (
-				325A5DD825E016CE00A19006 /* Headers */,
-				325A5DD925E016CE00A19006 /* Sources */,
-				325A5DDA25E016CE00A19006 /* Frameworks */,
-				325A5DDB25E016CE00A19006 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SFBPopovers;
-			productName = SFBPopovers;
-			productReference = 325A5DDD25E016CE00A19006 /* SFBPopovers.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		325A5E2E25E028D800A19006 /* SFBPopoverDemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 325A5E3A25E028D900A19006 /* Build configuration list for PBXNativeTarget "SFBPopoverDemo" */;
+			buildConfigurationList = 325A5E3A25E028D900A19006 /* Build configuration list for PBXNativeTarget "SFBPopoversDemo" */;
 			buildPhases = (
 				325A5E2B25E028D800A19006 /* Sources */,
 				325A5E2C25E028D800A19006 /* Frameworks */,
@@ -184,11 +96,13 @@
 			buildRules = (
 			);
 			dependencies = (
-				325A5E4825E0296600A19006 /* PBXTargetDependency */,
 			);
-			name = SFBPopoverDemo;
+			name = SFBPopoversDemo;
+			packageProductDependencies = (
+				32E0F49A2AD7A4340032BD64 /* SFBPopovers */,
+			);
 			productName = SFBPopoverDemo;
-			productReference = 325A5E2F25E028D800A19006 /* SFBPopoverDemo.app */;
+			productReference = 325A5E2F25E028D800A19006 /* SFBPopoversDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -197,18 +111,16 @@
 		325A5DD425E016CE00A19006 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					325A5DDC25E016CE00A19006 = {
-						CreatedOnToolsVersion = 12.4;
-					};
 					325A5E2E25E028D800A19006 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = 325A5DD725E016CE00A19006 /* Build configuration list for PBXProject "SFBPopovers" */;
+			buildConfigurationList = 325A5DD725E016CE00A19006 /* Build configuration list for PBXProject "SFBPopoversDemo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -217,24 +129,19 @@
 				Base,
 			);
 			mainGroup = 325A5DD325E016CE00A19006;
+			packageReferences = (
+				32E0F4992AD7A4340032BD64 /* XCLocalSwiftPackageReference ".." */,
+			);
 			productRefGroup = 325A5DDE25E016CE00A19006 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				325A5DDC25E016CE00A19006 /* SFBPopovers */,
-				325A5E2E25E028D800A19006 /* SFBPopoverDemo */,
+				325A5E2E25E028D800A19006 /* SFBPopoversDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		325A5DDB25E016CE00A19006 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		325A5E2D25E028D800A19006 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,16 +154,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		325A5DD925E016CE00A19006 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				325A5DF125E0178300A19006 /* SFBPopover.m in Sources */,
-				325A5DF325E0178300A19006 /* SFBPopoverWindowFrame.m in Sources */,
-				325A5DF225E0178300A19006 /* SFBPopoverWindow.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		325A5E2B25E028D800A19006 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,14 +163,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		325A5E4825E0296600A19006 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 325A5DDC25E016CE00A19006 /* SFBPopovers */;
-			targetProxy = 325A5E4725E0296600A19006 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		325A5E3525E028D900A19006 /* MainMenu.xib */ = {
@@ -322,9 +211,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -386,9 +277,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -408,52 +301,6 @@
 			};
 			name = Release;
 		};
-		325A5DE625E016CE00A19006 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SFBPopovers/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.Popovers;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		325A5DE725E016CE00A19006 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Manual;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SFBPopovers/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.Popovers;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		325A5E3B25E028D900A19006 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -461,15 +308,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
-				INFOPLIST_FILE = SFBPopoverDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.PopoverDemo;
+				INFOPLIST_FILE = SFBPopoversDemo/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.PopoversDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -483,15 +327,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
-				INFOPLIST_FILE = SFBPopoverDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
-				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.PopoverDemo;
+				INFOPLIST_FILE = SFBPopoversDemo/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.sbooth.PopoversDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -501,7 +342,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		325A5DD725E016CE00A19006 /* Build configuration list for PBXProject "SFBPopovers" */ = {
+		325A5DD725E016CE00A19006 /* Build configuration list for PBXProject "SFBPopoversDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				325A5DE325E016CE00A19006 /* Debug */,
@@ -510,16 +351,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		325A5DE525E016CE00A19006 /* Build configuration list for PBXNativeTarget "SFBPopovers" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				325A5DE625E016CE00A19006 /* Debug */,
-				325A5DE725E016CE00A19006 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		325A5E3A25E028D900A19006 /* Build configuration list for PBXNativeTarget "SFBPopoverDemo" */ = {
+		325A5E3A25E028D900A19006 /* Build configuration list for PBXNativeTarget "SFBPopoversDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				325A5E3B25E028D900A19006 /* Debug */,
@@ -529,6 +361,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		32E0F4992AD7A4340032BD64 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		32E0F49A2AD7A4340032BD64 /* SFBPopovers */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SFBPopovers;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 325A5DD425E016CE00A19006 /* Project object */;
 }
