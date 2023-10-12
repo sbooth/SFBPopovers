@@ -4,7 +4,7 @@
 // MIT license
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "SFBPopover.h"
 

@@ -4,7 +4,7 @@
 // MIT license
 //
 
-#import <AppKit/AppKit.h>
+@import AppKit;
 
 #import "SFBPopoverWindow.h"
 

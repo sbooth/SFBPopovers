@@ -8,7 +8,7 @@
 #import "SFBPopoverWindow.h"
 #import "SFBPopoverWindowFrame.h"
 
-#include <QuartzCore/QuartzCore.h>
+@import QuartzCore;
 
 // A custom delegate class is used since CAAnimation retains its delegate
 @interface SFBPopoverAnimationDelegate : NSObject <CAAnimationDelegate>
